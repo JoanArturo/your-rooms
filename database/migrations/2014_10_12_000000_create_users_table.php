@@ -19,6 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('profile_picture', 60)->nullable();
+            $table->enum('gender', ['Male', 'Female', 'Undefined'])->nullable();
+            $table->text('settings')->nullable();
+            $table->boolean('is_admin')->default(0)->nullable();
+            $table->boolean('is_banned')->default(0)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
