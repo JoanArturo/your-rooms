@@ -44,7 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function rooms()
     {
-        return $this->belongsToMany(Room::class);
+        return $this->belongsToMany(Room::class)->withTimestamps();
     }
     
     public function suggestions()
