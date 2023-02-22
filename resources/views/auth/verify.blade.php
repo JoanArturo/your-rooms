@@ -1,28 +1,27 @@
 @extends('layouts.app')
 
+@section('page', 'Verificación de correo')
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+<section class="verify-account-container">
+    @if (session('resent'))
+        <div class="alert alert-success" role="alert">Se ha enviado un nuevo enlace de verificación a su dirección de correo electrónico.</div>
+    @endif
 
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
+    <img src="{{ asset('icons/check.svg') }}" alt="Check icon">
+    <h1>Cuenta creada con éxito!</h1>
+    <p>Hemos enviado un correo de verificación a <strong class="color-tertiary">{{ Auth::user()->email }}</strong> para comprobar que este correo te pertenece.</p>
 
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <p>Si no recibiste el correo electrónico, 
+        <a href="{{ route('verification.resend') }}" 
+            onclick="event.preventDefault();
+                        document.getElementById('resend-form').submit();">
+            haga clic aquí para solicitar otro
+        </a>.
+    </p>
+
+    <form method="POST" action="{{ route('verification.resend') }}" id="resend-form" style="display: none;">
+        @csrf
+    </form>
+</section>
 @endsection

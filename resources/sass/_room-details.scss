@@ -1,0 +1,17 @@
+.users-list {
+    ol {
+        max-height: 290px;
+        overflow-y: auto;
+
+        li {
+            padding: 4px 10px;
+            margin-left: 25px;
+            margin-bottom: 4px;
+            border-radius: $border-radius;
+
+            &:hover {
+                background-color: $gray-light;
+            }
+        }
+    }
+}

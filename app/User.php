@@ -51,4 +51,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Suggestion::class);
     }
+
+    public function isVerified()
+    {
+        return ! empty($this->email_verified_at);
+    }
 }

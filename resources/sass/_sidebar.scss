@@ -1,0 +1,115 @@
+.sidebar {
+    position: fixed;
+    top: 65px;
+    left: -255px;
+    width: 100%;
+    max-width: 250px;
+    height: calc(100% - 65px);
+    background-color: white;
+    box-shadow: $sidebar-shadow;
+    transition: all $transition-slow ease;
+    &.show {
+        left: 0;
+    }
+
+    &.show .sidebar-overlay {
+        display: block;
+    }
+    
+    .sidebar-overlay {
+        position: fixed;
+        top: 65px;
+        left: 0;
+        z-index: -1;
+        display: none;
+        width: 100%;
+        height: calc(100% - 65px);
+    }
+
+    .sidebar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px;
+        border-bottom: 1px solid $border-color;
+
+        .sidebar-header-title {
+            margin: 0;
+            color: $secondary;
+            font-size: $font-size-sm;
+            text-transform: uppercase;
+        }
+
+        .sidebar-close-icon {
+            cursor: pointer;
+        }
+    }
+
+    .sidebar-items {
+        padding: 6px;
+        height: calc(100% - 48px);
+        overflow-y: auto;
+        @media screen and (max-width: $view-xs) {
+            height: calc(100% - 48px - 81px);
+        }
+
+        .sidebar-item {
+            margin-bottom: 6px;
+        }
+        
+        .sidebar-item a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 10px;
+            border-radius: $border-radius;
+            color: $semi-dark-color;
+            @media screen and (max-width: $view-xs) {
+                padding: 12px;
+            }
+            
+            &:hover {
+                text-decoration: none;
+                background-color: $gray-light;
+            }
+        }
+
+        .sidebar-item-options {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-item .sidebar-item-status {
+            padding: 2px 6px;
+            font-size: $font-size-sm;
+            font-weight: $font-weight-bold;
+            background-color: $gray-light;
+            border-radius: $border-radius;
+        }
+
+        .sidebar-item .sidebar-item-btn-close {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 19px;
+            height: 19px;
+            background-color: $secondary;
+            border: 1px solid $border-color;
+            border-radius: 50%;
+            cursor: pointer;
+            @media screen and (max-width: $view-xs) {
+                width: 24px;
+                height: 24px;
+            }
+
+            &:hover {
+                background-color: darken($color: $secondary, $amount: 10);
+            }
+
+            &:active {
+                background-color: lighten($color: $secondary, $amount: 5);
+            }
+        }
+    }
+}

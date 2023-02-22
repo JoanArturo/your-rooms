@@ -1,0 +1,115 @@
+.messages-container {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 18px;
+    min-height: calc(100vh - 210px);
+    max-height: calc(100vh - 210px);
+    padding: 18px;
+    background: #FAFAFA;
+    border-radius: $border-radius-lg;
+    overflow-y: auto;
+    @media screen and (max-width: $view-xs) {
+        min-height: calc(100vh - 292px);
+        max-height: calc(100vh - 292px);
+    }
+}
+
+.message {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+
+    .message-user {
+        margin-bottom: 6px;
+        color: $semi-dark-color;
+    }
+    
+    .message-body {
+        padding: 10px;
+        margin-bottom: 0;
+        background-color: $secondary;
+        color: white;
+        border-radius: 4px $border-radius $border-radius $border-radius;
+        min-width: 50px;
+    }
+
+    .message-time {
+        font-style: italic;
+        align-self: end;
+    }
+}
+
+#message-form {
+    position: relative;
+    margin-top: 14px;
+
+    input {
+        width: 100%;
+        padding: 12px 36px 12px 18px;
+        border: 1px solid $border-color;
+        border-radius: 20px !important;
+        background-color: $gray-light;
+        color: $semi-dark-color;
+        font-size: $font-size-md;
+
+        &:focus {
+            outline-color: $primary;
+        }
+
+        &:focus + svg path {
+            fill: $primary;
+        }
+    }
+
+    svg {
+        position: absolute;
+        top: 50%;
+        right: 18px;
+        transform: translateY(-50%);
+    }
+}
+
+.text-users-connected {
+    margin-top: 35px;
+    color: $secondary;
+}
+
+.users-container {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+    
+    .user {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+
+        .avatar-group {
+            gap: 15px;
+
+            .avatar-image {
+                width: 22px;
+                height: 22px;
+
+                img {
+                    width: 70%;
+                    height: 70%;
+                }
+            }
+            
+            p {
+                color: $semi-dark-color;
+            }
+        }
+
+        .badge-user-status {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #DA324F;
+            border: 1px solid $secondary;
+            border-radius: 50%;
+        }
+    }
+}

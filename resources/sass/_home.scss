@@ -1,0 +1,63 @@
+.col-room:last-child {
+    @media screen and (max-width: $view-xs) {
+        & .card-room {
+            border-bottom: none;
+        }
+    }
+}
+
+.card-room {
+    margin-bottom: 30px;
+    border-radius: 12px !important;
+    border: 1px solid $gray-light;
+    box-shadow: 0 4px 6px rgba($color: #000000, $alpha: 0.08);
+    color: $semi-dark-color;
+    transition: $transition;
+    overflow: hidden;
+    @media screen and (max-width: $view-xs) {
+        border: none;
+        border-radius: 0 !important;
+        border-bottom: 1px solid $border-color;
+        box-shadow: none;
+    }
+    
+    &:hover .card-options {
+        bottom: 0;
+        text-decoration: none;
+    }
+
+    .card-user-number {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .card-body > p {
+        margin-bottom: 10px;
+    }
+
+    .card-options {
+        position: absolute;
+        left: 0;
+        bottom: -100%;
+        width: 100%;
+        height: 100%;
+        background-color: #272727cb;
+        transition: $transition;
+
+        & > span {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            width: 100%;
+            border: 1px solid transparent;
+            text-transform: uppercase;
+            color: white;
+        }
+    }
+}

@@ -43582,6 +43582,7 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./core */ "./resources/js/core.js");
 
 /***/ }),
 
@@ -43632,6 +43633,179 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/core.js":
+/*!******************************!*\
+  !*** ./resources/js/core.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(function () {
+  var initializeLibraries = function initializeLibraries() {
+    $('.select2-single').select2();
+    $('[data-toggle="tooltip"]').tooltip();
+  };
+  var activeLoginOrRegisterSectionToLoadPage = function activeLoginOrRegisterSectionToLoadPage() {
+    var hash = $(location).prop('hash');
+    if (hash == '#login') {
+      showLoginForm();
+      hideRegisterForm();
+    } else if (hash == '#register') {
+      hideLoginForm();
+      showRegisterForm();
+    }
+  };
+  var initializeEventGoLogin = function initializeEventGoLogin() {
+    $('#btn-go-login').click(function (e) {
+      // e.preventDefault();
+      showLoginForm();
+      hideRegisterForm();
+    });
+  };
+  var showLoginForm = function showLoginForm() {
+    $('#login-form').show().animate({
+      left: '50%',
+      opacity: 1
+    }, 'fast');
+  };
+  var hideRegisterForm = function hideRegisterForm() {
+    $('#register-form').animate({
+      left: '120%',
+      opacity: 0
+    }, 'fast', function () {
+      $(this).css('display', 'none');
+    });
+  };
+  var initializeEventGoRegister = function initializeEventGoRegister() {
+    $('#btn-go-register').click(function (e) {
+      // e.preventDefault();
+      hideLoginForm();
+      showRegisterForm();
+    });
+  };
+  var hideLoginForm = function hideLoginForm() {
+    $('#login-form').animate({
+      left: '-20%',
+      opacity: 0
+    }, 'fast', function () {
+      $(this).css('display', 'none');
+    });
+  };
+  var showRegisterForm = function showRegisterForm() {
+    $('#register-form').show().animate({
+      left: '50%',
+      opacity: 1
+    }, 'fast');
+  };
+  var initializeEventShowSidebarRooms = function initializeEventShowSidebarRooms() {
+    $('#nav-link-rooms, #sidebar-rooms .sidebar-close-icon, #sidebar-rooms .sidebar-overlay').click(function (e) {
+      $('#sidebar-chats').removeClass('show');
+      $('#sidebar-rooms').toggleClass('show');
+    });
+  };
+  var initializeEventShowSidebarChats = function initializeEventShowSidebarChats() {
+    $('#nav-link-chats, #sidebar-chats .sidebar-close-icon, #sidebar-chats .sidebar-overlay').click(function (e) {
+      $('#sidebar-rooms').removeClass('show');
+      $('#sidebar-chats').toggleClass('show');
+    });
+  };
+  var renderProfileImageToSelectAImage = function renderProfileImageToSelectAImage() {
+    var imageInput = $('#image-input');
+    var imagePreview = $('.image-label img');
+    $(imageInput).on('change', function (e) {
+      var file = e.target.files[0];
+      if (file) {
+        var fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        $(fileReader).on('load', function () {
+          $(imagePreview).attr('src', this.result).addClass('image-selected');
+
+          // Change navbar icon
+          $('.avatar-image img').attr('src', this.result).addClass('has-profile-image');
+        });
+      }
+      createButtonDeleteProfileImage();
+    });
+  };
+  var createButtonDeleteProfileImage = function createButtonDeleteProfileImage() {
+    $('#profile-image-form #profile-image-container').append("\n            <button id=\"btn-delete-profile-image\">\n                <svg width=\"8\" height=\"8\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <path d=\"M1 10L0 9L4 5L0 1L1 0L5 4L9 0L10 1L6 5L10 9L9 10L5 6L1 10Z\" fill=\"#330136\"/>\n                </svg>\n                Eliminar foto\n            </button>\n        ");
+  };
+  var initializeEventDeleteProfileImage = function initializeEventDeleteProfileImage() {
+    $('#profile-image-container').click(function (e) {
+      var isButton = $(e.target).attr('id') == 'btn-delete-profile-image';
+      if (isButton) {
+        $('#profile-image-form').trigger('reset');
+        $('.image-label img').attr('src', '/icons/camera.svg').removeClass('image-selected');
+        $(e.target).remove();
+
+        // Change navbar icon
+        $('.avatar-image img').attr('src', '/icons/camera.svg').removeClass('has-profile-image');
+      }
+    });
+  };
+  var initializeEventCreateAccount = function initializeEventCreateAccount() {
+    $('.login-container').click(function (e) {
+      var isButton = $(e.target).attr('id') == 'btn-create-account';
+      if (isButton) {
+        e.preventDefault();
+        $(e.target).attr('disabled', true);
+        var formData = $('#register-form form').serialize();
+        createUserAccount(formData);
+      }
+    });
+  };
+  var createUserAccount = function createUserAccount(formData) {
+    showCreateAccountMessage();
+    axios.post('/register', formData).then(function (response) {
+      if (response.status == 200) {
+        $('.errors-container').html(getLoadingMessageHtml('Cuenta creada exitosamente!, redirigiendo...'));
+        location.href = '/home';
+      }
+    })["catch"](function (error) {
+      $('.errors-container').html(getErrorsMessageHtml(error));
+      $('#btn-create-account').attr('disabled', false);
+      continueExecutionCreateAccountMessage = false;
+    });
+  };
+  var continueExecutionCreateAccountMessage = true;
+  var showCreateAccountMessage = function showCreateAccountMessage() {
+    continueExecutionCreateAccountMessage = true;
+    $('.errors-container').html(getLoadingMessageHtml('Creando cuenta...'));
+    var almostReadyMessage = setTimeout(function () {
+      if (continueExecutionCreateAccountMessage) {
+        $('.errors-container').html(getLoadingMessageHtml('Ya casi está listo...'));
+      }
+    }, 10000);
+  };
+  var getLoadingMessageHtml = function getLoadingMessageHtml(text) {
+    return "\n            <div class=\"d-flex align-items-center mb-4\">\n                <strong>".concat(text, "</strong>\n                <div class=\"spinner-border spinner-border-sm ml-2\" role=\"status\" aria-hidden=\"true\"></div>\n            </div>\n        ");
+  };
+  var getErrorsMessageHtml = function getErrorsMessageHtml(error) {
+    var html = "\n            <div class=\"alert alert-danger mb-4\">\n                <ul class=\"m-0 p-0\">";
+    if (error.response.data.errors) {
+      var errors = Object.values(error.response.data.errors);
+      errors.forEach(function (errorMessage) {
+        html += "<li class=\"ml-2\">".concat(errorMessage, "</li>");
+      });
+    } else {
+      html += "<li class=\"ml-2\">".concat(error, "</li>");
+    }
+    html += '</ul></div>';
+    return html;
+  };
+  initializeLibraries();
+  initializeEventGoLogin();
+  initializeEventGoRegister();
+  activeLoginOrRegisterSectionToLoadPage();
+  initializeEventShowSidebarRooms();
+  initializeEventShowSidebarChats();
+  renderProfileImageToSelectAImage();
+  initializeEventDeleteProfileImage();
+  initializeEventCreateAccount();
+});
 
 /***/ }),
 

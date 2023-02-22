@@ -1,12 +1,54 @@
+@import url(https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap);
+
+// My Variables
+$font-stack: 'Lato', sans-serif;
+$semi-dark-color: #595959;
+$border-color: #DCDCDC;
+
+// Font sizes
+$font-size-sm: 0.625rem; // 10px
+$font-size: 0.75rem; // 12px
+$font-size-md: 0.875rem; // 14px
+$font-size-lg: 2.188rem; // 35px
+$font-weight-light: 300;
+$font-weight: 400;
+$font-weight-bold: 700;
+
+// Shadows
+$navbar-shadow: 0 4px 12px #0000000f;
+$sidebar-shadow: 4px 0 4px #00000026;
+$form-shadow: 0 4px 6px #00000026;
+$button-shadow: 0 4px 6px #00000026;
+$card-shadow: 0 4px 6px #00000014;
+
+$transition-slow: 500ms;
+$transition: 300ms;
+$transition-fast: 100ms;
+
+// Screen sizes
+$view-xs: 575px;
+$view-sm: 576px;
+$view-md: 768px;
+$view-lg: 992px;
+$view-xl: 1200px;
+
 // Body
-$body-bg: #f8fafc;
+$body-color: $semi-dark-color;
 
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
+$font-family-sans-serif: $font-stack;
+$font-size-base: $font-size;
 $line-height-base: 1.6;
 
-// Colors
+// Essential Colors
+$primary: #FF5E35;
+$secondary: #962E40;
+$tertiary: #330136;
+$success: #64fa81;
+$info: #648EFA;
+$danger: #FA6464;
+$warning: #FAE564;
+
 $blue: #3490dc;
 $indigo: #6574cd;
 $purple: #9561e2;
@@ -17,3 +59,16 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+$gray: #BDBDBD;
+$gray-light: #ECECEC;
+
+// New theme colors
+$theme-colors: (
+    "tertiary": $tertiary,
+    "gray": $gray-light
+);
+
+// Borders
+$border-radius: 8px;
+$borde-radius-md: 10px;
+$border-radius-lg: 12px;
