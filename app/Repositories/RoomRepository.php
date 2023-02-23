@@ -57,7 +57,7 @@ class RoomRepository implements RoomRepositoryInterface
 
     public function create(array $data)
     {
-        //
+        return Entity::create($data);
     }
 
     public function update($id, array $data)

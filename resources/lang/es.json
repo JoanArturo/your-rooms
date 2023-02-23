@@ -35,6 +35,7 @@
     "New": "Nuevo",
     "Edit": "Editar",
     "Delete": "Eliminar",
+    "Save": "Guardar",
     "Empty table": "Tabla vacía",
     "Users online": "Usuarios conectados",
     "Registration date": "Fecha de registro",
@@ -55,5 +56,8 @@
     "Yes, expel": "Si, expulsar",
     "Room details": "Detalles de la sala",
     "Active": "Activo",
-    "Inactive": "Inactivo"
+    "Inactive": "Inactivo",
+    "Activate on create?": "¿Activar al crear?",
+    "Back to list": "Regresar al listado",
+    "Create room": "Crear sala"
 }

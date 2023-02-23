@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
+    protected $fillable = [
+        'name', 'description', 'limit', 'active'
+    ];
+
     public function messages()
     {
         return $this->hasMany(Message::class);

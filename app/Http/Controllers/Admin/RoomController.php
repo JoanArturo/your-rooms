@@ -34,7 +34,7 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.room.create');
     }
 
     /**
@@ -45,7 +45,16 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = $request->validate([
+            'name'        => 'required',
+            'description' => 'required',
+            'limit'       => 'required|numeric|min:2',
+            'active'      => 'nullable'
+        ]);
+
+        $this->roomRepository->create($fields);
+
+        return redirect()->route('admin.room.index');
     }
 
     /**
