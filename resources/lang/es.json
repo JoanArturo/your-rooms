@@ -41,5 +41,7 @@
     "Are you sure to delete the registration <strong>:name</strong>?": "¿Estas seguro de eliminar el registro <strong>:name</strong>?",
     "No, cancel": "No, cancelar",
     "Yes, delete": "Si, eliminar",
-    "Search": "Buscar"
+    "Search": "Buscar",
+    "Full": "Lleno",
+    "Almost full": "Casi lleno"
 }

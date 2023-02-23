@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Presenters\RoomPresenter;
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
@@ -14,5 +15,10 @@ class Room extends Model
     public function users()
     {
         return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
+    public function presenter()
+    {
+        return new RoomPresenter($this);
     }
 }

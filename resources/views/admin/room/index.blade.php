@@ -32,14 +32,11 @@
             @forelse ($rooms as $room)
                 <tr>
                     <th scope="row">{{ $room->id }}</th>
-                    <td>{{ $room->name }}</td>
+                    <td>{{ $room->presenter()->name() }}</td>
                     <td>{{ $room->description }}</td>
                     <td>{{ $room->limit }}</td>
-                    <td>
-                        <span>{{ $room->users->count() }}</span>
-                        <span class="badge badge-warning ml-1">Casi lleno</span>
-                    </td>
-                    <td>{{ $room->created_at->diffForHumans() }}</td>
+                    <td>{{ $room->presenter()->usersOnlineNumber() }}</td>
+                    <td>{{ $room->presenter()->createdAt() }}</td>
                     <td>
                         <a href="#" class="btn btn-info table-btn"><i class="ri-pencil-line"></i>{{ __('Edit') }}</a>
                         <button type="button" class="btn btn-danger table-btn" data-toggle="modal" data-target="#deleteRecord"><i class="ri-delete-bin-line"></i> {{ __('Delete') }}</button>
