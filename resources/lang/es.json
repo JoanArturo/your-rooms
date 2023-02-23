@@ -59,5 +59,8 @@
     "Inactive": "Inactivo",
     "Activate on create?": "¿Activar al crear?",
     "Back to list": "Regresar al listado",
-    "Create room": "Crear sala"
+    "Create room": "Crear sala",
+    "Edit room": "Editar sala",
+    "The room data has been successfully updated.": "Los datos de la sala han sido actualizados correctamente.",
+    "Room created successfully.": "Sala creada exitosamente."
 }

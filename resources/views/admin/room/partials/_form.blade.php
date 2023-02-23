@@ -14,7 +14,7 @@
 </div>
 
 <div class="form-group d-flex align-items-center">
-    {!! Form::checkbox('active', true, 0, ['id' => 'active-input']) !!}
+    {!! Form::checkbox('active', true, null, ['id' => 'active-input']) !!}
     {!! Form::label('active-input', __('Activate on create?'), ['class' => 'm-0 mr-2']) !!}
 </div>
 

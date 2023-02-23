@@ -38,7 +38,7 @@
                     <td>{{ $room->presenter()->usersOnlineNumberWithIndicator() }}</td>
                     <td>{{ $room->presenter()->createdAt() }}</td>
                     <td>
-                        <a href="#" class="btn btn-info table-btn"><i class="ri-pencil-line"></i>{{ __('Edit') }}</a>
+                        <a href="{{ route('admin.room.edit', $room) }}" class="btn btn-info table-btn"><i class="ri-pencil-line"></i>{{ __('Edit') }}</a>
                         <button type="button" class="btn btn-danger table-btn" data-toggle="modal" data-target="#deleteRecord"><i class="ri-delete-bin-line"></i> {{ __('Delete') }}</button>
                     </td>
                 </tr>

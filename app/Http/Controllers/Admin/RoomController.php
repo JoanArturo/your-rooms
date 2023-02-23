@@ -54,7 +54,7 @@ class RoomController extends Controller
 
         $this->roomRepository->create($fields);
 
-        return redirect()->route('admin.room.index');
+        return redirect()->route('admin.room.index')->with('success', __('Room created successfully.'));
     }
 
     /**
@@ -78,7 +78,9 @@ class RoomController extends Controller
      */
     public function edit($id)
     {
-        //
+        $room = $this->roomRepository->findById($id);
+
+        return view('admin.room.edit', compact('room'));
     }
 
     /**
@@ -90,7 +92,16 @@ class RoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $fields = $request->validate([
+            'name'        => 'required',
+            'description' => 'required',
+            'limit'       => 'required|numeric|min:2',
+            'active'      => 'nullable'
+        ]);
+
+        $this->roomRepository->update($id , $fields);
+
+        return redirect()->route('admin.room.index')->with('success', __('The room data has been successfully updated.'));
     }
 
     /**

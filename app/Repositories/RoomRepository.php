@@ -62,6 +62,8 @@ class RoomRepository implements RoomRepositoryInterface
 
     public function update($id, array $data)
     {
-        //
+        $room = $this->findById($id);
+
+        return $room->update($data);
     }
 }

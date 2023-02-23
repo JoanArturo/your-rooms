@@ -21,15 +21,7 @@
     </header>
 
     <main class="container px-3 px-lg-0">
-        @if ($errors->any())
-            <div class="alert alert-danger my-4">
-                <ul class="m-0 p-0">
-                    @foreach ($errors->all() as $error)
-                        <li class="ml-2">{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @include('layouts.partials._messages-status')
 
         @yield('content')
 
