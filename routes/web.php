@@ -2,6 +2,14 @@
 
 Auth::routes(['verify' => true]);
 
+Route::get('/', function() {
+    return view('guest');
+})->name('guest')->middleware('guest');
+
 Route::get('/home', function() {
-    echo "Bienvenido";
+    return view('home');
 })->middleware('verified');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('room', 'Admin\RoomController');
+});

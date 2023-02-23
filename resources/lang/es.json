@@ -30,4 +30,16 @@
     "If you did not receive the email": "Si no has recibido el email",
     "click here to request another": "pulsa aquí para que te enviemos otro",
     "All rights reserved.":  "Todos los derechos reservados.",
+    "Rooms": "Salas",
+    "New": "Nuevo",
+    "Edit": "Editar",
+    "Delete": "Eliminar",
+    "Empty table": "Tabla vacía",
+    "Users online": "Usuarios conectados",
+    "Registration date": "Fecha de registro",
+    "Delete record": "Eliminar registro",
+    "Are you sure to delete the registration <strong>:name</strong>?": "¿Estas seguro de eliminar el registro <strong>:name</strong>?",
+    "No, cancel": "No, cancelar",
+    "Yes, delete": "Si, eliminar",
+    "Search": "Buscar"
 }

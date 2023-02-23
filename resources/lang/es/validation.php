@@ -147,6 +147,9 @@ return [
     */
 
     'attributes' => [
+        'name'        => 'Nombre',
+        'description' => 'Descripción',
+        'limit'       => 'Límite'
     ],
 
 ];
