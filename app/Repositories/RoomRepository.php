@@ -64,6 +64,9 @@ class RoomRepository implements RoomRepositoryInterface
     {
         $room = $this->findById($id);
 
+        if (empty($data['active']))
+            $data['active'] = 0;
+
         return $room->update($data);
     }
 }
