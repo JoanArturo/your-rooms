@@ -31,6 +31,7 @@
     "click here to request another": "pulsa aquí para que te enviemos otro",
     "All rights reserved.":  "Todos los derechos reservados.",
     "Rooms": "Salas",
+    "Room": "Sala",
     "New": "Nuevo",
     "Edit": "Editar",
     "Delete": "Eliminar",
@@ -43,5 +44,16 @@
     "Yes, delete": "Si, eliminar",
     "Search": "Buscar",
     "Full": "Lleno",
-    "Almost full": "Casi lleno"
+    "Almost full": "Casi lleno",
+    "Room status": "Estado de la sala",
+    "List of connected users": "Listado de usuarios conectados",
+    "Expel": "Expulsar",
+    "Expel user": "Expulsar usuario",
+    "No users connected": "No hay usuarios conectados",
+    "Back to the list of rooms": "Regresar al listado de salas",
+    "Are you sure to expel user <strong>:name</strong> out of this room?": "¿Estas seguro de expulsar al usuario <strong>:name</strong> de esta sala?",
+    "Yes, expel": "Si, expulsar",
+    "Room details": "Detalles de la sala",
+    "Active": "Activo",
+    "Inactive": "Inactivo"
 }

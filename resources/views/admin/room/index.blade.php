@@ -35,7 +35,7 @@
                     <td>{{ $room->presenter()->name() }}</td>
                     <td>{{ $room->description }}</td>
                     <td>{{ $room->limit }}</td>
-                    <td>{{ $room->presenter()->usersOnlineNumber() }}</td>
+                    <td>{{ $room->presenter()->usersOnlineNumberWithIndicator() }}</td>
                     <td>{{ $room->presenter()->createdAt() }}</td>
                     <td>
                         <a href="#" class="btn btn-info table-btn"><i class="ri-pencil-line"></i>{{ __('Edit') }}</a>

@@ -6,12 +6,17 @@ class RoomPresenter extends Presenter
 {
     public function name()
     {
-        return new HtmlString("<a href='#'>{$this->entity->name}</a>");
+        return new HtmlString("<a href='". route('admin.room.show', $this->entity) ."'>{$this->entity->name}</a>");
     }
 
     public function usersOnlineNumber()
     {
-        $userOnline = $this->entity->users->count();
+        return $this->entity->users->count();
+    }
+
+    public function usersOnlineNumberWithIndicator()
+    {
+        $userOnline = $this->usersOnlineNumber();
         $html = "<span>{$userOnline}</span>";
 
         if ($userOnline == $this->entity->limit)
@@ -25,5 +30,13 @@ class RoomPresenter extends Presenter
     public function createdAt()
     {
         return $this->entity->created_at->diffForHumans();
+    }
+
+    public function status()
+    {
+        $status = $this->entity->active ? __('Active') : __('Inactive');
+        $badgeColor = $this->entity->active ? 'success' : 'warning';
+
+        return new HtmlString("<span class='badge badge-{$badgeColor}'>{$status}</span>");
     }
 }

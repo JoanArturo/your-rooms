@@ -47,7 +47,7 @@ class RoomRepository implements RoomRepositoryInterface
 
     public function findById($id)
     {
-        //
+        return Entity::findOrFail($id);
     }
 
     public function delete($id)
