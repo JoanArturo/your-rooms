@@ -1,42 +1,45 @@
 @extends('layouts.app')
 
-@section('page', 'Detalles del usuario')
+@section('page', __('User details'))
 
 @section('content')
 <div class="card details-card my-4 rounded">
     <div class="card-header">
         <div class="details-image">
-            <img src="{{ asset('icons/camera.svg') }}" alt="Profile image">
+            {{ $user->presenter()->profilePicture() }}
         </div>
-        <h1 class="text-title m-0">Mark</h1>
-        <p class="m-0">Usuario</p>
+        <h1 class="text-title m-0">{{ $user->name }}</h1>
+        <p class="m-0">{{ $user->presenter()->role() }}</p>
     </div>
     <div class="card-body">
         <div class="details-info">
-            <p><strong>Nombre</strong></p>
-            <p>Mark</p>
+            <p><strong>{{ __('validation.attributes.name') }}</strong></p>
+            <p>{{ $user->name }}</p>
         </div>
         <div class="details-info">
-            <p><strong>Email</strong></p>
-            <p>@mdo</p>
+            <p><strong>{{ __('validation.attributes.email') }}</strong></p>
+            <p>{{ $user->email }}</p>
         </div>
         <div class="details-info">
-            <p><strong>Rol</strong></p>
-            <p>Usuario</p>
+            <p><strong>{{ __('validation.attributes.role') }}</strong></p>
+            <p>{{ $user->presenter()->role() }}</p>
         </div>
         <div class="details-info">
-            <p><strong>Estado de la cuenta</strong></p>
-            <span class="badge badge-success">Activo</span>
+            <p><strong>{{ __('validation.attributes.account_status') }}</strong></p>
+            {{ $user->presenter()->status() }}
         </div>
         <div class="details-info">
-            <p><strong>Fecha de registro</strong></p>
-            <p>hace 2 dias</p>
+            <p><strong>{{ __('Registration date') }}</strong></p>
+            <p>{{ $user->presenter()->createdAt() }}</p>
         </div>
     </div>
     <div class="card-footer">
-        <a href="./users-index.html" class="btn btn-gray"><i class="ri-arrow-left-s-line mr-2"></i> Regresar al listado de usuarios</a>
-        <button href="#" class="btn btn-danger"><i class="ri-forbid-line mr-2"></i> Banear cuenta</button>
-        <button href="#" class="btn btn-info"><i class="ri-forbid-line mr-2"></i> Desbanear cuenta</button>
+        <a href="{{ route('admin.user.index') }}" class="btn btn-gray"><i class="ri-arrow-left-s-line mr-2"></i> {{ __('Back to the list of users') }}</a>
+        @if ($user->is_banned)
+            <button href="#" class="btn btn-info"><i class="ri-forbid-line mr-2"></i> {{ __('Unban account') }}</button>
+        @else
+            <button href="#" class="btn btn-danger"><i class="ri-forbid-line mr-2"></i> {{ __('Ban account') }}</button>
+        @endif
     </div>
 </div>
 @endsection

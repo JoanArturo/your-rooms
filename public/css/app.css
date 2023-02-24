@@ -15218,10 +15218,11 @@ input[type=color]::-moz-color-swatch {
   top: 50%;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 70px;
   height: 70px;
-  text-align: center;
-  line-height: 70px;
   border-radius: 50%;
   border: 1px solid #DCDCDC;
   background-color: #ECECEC;

@@ -6,7 +6,15 @@ class UserPresenter extends Presenter
 {
     public function name()
     {
-        return new HtmlString("<a href='#'>{$this->entity->name}</a>");
+        return new HtmlString("<a href='". route('admin.user.show', $this->entity) ."'>{$this->entity->name}</a>");
+    }
+
+    public function profilePicture()
+    {
+        $profilePicture = $this->entity->profile_picture ? asset($this->entity->profile_picture) : asset('icons/camera.svg');
+        $styleClass = $this->entity->profile_picture ? 'has-profile-image' : '';
+
+        return new HtmlString("<img src='{$profilePicture}' alt='Profile image' class='{$styleClass}'>");
     }
 
     public function role()

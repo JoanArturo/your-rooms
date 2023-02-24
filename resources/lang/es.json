@@ -66,5 +66,9 @@
     "Users": "Usuarios",
     "User": "Usuario",
     "Banned": "Baneado",
-    "Administrator": "Administrador"
+    "Administrator": "Administrador",
+    "Back to the list of users": "Regresar al listado de usuarios",
+    "Ban account": "Banear cuenta",
+    "Unban account": "Desbanear cuenta",
+    "User details": "Detalles del usuario"
 }
