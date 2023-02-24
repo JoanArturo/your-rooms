@@ -21,7 +21,7 @@
             <div class="btn-group dropdown-avatar">
                 <div class="avatar-group" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="avatar-image">
-                        {{ $user->presenter()->profilePicture() }}
+                        {{ Auth::user()->presenter()->profilePicture() }}
                     </div>
                     <img src="{{ asset('icons/arrow-down.svg') }}" alt="Arrow down icon">
                 </div>
