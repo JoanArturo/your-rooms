@@ -32,17 +32,11 @@
             @forelse ($users as $user)
                 <tr>
                     <th scope="row">{{ $user->id }}</th>
-                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->presenter()->name() }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->is_admin ? __('Administrator') : __('User') }}</td>
-                    <td>
-                        @if ($user->is_banned)
-                            <span class="badge badge-danger">{{ __('Banned') }}</span>
-                        @else
-                            <span class="badge badge-success">{{ __('Active') }}</span>
-                        @endif
-                    </td>
-                    <td>{{ $user->created_at->diffForHumans() }}</td>
+                    <td>{{ $user->presenter()->role() }}</td>
+                    <td>{{ $user->presenter()->status() }}</td>
+                    <td>{{ $user->presenter()->createdAt() }}</td>
                     <td>
                         <a href="#" class="btn btn-info table-btn"><i class="ri-pencil-line"></i>{{ __('Edit') }}</a>
                         <button type="button" class="btn btn-danger table-btn" data-toggle="modal" data-target="#deleteRecord"><i class="ri-delete-bin-line"></i> {{ __('Delete') }}</button>

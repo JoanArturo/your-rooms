@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Presenters\UserPresenter;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -50,6 +51,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function suggestions()
     {
         return $this->hasMany(Suggestion::class);
+    }
+
+    public function presenter()
+    {
+        return new UserPresenter($this);
     }
 
     public function isVerified()
