@@ -13,4 +13,6 @@ Route::get('/home', function() {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('room', 'Admin\RoomController');
     Route::get('room/{id}/delete', 'Admin\RoomController@delete')->name('room.delete');
+    
+    Route::resource('user', 'Admin\UserController');
 });

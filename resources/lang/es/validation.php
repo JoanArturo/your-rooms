@@ -147,9 +147,12 @@ return [
     */
 
     'attributes' => [
-        'name'        => 'Nombre',
-        'description' => 'Descripción',
-        'limit'       => 'Límite'
+        'name'           => 'Nombre',
+        'description'    => 'Descripción',
+        'limit'          => 'Límite',
+        'email'          => 'Correo electrónico',
+        'role'           => 'Rol',
+        'account_status' => 'Estado de la cuenta'
     ],
 
 ];

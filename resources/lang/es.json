@@ -62,5 +62,9 @@
     "Create room": "Crear sala",
     "Edit room": "Editar sala",
     "The room data has been successfully updated.": "Los datos de la sala han sido actualizados correctamente.",
-    "Room created successfully.": "Sala creada exitosamente."
+    "Room created successfully.": "Sala creada exitosamente.",
+    "Users": "Usuarios",
+    "User": "Usuario",
+    "Banned": "Baneado",
+    "Administrator": "Administrador"
 }
