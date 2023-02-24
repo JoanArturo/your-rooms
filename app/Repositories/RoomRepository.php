@@ -52,7 +52,11 @@ class RoomRepository implements RoomRepositoryInterface
 
     public function delete($id)
     {
-        //
+        $room = $this->findById($id);
+
+        $room->users()->delete();
+
+        return $room->delete();
     }
 
     public function create(array $data)

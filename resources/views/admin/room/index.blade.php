@@ -39,7 +39,7 @@
                     <td>{{ $room->presenter()->createdAt() }}</td>
                     <td>
                         <a href="{{ route('admin.room.edit', $room) }}" class="btn btn-info table-btn"><i class="ri-pencil-line"></i>{{ __('Edit') }}</a>
-                        <button type="button" class="btn btn-danger table-btn" data-toggle="modal" data-target="#deleteRecord"><i class="ri-delete-bin-line"></i> {{ __('Delete') }}</button>
+                        <button type="button" class="btn btn-danger table-btn btn-delete-record" data-url="{{ route('admin.room.delete', $room) }}"><i class="ri-delete-bin-line"></i> {{ __('Delete') }}</button>
                     </td>
                 </tr>
             @empty
@@ -51,23 +51,5 @@
     </table>
 
     {{ $rooms->links() }}
-</div>
-
-<!-- Modal Delete -->
-<div class="modal fade" id="deleteRecord" tabindex="-1" role="dialog" aria-labelledby="deleteRecordLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-secondary">
-                <h5 class="modal-title" id="deleteRecordLabel">{{ __('Delete record') }}</h5>
-            </div>
-            <div class="modal-body py-4">
-                <p class="m-0">{!! __('Are you sure to delete the registration <strong>:name</strong>?', ['name' => 'México']) !!}</p>
-            </div>
-            <div class="modal-footer p-2">
-                <button type="button" class="btn btn-gray" data-dismiss="modal">{{ __('No, cancel') }}</button>
-                <button type="button" class="btn btn-danger">{{ __('Yes, delete') }}</button>
-            </div>
-        </div>
-    </div>
 </div>
 @endsection

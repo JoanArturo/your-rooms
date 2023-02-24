@@ -105,6 +105,22 @@ class RoomController extends Controller
     }
 
     /**
+     * Show delete modal.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        if (! request()->ajax())
+            abort(404);
+
+        $room = $this->roomRepository->findById($id);
+
+        return view('admin.room.partials._delete', compact('room'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -112,6 +128,8 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->roomRepository->delete($id);
+
+        return response()->json(null, 204);
     }
 }

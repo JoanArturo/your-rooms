@@ -43796,6 +43796,36 @@ $(function () {
     html += '</ul></div>';
     return html;
   };
+  var initializeEventDeleteRecord = function initializeEventDeleteRecord() {
+    $('.btn-delete-record').click(function (e) {
+      var url = $(e.delegateTarget).data('url');
+      axios.get(url).then(function (response) {
+        $('#modal-container').html(response.data);
+        $('#modal-container .modal').modal('show');
+      })["catch"](function (error) {
+        $('.errors-container').html(getErrorsMessageHtml(error));
+      });
+    });
+  };
+  var initializeEventConfirmDeleteRecord = function initializeEventConfirmDeleteRecord() {
+    $('main').click(function (e) {
+      var isButton = $(e.target).attr('id') == 'btn-confirm-deletion';
+      if (isButton) {
+        e.preventDefault();
+        var url = $(e.target).data('url');
+        $(e.target).closest('.modal').modal('toggle');
+        $('.messages-status').html(getLoadingMessageHtml('Eliminando registro...'));
+        axios["delete"](url).then(function (response) {
+          if (response.status == 204) {
+            $('.messages-status').html(getLoadingMessageHtml('Registro eliminado, refrescando tabla...'));
+            location.reload();
+          }
+        })["catch"](function (error) {
+          $('.messages-status').html(getErrorsMessageHtml(error));
+        });
+      }
+    });
+  };
   initializeLibraries();
   initializeEventGoLogin();
   initializeEventGoRegister();
@@ -43805,6 +43835,8 @@ $(function () {
   renderProfileImageToSelectAImage();
   initializeEventDeleteProfileImage();
   initializeEventCreateAccount();
+  initializeEventDeleteRecord();
+  initializeEventConfirmDeleteRecord();
 });
 
 /***/ }),

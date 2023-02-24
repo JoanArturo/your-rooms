@@ -27,6 +27,8 @@
 
         @include('layouts.partials._sidebar-rooms')
         @include('layouts.partials._sidebar-chats')
+
+        <div id="modal-container"></div>
     </main>
 </body>
 </html>

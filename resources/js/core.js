@@ -215,6 +215,56 @@ $(() => {
         return html;
     }
 
+    const initializeEventDeleteRecord = () => {
+        $('.btn-delete-record').click( (e) => {
+            let url = $(e.delegateTarget).data('url');
+
+            axios.get(url)
+                .then( (response) => {
+                    $('#modal-container').html(response.data);
+                    $('#modal-container .modal').modal('show');
+                })
+                .catch( (error) => {
+                    $('.errors-container').html(
+                        getErrorsMessageHtml(error)
+                    );
+                });
+        });
+    }
+
+    const initializeEventConfirmDeleteRecord = () => {
+        $('main').click( (e) => {
+            const isButton = $(e.target).attr('id') == 'btn-confirm-deletion';
+
+            if (isButton) {
+                e.preventDefault();
+                let url = $(e.target).data('url');
+
+                $(e.target).closest('.modal').modal('toggle');
+
+                $('.messages-status').html(
+                    getLoadingMessageHtml('Eliminando registro...')
+                );
+
+                axios.delete(url)
+                    .then( (response) => {
+                        if (response.status == 204) {
+                            $('.messages-status').html(
+                                getLoadingMessageHtml('Registro eliminado, refrescando tabla...')
+                            );
+
+                            location.reload();
+                        }
+                    })
+                    .catch( (error) => {
+                        $('.messages-status').html(
+                            getErrorsMessageHtml(error)
+                        );
+                    });
+            }
+        });
+    }
+
     initializeLibraries();
     initializeEventGoLogin();
     initializeEventGoRegister();
@@ -224,4 +274,6 @@ $(() => {
     renderProfileImageToSelectAImage();
     initializeEventDeleteProfileImage();
     initializeEventCreateAccount();
+    initializeEventDeleteRecord();
+    initializeEventConfirmDeleteRecord();
 });
