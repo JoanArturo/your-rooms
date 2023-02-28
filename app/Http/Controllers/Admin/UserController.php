@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Interfaces\UserRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -34,7 +35,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = $this->userRepository->getAllRoles()->prepend(__('Select a role'));
+        
+        $accountStatus = $this->userRepository->getAllAccountStatus()->prepend(__('Select a status'));
+
+        return view('admin.user.create', compact('roles', 'accountStatus'));
     }
 
     /**
@@ -45,7 +50,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = $request->validate([
+            'name'           => 'required|string|max:255',
+            'email'          => 'required|string|email|max:255|unique:users',
+            'password'       => 'required|string|min:8|confirmed',
+            'role'           => ['required', Rule::in($this->userRepository->getAllRoles()->keys())],
+            'account_status' => ['required', Rule::in($this->userRepository->getAllAccountStatus()->keys())]
+        ]);
+
+        $this->userRepository->create($fields);
+
+        return redirect()->route('admin.user.index')->with('success', __('User created successfully.'));
     }
 
     /**

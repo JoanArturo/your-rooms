@@ -70,5 +70,9 @@
     "Back to the list of users": "Regresar al listado de usuarios",
     "Ban account": "Banear cuenta",
     "Unban account": "Desbanear cuenta",
-    "User details": "Detalles del usuario"
+    "User details": "Detalles del usuario",
+    "User created successfully.": "Usuario creado exitosamente.",
+    "Create user": "Crear usuario",
+    "Select a role": "Seleccione un rol",
+    "Select a status": "Seleccione un estatus"
 }

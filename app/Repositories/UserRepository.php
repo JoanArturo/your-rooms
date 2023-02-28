@@ -2,6 +2,7 @@
 
 use App\User as Entity;
 use App\Interfaces\UserRepositoryInterface;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -65,6 +66,14 @@ class UserRepository implements UserRepositoryInterface
 
     public function create(array $data)
     {
+        $data['is_admin'] = $data['role'] == 1;
+        
+        $data['is_banned'] = $data['account_status'] == 2;
+
+        unset($data['role'], $data['account_status']);
+
+        $data['password'] = Hash::make($data['password']);
+
         return Entity::create($data);
     }
 
@@ -73,5 +82,21 @@ class UserRepository implements UserRepositoryInterface
         $entity = $this->findById($id);
 
         return $entity->update($data);
+    }
+
+    public function getAllRoles(): \Illuminate\Support\Collection
+    {
+        return collect([
+            1 => __('Administrator'),
+            2 => __('User')
+        ]);
+    }
+
+    public function getAllAccountStatus(): \Illuminate\Support\Collection
+    {
+        return collect([
+            1 => __('Active'),
+            2 => __('Banned')
+        ]);
     }
 }

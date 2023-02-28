@@ -11,7 +11,7 @@
                 <input type="text" placeholder="{{ __('Search') }}" name="search" class="form-control table-search-input" value="{{ request()->get('search') }}">
                 <i class="ri-search-line"></i>
             </form>
-            <a href="#" class="table-button-add ml-2">
+            <a href="{{ route('admin.user.create') }}" class="table-button-add ml-2">
                 <i class="ri-add-line"></i> {{ __('New') }}
             </a>
         </div>
