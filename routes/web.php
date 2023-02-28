@@ -6,11 +6,13 @@ Route::get('/', function() {
     return view('guest');
 })->name('guest')->middleware('guest');
 
+// User routes
 Route::get('/home', function() {
     return view('home');
-})->middleware(['verified', 'ban']);
+})->name('home')->middleware(['verified', 'ban']);
 
-Route::prefix('admin')->name('admin.')->group(function () {
+// Admin routes
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('room', 'Admin\RoomController');
     Route::get('room/{id}/delete', 'Admin\RoomController@delete')->name('room.delete');
     
