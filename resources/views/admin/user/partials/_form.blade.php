@@ -13,6 +13,7 @@
     </div>
 </div>
 
+@empty($user)
 <div class="form-row">
     <div class="col-12 col-md-6">
         <div class="form-group float-input">
@@ -27,6 +28,7 @@
         </div>
     </div>
 </div>
+@endempty
 
 <div class="form-group float-input">
     {!! Form::select('role', $roles, null, ['id' => 'role-input', 'class' => 'select2-single']) !!}

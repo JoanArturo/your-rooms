@@ -84,7 +84,15 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = $this->userRepository->findById($id);
+        $user->role = $user->is_admin ? 1 : 2;
+        $user->account_status = $user->is_banned ? 2 : 1;
+
+        $roles = $this->userRepository->getAllRoles()->prepend(__('Select a role'));
+        
+        $accountStatus = $this->userRepository->getAllAccountStatus()->prepend(__('Select a status'));
+
+        return view('admin.user.edit', compact('user', 'roles', 'accountStatus'));
     }
 
     /**
@@ -96,7 +104,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $fields = $request->validate([
+            'name'           => 'required|string|max:255',
+            'email'          => 'required|string|email|max:255|unique:users,email,' . $id,
+            'role'           => ['required', Rule::in($this->userRepository->getAllRoles()->keys())],
+            'account_status' => ['required', Rule::in($this->userRepository->getAllAccountStatus()->keys())]
+        ]);
+
+        $this->userRepository->update($id, $fields);
+
+        return redirect()->route('admin.user.index')->with('success', __('The user data has been successfully updated.'));
     }
 
     /**

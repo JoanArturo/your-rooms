@@ -72,7 +72,9 @@
     "Unban account": "Desbanear cuenta",
     "User details": "Detalles del usuario",
     "User created successfully.": "Usuario creado exitosamente.",
+    "The user data has been successfully updated.": "Los datos del usuario han sido actualizados correctamente.",
     "Create user": "Crear usuario",
+    "Edit user": "Editar usuario",
     "Select a role": "Seleccione un rol",
     "Select a status": "Seleccione un estatus"
 }
