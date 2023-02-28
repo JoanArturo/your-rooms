@@ -144,4 +144,20 @@ class UserController extends Controller
 
         return response()->json(null, 204);
     }
+
+    /**
+     * Updates a user's account status (Banned, Unbanned).
+     *
+     * @param  int  $id
+     * @param  bool  $status
+     * @return \Illuminate\Http\Response
+     */
+    public function updateBanStatus($id, $status)
+    {
+        $this->userRepository->updateIsBannedStatusFromUser($id, $status);
+
+        $message = $status ? __('The user has been banned.') : __('The user has been unbanned.');
+
+        return redirect()->route('admin.user.show', $id)->with('success', $message);
+    }
 }

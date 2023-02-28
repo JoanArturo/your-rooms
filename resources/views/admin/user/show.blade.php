@@ -36,9 +36,15 @@
     <div class="card-footer">
         <a href="{{ route('admin.user.index') }}" class="btn btn-gray"><i class="ri-arrow-left-s-line mr-2"></i> {{ __('Back to the list of users') }}</a>
         @if ($user->is_banned)
-            <button href="#" class="btn btn-info"><i class="ri-forbid-line mr-2"></i> {{ __('Unban account') }}</button>
+            <button class="btn btn-info" onclick="document.getElementById('unban-form').submit()"><i class="ri-forbid-line mr-2"></i> {{ __('Unban account') }}</button>
+
+            {!! Form::open(['url' => route('admin.user.updateBanStatus', [$user, 0]), 'id' => 'unban-form', 'styles' => 'display: none;']) !!}
+            {!! Form::close() !!}
         @else
-            <button href="#" class="btn btn-danger"><i class="ri-forbid-line mr-2"></i> {{ __('Ban account') }}</button>
+            <button class="btn btn-danger" onclick="document.getElementById('ban-form').submit()"><i class="ri-forbid-line mr-2"></i> {{ __('Ban account') }}</button>
+
+            {!! Form::open(['url' => route('admin.user.updateBanStatus', [$user, 1]), 'id' => 'ban-form', 'styles' => 'display: none;']) !!}
+            {!! Form::close() !!}
         @endif
     </div>
 </div>

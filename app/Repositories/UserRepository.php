@@ -105,4 +105,13 @@ class UserRepository implements UserRepositoryInterface
             2 => __('Banned')
         ]);
     }
+
+    public function updateIsBannedStatusFromUser($id, bool $status)
+    {
+        $entity = $this->findById($id);
+
+        $entity->is_banned = $status;
+
+        return $entity->save();
+    }
 }

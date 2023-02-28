@@ -76,5 +76,7 @@
     "Create user": "Crear usuario",
     "Edit user": "Editar usuario",
     "Select a role": "Seleccione un rol",
-    "Select a status": "Seleccione un estatus"
+    "Select a status": "Seleccione un estatus",
+    "The user has been banned.": "El usuario ha sido baneado.",
+    "The user has been unbanned.": "El usuario ha sido desbaneado."
 }

@@ -6,4 +6,5 @@ interface UserRepositoryInterface extends RepositoryInterface
 {
     public function getAllRoles(): Collection;
     public function getAllAccountStatus(): Collection;
+    public function updateIsBannedStatusFromUser($id, bool $status);
 }

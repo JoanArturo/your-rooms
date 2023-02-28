@@ -16,4 +16,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
     
     Route::resource('user', 'Admin\UserController');
     Route::get('user/{id}/delete', 'Admin\UserController@delete')->name('user.delete');
+    Route::post('user/{id}/update-ban-status/{status}', 'Admin\UserController@updateBanStatus')->name('user.updateBanStatus');
 });
