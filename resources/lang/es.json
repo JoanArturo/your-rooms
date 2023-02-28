@@ -78,5 +78,6 @@
     "Select a role": "Seleccione un rol",
     "Select a status": "Seleccione un estatus",
     "The user has been banned.": "El usuario ha sido baneado.",
-    "The user has been unbanned.": "El usuario ha sido desbaneado."
+    "The user has been unbanned.": "El usuario ha sido desbaneado.",
+    "This account has been banned.": "Esta cuenta ha sido baneada."
 }

@@ -8,7 +8,7 @@ Route::get('/', function() {
 
 Route::get('/home', function() {
     return view('home');
-})->middleware('verified');
+})->middleware(['verified', 'ban']);
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('room', 'Admin\RoomController');
