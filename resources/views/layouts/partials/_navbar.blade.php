@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand navbar-light bg-light">
     <div class="container d-flex align-items-center justify-content-between">
         <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
-        @if (Auth::user()->isVerified())
+        @if (Auth::check() && Auth::user()->isVerified())
             <div class="collapse navbar-collapse flex-grow-0" id="navbar-nav-container">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
