@@ -15,4 +15,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('room/{id}/delete', 'Admin\RoomController@delete')->name('room.delete');
     
     Route::resource('user', 'Admin\UserController');
+    Route::get('user/{id}/delete', 'Admin\UserController@delete')->name('user.delete');
 });

@@ -124,7 +124,12 @@ class UserController extends Controller
      */
     public function delete($id)
     {
-        //
+        if (! request()->ajax())
+            abort(404);
+
+        $user = $this->userRepository->findById($id);
+
+        return view('admin.user.partials._delete', compact('user'));
     }
 
     /**
@@ -135,6 +140,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->userRepository->delete($id);
+
+        return response()->json(null, 204);
     }
 }
