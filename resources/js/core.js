@@ -265,6 +265,58 @@ $(() => {
         });
     }
 
+    const initializeEventLoadMoreRooms = () => {
+        $('#btn-load-more-rooms').click( (e) => {
+            let currentPage = $(e.delegateTarget).data('current-page');
+            let nextPage = currentPage + 1;
+            let url = '/room/show-more?page=' + nextPage;
+            let hasMorePages = true;
+
+            // Disable button
+            $(e.delegateTarget).attr('disabled', true);
+
+            // Show a spinner load
+            $('#rooms-list').append(`
+                <div class="col-12 col-md-4 d-flex align-items-center justify-content-center py-3" id="message-loading-room">
+                    ${getLoadingMessageHtml('Cargando salas...')}
+                </div>
+            `);
+
+            axios.get(url)
+                .then( (response) => {
+                    // Hidden spinner load
+                    $('#rooms-list').find('#message-loading-room').remove();
+                    
+                    // Add new items
+                    $('#rooms-list').append(response.data.elements);
+
+                    hasMorePages = response.data.hasMorePages;
+
+                    // Update the state of the Load More Rooms button
+                    if (hasMorePages) {
+                        $(e.delegateTarget).find('span').html(`(${response.data.page.total - response.data.page.to})`);
+                        $(e.delegateTarget).data('current-page', nextPage);
+                    } else {
+                        $(e.delegateTarget).remove();
+                    }
+
+                    // Disable button
+                    $(e.delegateTarget).attr('disabled', false);
+                })
+                .catch( (error) => {
+                    $('.errors-container').html(
+                        getErrorsMessageHtml(error)
+                    );
+
+                    // Disable button
+                    $(e.delegateTarget).attr('disabled', false);
+
+                    // Hidden spinner load
+                    $('#rooms-list').find('#message-loading-room').remove();
+                });
+        });
+    }
+
     initializeLibraries();
     initializeEventGoLogin();
     initializeEventGoRegister();
@@ -276,4 +328,5 @@ $(() => {
     initializeEventCreateAccount();
     initializeEventDeleteRecord();
     initializeEventConfirmDeleteRecord();
+    initializeEventLoadMoreRooms();
 });

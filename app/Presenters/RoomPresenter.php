@@ -1,12 +1,21 @@
 <?php namespace App\Presenters;
 
 use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
 
 class RoomPresenter extends Presenter
 {
     public function name()
     {
         return new HtmlString("<a href='". route('admin.room.show', $this->entity) ."'>{$this->entity->name}</a>");
+    }
+    
+    public function description($length = null)
+    {
+        if (! $length || $length > Str::length($this->entity->description))
+            return $this->entity->description;
+
+        return trim(Str::substr($this->entity->description, 0, $length)) . '...';
     }
 
     public function usersOnlineNumber()

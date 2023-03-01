@@ -43826,6 +43826,47 @@ $(function () {
       }
     });
   };
+  var initializeEventLoadMoreRooms = function initializeEventLoadMoreRooms() {
+    $('#btn-load-more-rooms').click(function (e) {
+      var currentPage = $(e.delegateTarget).data('current-page');
+      var nextPage = currentPage + 1;
+      var url = '/room/show-more?page=' + nextPage;
+      var hasMorePages = true;
+
+      // Disable button
+      $(e.delegateTarget).attr('disabled', true);
+
+      // Show a spinner load
+      $('#rooms-list').append("\n                <div class=\"col-12 col-md-4 d-flex align-items-center justify-content-center py-3\" id=\"message-loading-room\">\n                    ".concat(getLoadingMessageHtml('Cargando salas...'), "\n                </div>\n            "));
+      axios.get(url).then(function (response) {
+        // Hidden spinner load
+        $('#rooms-list').find('#message-loading-room').remove();
+
+        // Add new items
+        $('#rooms-list').append(response.data.elements);
+        hasMorePages = response.data.hasMorePages;
+
+        // Update the state of the Load More Rooms button
+        if (hasMorePages) {
+          $(e.delegateTarget).find('span').html("(".concat(response.data.page.total - response.data.page.to, ")"));
+          $(e.delegateTarget).data('current-page', nextPage);
+        } else {
+          $(e.delegateTarget).remove();
+        }
+
+        // Disable button
+        $(e.delegateTarget).attr('disabled', false);
+      })["catch"](function (error) {
+        $('.errors-container').html(getErrorsMessageHtml(error));
+
+        // Disable button
+        $(e.delegateTarget).attr('disabled', false);
+
+        // Hidden spinner load
+        $('#rooms-list').find('#message-loading-room').remove();
+      });
+    });
+  };
   initializeLibraries();
   initializeEventGoLogin();
   initializeEventGoRegister();
@@ -43837,6 +43878,7 @@ $(function () {
   initializeEventCreateAccount();
   initializeEventDeleteRecord();
   initializeEventConfirmDeleteRecord();
+  initializeEventLoadMoreRooms();
 });
 
 /***/ }),

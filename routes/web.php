@@ -1,5 +1,7 @@
 <?php
 
+use App\Room;
+
 Auth::routes(['verify' => true]);
 
 Route::get('/', function() {
@@ -7,9 +9,10 @@ Route::get('/', function() {
 })->name('guest')->middleware('guest');
 
 // User routes
-Route::get('/home', function() {
-    return view('home');
-})->name('home')->middleware(['verified', 'ban']);
+Route::middleware(['auth', 'verified', 'ban'])->group(function () {
+    Route::get('room', 'RoomController@index')->name('room.index');
+    Route::get('room/show-more', 'RoomController@showMoreRooms')->name('room.showMoreRooms');
+});
 
 // Admin routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
