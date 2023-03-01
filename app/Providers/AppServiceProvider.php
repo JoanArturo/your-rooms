@@ -27,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::component('components.modal', 'modal');
+        Blade::component('components.card-room', 'cardroom');
 
         VerifyEmail::toMailUsing(function($notifiable, $url) {
             return (new MailMessage)

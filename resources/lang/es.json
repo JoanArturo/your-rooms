@@ -79,5 +79,10 @@
     "Select a status": "Seleccione un estatus",
     "The user has been banned.": "El usuario ha sido baneado.",
     "The user has been unbanned.": "El usuario ha sido desbaneado.",
-    "This account has been banned.": "Esta cuenta ha sido baneada."
+    "This account has been banned.": "Esta cuenta ha sido baneada.",
+    "Last rooms created": "Últimas salas creadas",
+    "Home": "Inicio",
+    "Created": "Creado",
+    "Join the room": "Unirse a la sala",
+    "Load more rooms": "Cargar más salas"
 }
