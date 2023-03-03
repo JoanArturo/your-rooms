@@ -92,5 +92,9 @@
     "Rooms available": "Salas disponibles",
     "Connected to the room": "Conectado a la sala",
     "Sent": "Enviado",
-    "The room :name is full.": "La sala :name está llena."
+    "The room :name is full.": "La sala :name está llena.",
+    "Send": "Enviar",
+    "Cancel": "Cancelar",
+    "Hello <strong>:name</strong>, we invite you to suggest any change or functionality that you would like us to implement within the system, feel free to tell us your ideas, we will be happy to hear from you.": "Hola <strong>:name</strong>, te invitamos a que nos sugieras algún cambio  o alguna funcionalidad que te gustaría que implementáramos dentro del sistema, siéntete libre de comentarnos tus ideas estaremos encantados de leerte.",
+    "We thank you for taking the time to express your ideas to us, we are happy to read your message.": "Te agradecemos por tomarte el tiempo para expresarnos tus ideas, estamos contentos de poder leer tu mensaje."
 }

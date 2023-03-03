@@ -12,6 +12,8 @@ Route::get('/', function() {
 Route::middleware(['auth', 'verified', 'ban'])->group(function () {
     Route::get('room/show-more', 'RoomController@showMoreRooms')->name('room.showMoreRooms');
     Route::resource('room', 'RoomController')->only(['index', 'show']);
+
+    Route::resource('suggestion', 'SuggestionController')->only(['create', 'store']);
 });
 
 // Admin routes
