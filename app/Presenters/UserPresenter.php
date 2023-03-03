@@ -35,6 +35,16 @@ class UserPresenter extends Presenter
         return $this->entity->rooms->count();
     }
 
+    public function messageColor()
+    {
+        if (empty($this->entity->settings))
+            return;
+
+        $settings = $this->entity->settings;
+
+        return $settings['message_color'];
+    }
+
     public function createdAt()
     {
         return $this->entity->created_at->diffForHumans();
