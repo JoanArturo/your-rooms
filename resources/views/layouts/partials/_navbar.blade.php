@@ -5,15 +5,15 @@
             <div class="collapse navbar-collapse flex-grow-0" id="navbar-nav-container">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#"><img src="{{ asset('icons/home.svg') }}" alt="Home icon"> <span class="nav-link-text">Inicio</span></a>
+                        <a class="nav-link" href="{{ route('room.index') }}"><img src="{{ asset('icons/home.svg') }}" alt="Home icon"> <span class="nav-link-text">{{ __('Home') }}</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="nav-link-rooms" href="javascript:void(0)"><img src="{{ asset('icons/rooms.svg') }}" alt="Rooms icon"> <span class="nav-link-text">Salas</span></a>
+                        <a class="nav-link" id="nav-link-rooms" href="javascript:void(0)"><img src="{{ asset('icons/rooms.svg') }}" alt="Rooms icon"> <span class="nav-link-text">{{ __('Rooms') }}</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="nav-link-chats" href="javascript:void(0)">
                             <img src="{{ asset('icons/chats.svg') }}" alt="Chats icon"> <span class="nav-link-text">Chats</span>
-                            <span class="badge badge-gray badge-number">10</span>
+                            <span class="badge badge-gray badge-number">{{ Auth::user()->presenter()->openRoomsNumber() }}</span>
                         </a>
                     </li>
                 </ul>
@@ -26,11 +26,11 @@
                     <img src="{{ asset('icons/arrow-down.svg') }}" alt="Arrow down icon">
                 </div>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="./users-index.html">Listado de usuarios</a>
-                    <a class="dropdown-item" href="./rooms-index.html">Listado de salas</a>
+                    <a class="dropdown-item" href="{{ route('admin.user.index') }}">{{ __('Users list') }}</a>
+                    <a class="dropdown-item" href="{{ route('admin.room.index') }}">{{ __('Rooms list') }}</a>
                     <hr class="m-0">
-                    <button class="dropdown-item" type="button">Sugerencias</button>
-                    <button class="dropdown-item" type="button">Información de perfil</button>
+                    <button class="dropdown-item" type="button">{{ __('Suggestions') }}</button>
+                    <button class="dropdown-item" type="button">{{ __('Profile information') }}</button>
                     <button class="dropdown-item text-danger" type="button" 
                         onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
