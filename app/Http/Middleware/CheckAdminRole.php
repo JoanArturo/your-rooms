@@ -17,6 +17,7 @@ class CheckAdminRole
     {
         return $request->user()->is_admin ? 
             $next($request) : 
-            redirect()->route('home');
+        
+        redirect('/');
     }
 }
