@@ -26,10 +26,12 @@
                     <img src="{{ asset('icons/arrow-down.svg') }}" alt="Arrow down icon">
                 </div>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="{{ route('admin.user.index') }}">{{ __('Users list') }}</a>
-                    <a class="dropdown-item" href="{{ route('admin.room.index') }}">{{ __('Rooms list') }}</a>
-                    <hr class="m-0">
-                    <button class="dropdown-item" type="button">{{ __('Suggestions') }}</button>
+                    @if (Auth::user()->is_admin)
+                        <a class="dropdown-item" href="{{ route('admin.user.index') }}">{{ __('Users list') }}</a>
+                        <a class="dropdown-item" href="{{ route('admin.room.index') }}">{{ __('Rooms list') }}</a>
+                        <hr class="m-0">
+                    @endif
+                    <a class="dropdown-item" href="{{ route('suggestion.create') }}">{{ __('Suggestions') }}</a>
                     <button class="dropdown-item" type="button">{{ __('Profile information') }}</button>
                     <button class="dropdown-item text-danger" type="button" 
                         onclick="event.preventDefault();
