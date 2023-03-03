@@ -10,8 +10,8 @@ Route::get('/', function() {
 
 // User routes
 Route::middleware(['auth', 'verified', 'ban'])->group(function () {
-    Route::get('room', 'RoomController@index')->name('room.index');
     Route::get('room/show-more', 'RoomController@showMoreRooms')->name('room.showMoreRooms');
+    Route::resource('room', 'RoomController')->only(['index', 'show']);
 });
 
 // Admin routes

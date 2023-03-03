@@ -89,5 +89,8 @@
     "Rooms list": "Listado de salas",
     "Suggestions": "Sugerencias",
     "Profile information": "Información de perfil",
-    "Rooms available": "Salas disponibles"
+    "Rooms available": "Salas disponibles",
+    "Connected to the room": "Conectado a la sala",
+    "Sent": "Enviado",
+    "The room :name is full.": "La sala :name está llena."
 }

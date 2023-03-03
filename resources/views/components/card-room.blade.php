@@ -10,7 +10,7 @@
                 </div>
                 <i><small>{{ __('Created') }} {{ $room->presenter()->createdAt() }}</small></i>
             </div>
-            <a href="#" class="card-options">
+            <a href="{{ route('room.show', $room) }}" class="card-options">
                 <span>{{ __('Join the room') }} <i class="ri-arrow-right-line"></i></span>
             </a>
         </div>

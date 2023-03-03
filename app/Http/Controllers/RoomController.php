@@ -53,4 +53,28 @@ class RoomController extends Controller
             'elements'     => $elementsHtml
         ], 200);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $room = $this->roomRepository->findById($id);
+        $user = auth()->user();
+
+        $isJoined = $room->users->contains('id', $user->id);
+
+        if (! $isJoined) {
+            if ($room->users->count() < $room->limit) {
+                $room->users()->attach($user);
+            } else {
+                return back()->withErrors(__('The room :name is full.', ['name' => $room->name]));
+            }
+        }
+
+        return view('room.show', compact('room'));
+    }
 }

@@ -21,7 +21,9 @@
     </header>
 
     <main class="container px-3 px-lg-0">
-        @include('layouts.partials._messages-status')
+        @section('alerts')
+            @include('layouts.partials._messages-status')
+        @show
 
         @yield('content')
 
