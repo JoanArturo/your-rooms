@@ -152,7 +152,8 @@ return [
         'limit'          => 'Límite',
         'email'          => 'Correo electrónico',
         'role'           => 'Rol',
-        'account_status' => 'Estado de la cuenta'
+        'account_status' => 'Estado de la cuenta',
+        'gender'         => 'Género',
     ],
 
 ];

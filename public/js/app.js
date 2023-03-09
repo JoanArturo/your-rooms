@@ -43796,6 +43796,9 @@ $(function () {
     html += '</ul></div>';
     return html;
   };
+  var getSuccessMessage = function getSuccessMessage(message) {
+    return "\n            <div class=\"alert alert-success mb-4\">\n                <p class=\"m-0\">".concat(message, "</p>\n            </div> \n        ");
+  };
   var initializeEventDeleteRecord = function initializeEventDeleteRecord() {
     $('.btn-delete-record').click(function (e) {
       var url = $(e.delegateTarget).data('url');
@@ -43867,6 +43870,20 @@ $(function () {
       });
     });
   };
+  var initializeEventSaveProfileChanges = function initializeEventSaveProfileChanges() {
+    $('#btn-save-profile-changes').click(function (e) {
+      var url = $('#user-profile-form').attr('action');
+      var formData = $('#user-profile-form').serialize();
+      $('.messages-status').html(getLoadingMessageHtml('Gurdando cambios...'));
+      axios.put(url, formData).then(function (response) {
+        if (response.status == 200) {
+          $('.messages-status').html(getSuccessMessage(response.data.status_message));
+        }
+      })["catch"](function (error) {
+        $('.messages-status').html(getErrorsMessageHtml(error));
+      });
+    });
+  };
   initializeLibraries();
   initializeEventGoLogin();
   initializeEventGoRegister();
@@ -43879,6 +43896,7 @@ $(function () {
   initializeEventDeleteRecord();
   initializeEventConfirmDeleteRecord();
   initializeEventLoadMoreRooms();
+  initializeEventSaveProfileChanges();
 });
 
 /***/ }),

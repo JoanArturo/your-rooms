@@ -14,6 +14,9 @@ Route::middleware(['auth', 'verified', 'ban'])->group(function () {
     Route::resource('room', 'RoomController')->only(['index', 'show']);
 
     Route::resource('suggestion', 'SuggestionController')->only(['create', 'store']);
+    
+    Route::resource('user', 'UserController')->only(['update']);
+    Route::get('user/profile', 'UserController@profile')->name('user.profile');
 });
 
 // Admin routes

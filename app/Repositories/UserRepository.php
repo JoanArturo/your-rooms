@@ -81,12 +81,22 @@ class UserRepository implements UserRepositoryInterface
     {
         $entity = $this->findById($id);
 
-        $data['is_admin'] = $data['role'] == 1;
+        if (isset($data['role'])) {
+            $data['is_admin'] = $data['role'] == 1;
+            unset($data['role']);
+        }
+
+        if (isset($data['account_status'])) {
+            $data['is_banned'] = $data['account_status'] == 2;
+            unset($data['account_status']);
+        }
+
+        if (isset($data['message_color'])) {
+            $currentSettings = $entity->settings ?? [];
+            $data['settings'] = ['message_color' => $data['message_color']] + $currentSettings;
+            unset($data['message_color']);
+        }
         
-        $data['is_banned'] = $data['account_status'] == 2;
-
-        unset($data['role'], $data['account_status']);
-
         return $entity->update($data);
     }
 

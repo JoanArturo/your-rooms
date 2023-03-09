@@ -32,7 +32,7 @@
                         <hr class="m-0">
                     @endif
                     <a class="dropdown-item" href="{{ route('suggestion.create') }}">{{ __('Suggestions') }}</a>
-                    <button class="dropdown-item" type="button">{{ __('Profile information') }}</button>
+                    <a class="dropdown-item" href="{{ route('user.profile') }}">{{ __('Profile information') }}</a>
                     <button class="dropdown-item text-danger" type="button" 
                         onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">

@@ -215,6 +215,14 @@ $(() => {
         return html;
     }
 
+    const getSuccessMessage = (message) => {
+        return `
+            <div class="alert alert-success mb-4">
+                <p class="m-0">${message}</p>
+            </div> 
+        `;
+    }
+
     const initializeEventDeleteRecord = () => {
         $('.btn-delete-record').click( (e) => {
             let url = $(e.delegateTarget).data('url');
@@ -317,6 +325,31 @@ $(() => {
         });
     }
 
+    const initializeEventSaveProfileChanges = () => {
+        $('#btn-save-profile-changes').click( (e) => {
+            let url = $('#user-profile-form').attr('action');
+            let formData = $('#user-profile-form').serialize();
+
+            $('.messages-status').html(
+                getLoadingMessageHtml('Gurdando cambios...')
+            );
+
+            axios.put(url, formData)
+                .then( (response) => {
+                    if (response.status == 200) {
+                        $('.messages-status').html(
+                            getSuccessMessage(response.data.status_message)
+                        );
+                    }
+                })
+                .catch( (error) => {
+                    $('.messages-status').html(
+                        getErrorsMessageHtml(error)
+                    );
+                });
+        });
+    }
+
     initializeLibraries();
     initializeEventGoLogin();
     initializeEventGoRegister();
@@ -329,4 +362,5 @@ $(() => {
     initializeEventDeleteRecord();
     initializeEventConfirmDeleteRecord();
     initializeEventLoadMoreRooms();
+    initializeEventSaveProfileChanges();
 });

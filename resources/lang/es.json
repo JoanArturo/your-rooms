@@ -96,5 +96,15 @@
     "Send": "Enviar",
     "Cancel": "Cancelar",
     "Hello <strong>:name</strong>, we invite you to suggest any change or functionality that you would like us to implement within the system, feel free to tell us your ideas, we will be happy to hear from you.": "Hola <strong>:name</strong>, te invitamos a que nos sugieras algún cambio  o alguna funcionalidad que te gustaría que implementáramos dentro del sistema, siéntete libre de comentarnos tus ideas estaremos encantados de leerte.",
-    "We thank you for taking the time to express your ideas to us, we are happy to read your message.": "Te agradecemos por tomarte el tiempo para expresarnos tus ideas, estamos contentos de poder leer tu mensaje."
+    "We thank you for taking the time to express your ideas to us, we are happy to read your message.": "Te agradecemos por tomarte el tiempo para expresarnos tus ideas, estamos contentos de poder leer tu mensaje.",
+    "Message color": "Color de mensajes",
+    "Save changes": "Guardar cambios",
+    "Other settings": "Otros ajustes",
+    "Change password": "Cambiar contraseña",
+    "Deactivate account": "Desactivar cuenta",
+    "You updated your data correctly.": "Actualizaste tus datos correctamente.",
+    "Undefined": "Indefinido",
+    "Male": "Masculino",
+    "Female": "Femenino",
+    "Profile picture": "Foto de perfil"
 }
