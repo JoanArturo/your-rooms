@@ -43721,13 +43721,27 @@ $(function () {
         var fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         $(fileReader).on('load', function () {
-          $(imagePreview).attr('src', this.result).addClass('image-selected');
+          $(imagePreview).attr('src', this.result).addClass('has-profile-image');
 
           // Change navbar icon
           $('.avatar-image img').attr('src', this.result).addClass('has-profile-image');
         });
       }
+      uploadProfilePicture();
       createButtonDeleteProfileImage();
+    });
+  };
+  var uploadProfilePicture = function uploadProfilePicture() {
+    var form = $('#profile-image-form');
+    var url = $(form).attr('action');
+    var formData = new FormData($(form)[0]);
+    $('.messages-status').html(getLoadingMessageHtml('Cambiando foto de perfil...'));
+    axios.post(url, formData).then(function (response) {
+      if (response.status == 200) {
+        $('.messages-status').html(getSuccessMessage(response.data.status_message));
+      }
+    })["catch"](function (error) {
+      $('.messages-status').html(getErrorsMessageHtml(error));
     });
   };
   var createButtonDeleteProfileImage = function createButtonDeleteProfileImage() {
@@ -43738,12 +43752,23 @@ $(function () {
       var isButton = $(e.target).attr('id') == 'btn-delete-profile-image';
       if (isButton) {
         $('#profile-image-form').trigger('reset');
-        $('.image-label img').attr('src', '/icons/camera.svg').removeClass('image-selected');
+        $('.image-label img').attr('src', '/icons/camera.svg').removeClass('has-profile-image');
         $(e.target).remove();
 
         // Change navbar icon
         $('.avatar-image img').attr('src', '/icons/camera.svg').removeClass('has-profile-image');
+        deleteProfilePicture();
       }
+    });
+  };
+  var deleteProfilePicture = function deleteProfilePicture() {
+    $('.messages-status').html(getLoadingMessageHtml('Eliminando foto de perfil...'));
+    axios["delete"]('/user/delete-profile-picture').then(function (response) {
+      if (response.status == 200) {
+        $('.messages-status').html(getSuccessMessage(response.data.status_message));
+      }
+    })["catch"](function (error) {
+      $('.messages-status').html(getErrorsMessageHtml(error));
     });
   };
   var initializeEventCreateAccount = function initializeEventCreateAccount() {

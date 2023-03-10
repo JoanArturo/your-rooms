@@ -17,6 +17,8 @@ Route::middleware(['auth', 'verified', 'ban'])->group(function () {
     
     Route::resource('user', 'UserController')->only(['update']);
     Route::get('user/profile', 'UserController@profile')->name('user.profile');
+    Route::post('user/upload-profile-picture', 'UserController@uploadProfilePicture')->name('user.uploadProfilePicture');
+    Route::delete('user/delete-profile-picture', 'UserController@deleteProfilePicture')->name('user.deleteProfilePicture');
 });
 
 // Admin routes

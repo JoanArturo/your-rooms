@@ -6,20 +6,23 @@
 <div class="top-separate">
     <h1 class="text-title text-center m-0 pb-4">{{ __('Profile information') }}</h1>
     <div class="container-sm container-center mb-5">
-        <form action="#" class="pb-4 text-center" id="profile-image-form">
-            <input type="file" name="image-input" id="image-input" class="image-input">
+        {!! Form::open(['url' => route('user.uploadProfilePicture'), 'id' => 'profile-image-form', 'class' => 'pb-4 text-center', 'enctype' => 'multipart/form-data']) !!}
+            <input type="file" name="profile_picture" id="image-input" class="image-input">
             <div class="d-inline-flex position-relative" id="profile-image-container">
                 <label for="image-input" class="image-label" data-toggle="tooltip" title="{{ __('Profile picture') }}">
-                    <img src="{{ asset('icons/camera.svg') }}" alt="{{ __('Profile picture') }}">
+                    {{ $user->presenter()->profilePicture() }}
                 </label>
-                <!-- <button id="btn-delete-profile-image">
-                    <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 10L0 9L4 5L0 1L1 0L5 4L9 0L10 1L6 5L10 9L9 10L5 6L1 10Z" fill="#330136"/>
-                    </svg>
-                    Eliminar foto
-                </button> -->
+                @isset ($user->profile_picture)
+                    <button id="btn-delete-profile-image">
+                        <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 10L0 9L4 5L0 1L1 0L5 4L9 0L10 1L6 5L10 9L9 10L5 6L1 10Z" fill="#330136"/>
+                        </svg>
+                        {{ __('Delete picture') }}
+                    </button>
+                @endisset
             </div>
-        </form>
+        {!! Form::close() !!}
+        
         {!! Form::model($user, ['url' => route('user.update', $user), 'method' => 'put', 'id' => 'user-profile-form']) !!}
             <div class="form-group float-input">
                 {!! Form::text('name', null, ['id' => 'name-input', 'class' => 'form-control', 'required' => true, 'autofocus' => true]) !!}

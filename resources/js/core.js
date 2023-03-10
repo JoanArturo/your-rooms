@@ -95,15 +95,41 @@ $(() => {
                 fileReader.readAsDataURL(file);
                 
                 $(fileReader).on('load', function() {
-                    $(imagePreview).attr('src', this.result).addClass('image-selected');
+                    $(imagePreview).attr('src', this.result).addClass('has-profile-image');
 
                     // Change navbar icon
                     $('.avatar-image img').attr('src', this.result).addClass('has-profile-image');
                 });
             }
 
+            uploadProfilePicture();
+
             createButtonDeleteProfileImage();
         });
+    }
+
+    const uploadProfilePicture = () => {
+        let form = $('#profile-image-form');
+        let url = $(form).attr('action');
+        let formData = new FormData($(form)[0]);
+
+        $('.messages-status').html(
+            getLoadingMessageHtml('Cambiando foto de perfil...')
+        );
+
+        axios.post(url, formData)
+            .then( (response) => {
+                if (response.status == 200) {
+                    $('.messages-status').html(
+                        getSuccessMessage(response.data.status_message)
+                    );
+                }
+            })
+            .catch( (error) => {
+                $('.messages-status').html(
+                    getErrorsMessageHtml(error)
+                );
+            });
     }
 
     const createButtonDeleteProfileImage = () => {
@@ -123,13 +149,35 @@ $(() => {
 
             if (isButton) {
                 $('#profile-image-form').trigger('reset');
-                $('.image-label img').attr('src', '/icons/camera.svg').removeClass('image-selected');
+                $('.image-label img').attr('src', '/icons/camera.svg').removeClass('has-profile-image');
                 $(e.target).remove();
                 
                 // Change navbar icon
                 $('.avatar-image img').attr('src', '/icons/camera.svg').removeClass('has-profile-image');
+
+                deleteProfilePicture();
             }
         });
+    }
+
+    const deleteProfilePicture = () => {
+        $('.messages-status').html(
+            getLoadingMessageHtml('Eliminando foto de perfil...')
+        );
+
+        axios.delete('/user/delete-profile-picture')
+            .then( (response) => {
+                if (response.status == 200) {
+                    $('.messages-status').html(
+                        getSuccessMessage(response.data.status_message)
+                    );
+                }
+            })
+            .catch( (error) => {
+                $('.messages-status').html(
+                    getErrorsMessageHtml(error)
+                );
+            });
     }
 
     const initializeEventCreateAccount = () => {

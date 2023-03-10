@@ -11,7 +11,7 @@ class UserPresenter extends Presenter
 
     public function profilePicture()
     {
-        $profilePicture = $this->entity->profile_picture ? asset($this->entity->profile_picture) : asset('icons/camera.svg');
+        $profilePicture = $this->entity->profile_picture ? asset('storage/' . $this->entity->profile_picture) : asset('icons/camera.svg');
         $styleClass = $this->entity->profile_picture ? 'has-profile-image' : '';
 
         return new HtmlString("<img src='{$profilePicture}' alt='Profile image' class='{$styleClass}'>");

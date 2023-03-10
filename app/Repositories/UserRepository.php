@@ -3,6 +3,7 @@
 use App\User as Entity;
 use App\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -123,5 +124,32 @@ class UserRepository implements UserRepositoryInterface
         $entity->is_banned = $status;
 
         return $entity->save();
+    }
+    
+    public function updateProfilePictureFromUser($id, $file)
+    {
+        $user = $this->findById($id);
+        $path = '/profile-picture/';
+
+        if (isset($user->profile_picture) && Storage::exists($user->profile_picture))
+            Storage::delete($user->profile_picture);
+
+        $filename = $file->store($path);
+
+        $user->profile_picture = $filename;
+
+        return $user->save();
+    }
+
+    public function deleteProfilePictureFromUser($id)
+    {
+        $user = $this->findById($id);
+
+        if (isset($user->profile_picture) && Storage::exists($user->profile_picture))
+            Storage::delete($user->profile_picture);
+
+        $user->profile_picture = null;
+
+        return $user->save();
     }
 }

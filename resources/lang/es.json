@@ -106,5 +106,8 @@
     "Undefined": "Indefinido",
     "Male": "Masculino",
     "Female": "Femenino",
-    "Profile picture": "Foto de perfil"
+    "Profile picture": "Foto de perfil",
+    "You changed your profile picture.": "Cambiaste tu foto de perfil.",
+    "Delete picture": "Eliminar foto",
+    "You deleted your profile picture.": "Eliminaste tu foto de perfil."
 }

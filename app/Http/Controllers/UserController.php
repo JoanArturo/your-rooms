@@ -52,4 +52,38 @@ class UserController extends Controller
 
         return response()->json(['status_message' => __('You updated your data correctly.')], 200);
     }
+
+    /**
+     * Update a user's profile picture.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadProfilePicture(Request $request)
+    {
+        if (! $request->hasFile('profile_picture'))
+            return response()->json(null, 500);
+
+        $user = auth()->user();
+
+        $file = $request->file('profile_picture');
+
+        $this->userRepository->updateProfilePictureFromUser($user->id, $file);
+
+        return response()->json(['status_message' => __('You changed your profile picture.')], 200);
+    }
+    
+    /**
+     * Delete a user's profile picture.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteProfilePicture()
+    {
+        $user = auth()->user();
+
+        $this->userRepository->deleteProfilePictureFromUser($user->id);
+
+        return response()->json(['status_message' => __('You deleted your profile picture.')], 200);
+    }
 }
