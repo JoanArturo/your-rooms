@@ -147,13 +147,15 @@ return [
     */
 
     'attributes' => [
-        'name'           => 'Nombre',
-        'description'    => 'Descripción',
-        'limit'          => 'Límite',
-        'email'          => 'Correo electrónico',
-        'role'           => 'Rol',
-        'account_status' => 'Estado de la cuenta',
-        'gender'         => 'Género',
+        'name'            => 'Nombre',
+        'description'     => 'Descripción',
+        'limit'           => 'Límite',
+        'email'           => 'Correo electrónico',
+        'role'            => 'Rol',
+        'account_status'  => 'Estado de la cuenta',
+        'gender'          => 'Género',
+        'new_password'    => 'Nueva contraseña',
+        'repeat_password' => 'Repetir contraseña'
     ],
 
 ];

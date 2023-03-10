@@ -9,4 +9,5 @@ interface UserRepositoryInterface extends RepositoryInterface
     public function updateIsBannedStatusFromUser($id, bool $status);
     public function updateProfilePictureFromUser($id, $file);
     public function deleteProfilePictureFromUser($id);
+    public function updatePasswordFromUser($id, $newPassword);
 }

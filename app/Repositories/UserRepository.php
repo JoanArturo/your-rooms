@@ -152,4 +152,13 @@ class UserRepository implements UserRepositoryInterface
 
         return $user->save();
     }
+
+    public function updatePasswordFromUser($id, $newPassword)
+    {
+        $entity = $this->findById($id);
+
+        return $entity->update([
+            'password' => Hash::make($newPassword)
+        ]);
+    }
 }

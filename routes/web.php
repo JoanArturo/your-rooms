@@ -15,10 +15,12 @@ Route::middleware(['auth', 'verified', 'ban'])->group(function () {
 
     Route::resource('suggestion', 'SuggestionController')->only(['create', 'store']);
     
-    Route::resource('user', 'UserController')->only(['update']);
     Route::get('user/profile', 'UserController@profile')->name('user.profile');
+    Route::get('user/change-password', 'UserController@changePassword')->name('user.changePassword');
+    Route::put('user/update-password', 'UserController@updatePassword')->name('user.updatePassword');
     Route::post('user/upload-profile-picture', 'UserController@uploadProfilePicture')->name('user.uploadProfilePicture');
     Route::delete('user/delete-profile-picture', 'UserController@deleteProfilePicture')->name('user.deleteProfilePicture');
+    Route::resource('user', 'UserController')->only(['update']);
 });
 
 // Admin routes

@@ -86,4 +86,33 @@ class UserController extends Controller
 
         return response()->json(['status_message' => __('You deleted your profile picture.')], 200);
     }
+
+    /**
+     * Shows the change password view.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword()
+    {
+        return view('user.change-password');
+    }
+
+    /**
+     * Update the user's password.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword(Request $request)
+    {
+        $fields = $request->validate([
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = auth()->user();
+
+        $this->userRepository->updatePasswordFromUser($user->id, $fields['new_password']);
+
+        return redirect()->route('user.profile')->with('success', __('Updated password.'));
+    }
 }
