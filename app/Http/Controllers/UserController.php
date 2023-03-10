@@ -115,4 +115,27 @@ class UserController extends Controller
 
         return redirect()->route('user.profile')->with('success', __('Updated password.'));
     }
+
+    /**
+     * Shows the account deactivation view.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deactivateAccount()
+    {
+        return view('user.deactivate-account');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $this->userRepository->delete($id);
+
+        return redirect()->route('guest');
+    }
 }

@@ -52,7 +52,7 @@
         <div class="options-group">
             <p class="text-subtitle m-0">{{ __('Other settings') }}</p>
             <a class="btn btn-block btn-gray" href="{{ route('user.changePassword') }}">{{ __('Change password') }}</a>
-            <button class="btn btn-block btn-outline-danger m-0" type="submit">{{ __('Deactivate account') }}</button>
+            <a class="btn btn-block btn-outline-danger m-0" href="{{ route('user.deactivateAccount') }}">{{ __('Deactivate account') }}</a>
         </div>
     </div>
 </div>

@@ -58,9 +58,12 @@ class UserRepository implements UserRepositoryInterface
 
         $entity->messages()->delete();
 
-        $entity->rooms()->delete();
+        $entity->rooms()->detach();
         
         $entity->suggestions()->delete();
+
+        if (isset($entity->profile_picture) && Storage::exists($entity->profile_picture))
+            Storage::delete($entity->profile_picture);
 
         return $entity->delete();
     }
