@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\RoomRepositoryInterface;
+use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
@@ -76,5 +77,14 @@ class RoomController extends Controller
         }
 
         return view('room.show', compact('room'));
+    }
+    
+    public function sendMessage(Request $request, $id)
+    {
+        $user = auth()->user();
+
+        $this->roomRepository->createMessage($id, $user->id, $request->message);
+
+        return back();
     }
 }

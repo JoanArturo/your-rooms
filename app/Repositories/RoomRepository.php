@@ -73,4 +73,14 @@ class RoomRepository implements RoomRepositoryInterface
 
         return $room->update($data);
     }
+
+    public function createMessage($id, $userId, $message)
+    {
+        $room = $this->findById($id);
+
+        return $room->messages()->create([
+            'body'    => $message,
+            'user_id' => $userId
+        ]);
+    }
 }

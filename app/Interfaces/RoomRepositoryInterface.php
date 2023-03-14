@@ -2,5 +2,5 @@
 
 interface RoomRepositoryInterface extends RepositoryInterface
 {
-    //
+    public function createMessage($id, $userId, $message);
 }

@@ -11,6 +11,7 @@ Route::get('/', function() {
 // User routes
 Route::middleware(['auth', 'verified', 'ban'])->group(function () {
     Route::get('room/show-more', 'RoomController@showMoreRooms')->name('room.showMoreRooms');
+    Route::post('room/{id}/send-message', 'RoomController@sendMessage')->name('room.sendMessage');
     Route::resource('room', 'RoomController')->only(['index', 'show']);
 
     Route::resource('suggestion', 'SuggestionController')->only(['create', 'store']);
