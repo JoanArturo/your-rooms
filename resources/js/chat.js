@@ -60,6 +60,9 @@ $(() => {
                 .listen('MessageWasSent', (e) => {
                     $('.messages-container').prepend(e.component);
                 })
+                .listen('UserJoinedARoom', (e) => {
+                    $(e.component).hide().appendTo('.users-container').fadeIn();
+                })
                 .listenForWhisper('typing', (e) => {
                     if (e.typing)
                         $('.typing-text').css('display', 'flex');

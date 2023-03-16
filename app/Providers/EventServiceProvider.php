@@ -20,7 +20,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         \App\Events\MessageWasSent::class => [
             \App\Listeners\SendMessageToUsers::class
-        ]
+        ],
+        \App\Events\UserJoinedARoom::class => [
+            \App\Listeners\SendUserInformationToRoomUsers::class
+        ],
     ];
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\MessageWasSent;
+use App\Events\UserJoinedARoom;
 use App\Interfaces\RoomRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -66,18 +67,20 @@ class RoomController extends Controller
     {
         $room = $this->roomRepository->findById($id);
         $user = auth()->user();
-
+        
         $isJoined = $room->users->contains('id', $user->id);
+        $users = $room->users->where('id', '<>', $user->id);
 
         if (! $isJoined) {
             if ($room->users->count() < $room->limit) {
                 $room->users()->attach($user);
+                broadcast(new UserJoinedARoom($room, $user))->toOthers();
             } else {
                 return back()->withErrors(__('The room :name is full.', ['name' => $room->name]));
             }
         }
 
-        return view('room.show', compact('room'));
+        return view('room.show', compact('room', 'users'));
     }
     
     public function sendMessage(Request $request, $id)

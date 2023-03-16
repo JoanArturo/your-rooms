@@ -33,16 +33,12 @@
             {{ $room->presenter()->usersOnlineNumber() }} {{ __('Users online') }}
         </p>
         <div class="users-container">
-            @foreach ($room->users as $user)
-                <div class="user">
-                    <div class="avatar-group">
-                        <div class="avatar-image">
-                            {{ $user->presenter()->profilePicture() }}
-                        </div>
-                        <p class="m-0">{{ $user->name }}</p>
-                    </div>
-                    <div class="badge-user-status" style="background-color: {{ $user->presenter()->messageColor() }}"></div>
-                </div>
+            @carduser(['user' => Auth::user()])
+            @endcarduser
+
+            @foreach ($users as $user)
+                @carduser(['user' => $user])
+                @endcarduser
             @endforeach
         </div>
     </div>

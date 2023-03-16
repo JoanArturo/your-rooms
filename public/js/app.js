@@ -55078,6 +55078,8 @@ $(function () {
     if (settings) {
       Echo["private"]("room.".concat(settings.room.id)).listen('MessageWasSent', function (e) {
         $('.messages-container').prepend(e.component);
+      }).listen('UserJoinedARoom', function (e) {
+        $(e.component).hide().appendTo('.users-container').fadeIn();
       }).listenForWhisper('typing', function (e) {
         if (e.typing) $('.typing-text').css('display', 'flex');
         $('.typing-text .typing-text-user').html(e.user);
