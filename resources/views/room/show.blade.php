@@ -10,21 +10,15 @@
         <p class="text-container-title">{{ __('Connected to the room') }} <strong>{{ $room->name }}</strong></p>
         <div class="messages-container">
             @foreach ($room->messages->reverse() as $message)
-                <div class="message">
-                    <div class="avatar-group">
-                        <div class="avatar-image">
-                            {{ $message->user->presenter()->profilePicture() }}
-                        </div>
-                    </div>
-                    <div>
-                        <p class="message-user"><strong>{{ $message->user->name }}</strong></p>
-                        <div class="d-flex flex-wrap">
-                            <p class="message-body mr-2" style="background-color: {{ $message->user->presenter()->messageColor() }}">{{ $message->body }}</p>
-                            <small class="message-time">{{ __('Sent') }} {{ $message->created_at->diffForHumans() }}</small>
-                        </div>
-                    </div>
-                </div>
+                @message(['message' => $message])
+                @endmessage
             @endforeach
+            <div class="typing-text">
+                <p><span class="typing-text-user">Username</span> esta escribiendo</p>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
         {!! Form::open(['url' => route('room.sendMessage', $room), 'id' => 'message-form']) !!}
             {!! Form::text('message', null, ['id' => 'message-input', 'placeholder' => 'Escribe un mensaje...', 'autofocus' => 'true', 'autocomplete' => 'off']) !!}
@@ -53,4 +47,23 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('js')
+    <script>
+        window.settings = {
+            user: {
+                id: {!! Auth::user()->id !!},
+                name: "{!! Auth::user()->name !!}",
+                settings: {!! json_encode(Auth::user()->settings) !!},
+                profilePicture: "{!! Auth::user()->presenter()->profilePicture() !!}"
+            },
+            room: {
+                id: {!! $room->id !!},
+                name: "{!! $room->name !!}",
+                description: "{!! $room->description !!}"
+            }
+        };
+    </script>
 @endsection

@@ -78,9 +78,11 @@ class RoomRepository implements RoomRepositoryInterface
     {
         $room = $this->findById($id);
 
-        return $room->messages()->create([
+        $message = $room->messages()->create([
             'body'    => $message,
             'user_id' => $userId
         ]);
+
+        return $message->load(['user', 'room']);
     }
 }

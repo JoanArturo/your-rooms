@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageWasSent;
 use App\Interfaces\RoomRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -83,8 +84,17 @@ class RoomController extends Controller
     {
         $user = auth()->user();
 
-        $this->roomRepository->createMessage($id, $user->id, $request->message);
+        $message = $this->roomRepository->createMessage($id, $user->id, $request->message);
 
-        return back();
+        broadcast(new MessageWasSent($message))->toOthers();
+
+        return response()->json([
+            'message' => [
+                'id'         => $message->id,
+                'body'       => $message->body,
+                'user'       => $message->user,
+                'created_at' => __('Sent') . ' ' . $message->created_at->diffForHumans(),
+            ]
+        ], 200);
     }
 }

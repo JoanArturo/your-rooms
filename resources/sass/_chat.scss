@@ -1,10 +1,12 @@
 .messages-container {
+    position: relative;
     display: flex;
     flex-direction: column-reverse;
     gap: 18px;
     min-height: calc(100vh - 210px);
     max-height: calc(100vh - 210px);
     padding: 18px;
+    padding-bottom: 32px;
     background: #FAFAFA;
     border-radius: $border-radius-lg;
     overflow-y: auto;
@@ -110,6 +112,54 @@
             background-color: #DA324F;
             border: 1px solid $secondary;
             border-radius: 50%;
+        }
+    }
+}
+
+.typing-text {
+    position: absolute;
+    bottom: 0;
+    display: none;
+    align-items: center;
+    gap: 6px;
+
+    p {
+        margin: 0;
+    }
+
+    & > span {
+        position: relative;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: #dddddd;
+        border-radius: 50%;
+        
+        animation: typing 1s infinite ease-in-out;
+    }
+
+    & > span:nth-of-type(2) {
+        animation-delay: 100ms;
+    }
+    
+    & > span:nth-of-type(3) {
+        animation-delay: 200ms;
+    }
+
+    @keyframes typing {
+        0% {
+            top: 0px;
+            background-color: #dddddd;
+        }
+
+        30% {
+            top: -10px;
+            background-color: #a3a3a3;
+        }
+
+        50% {
+            top: 0px;
+            background-color: #dddddd;
         }
     }
 }

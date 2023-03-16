@@ -32,5 +32,7 @@
 
         <div id="modal-container"></div>
     </main>
+    
+    @yield('js')
 </body>
 </html>
