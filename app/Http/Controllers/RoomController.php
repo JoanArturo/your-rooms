@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\MessageWasSent;
 use App\Events\UserJoinedARoom;
+use App\Events\UserLeftARoom;
 use App\Interfaces\RoomRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -99,5 +100,24 @@ class RoomController extends Controller
                 'created_at' => __('Sent') . ' ' . $message->created_at->diffForHumans(),
             ]
         ], 200);
+    }
+
+    /**
+     * Leave a room.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function leave($id)
+    {
+        $user = auth()->user();
+        
+        $this->roomRepository->removeUserFromARoom($user->id, $id);
+
+        $room = $this->roomRepository->findById($id)->load('users');
+
+        broadcast(new UserLeftARoom($user, $room))->toOthers();
+
+        return redirect()->route('room.index');
     }
 }

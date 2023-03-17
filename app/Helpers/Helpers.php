@@ -9,3 +9,13 @@ function activeRoomsNumber()
 {
     return \App\Room::whereActive(1)->count();
 }
+
+function openRoomsOfTheCurrentUser()
+{
+    return \Auth::user()->rooms;
+}
+
+function numberOfOpenRoomsOfTheCurrentUser()
+{
+    return openRoomsOfTheCurrentUser()->count();
+}

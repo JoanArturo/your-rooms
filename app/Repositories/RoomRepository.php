@@ -85,4 +85,11 @@ class RoomRepository implements RoomRepositoryInterface
 
         return $message->load(['user', 'room']);
     }
+
+    public function removeUserFromARoom($userId, $roomId)
+    {
+        $room = $this->findById($roomId);
+
+        $room->users()->detach($userId);
+    }
 }

@@ -64,6 +64,13 @@ $(() => {
                     .listen('UserJoinedARoom', (e) => {
                         $(e.component).hide().appendTo('.users-container').fadeIn();
                     })
+                    .listen('UserLeftARoom', (e) => {
+                        // Update the number of connected users text
+                        $('.text-users-connected span').html(e.room.users.length);
+
+                        // Remove the card of the disconnected user
+                        $(`div[data-userid=${e.user.id}]`).remove();
+                    })
                     .listenForWhisper('typing', (e) => {
                         if (e.typing)
                             $('.typing-text').css('display', 'flex');

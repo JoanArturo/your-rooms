@@ -30,7 +30,7 @@
     <div class="col-12 col-md-3 d-none d-md-block">
         <p class="text-users-connected">
             <img src="{{ asset('icons/users.svg') }}" alt="Users icon" class="mr-1">
-            {{ $room->presenter()->usersOnlineNumber() }} {{ __('Users online') }}
+            <span>{{ $room->presenter()->usersOnlineNumber() }}</span> {{ __('Users online') }}
         </p>
         <div class="users-container">
             @carduser(['user' => Auth::user()])

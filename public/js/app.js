@@ -55081,6 +55081,12 @@ $(function () {
           $('.messages-container').prepend(e.component);
         }).listen('UserJoinedARoom', function (e) {
           $(e.component).hide().appendTo('.users-container').fadeIn();
+        }).listen('UserLeftARoom', function (e) {
+          // Update the number of connected users text
+          $('.text-users-connected span').html(e.room.users.length);
+
+          // Remove the card of the disconnected user
+          $("div[data-userid=".concat(e.user.id, "]")).remove();
         }).listenForWhisper('typing', function (e) {
           if (e.typing) $('.typing-text').css('display', 'flex');
           $('.typing-text .typing-text-user').html(e.user);

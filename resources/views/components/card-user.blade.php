@@ -1,4 +1,4 @@
-<div class="user">
+<div class="user" data-userid="{{ $user->id }}">
     <div class="avatar-group">
         <div class="avatar-image">
             {{ $user->presenter()->profilePicture() }}

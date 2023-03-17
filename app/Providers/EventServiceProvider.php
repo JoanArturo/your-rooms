@@ -24,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\UserJoinedARoom::class => [
             \App\Listeners\SendUserInformationToRoomUsers::class
         ],
+        \App\Events\UserLeftARoom::class => [
+            \App\Listeners\InformUsers::class
+        ],
     ];
 
     /**
