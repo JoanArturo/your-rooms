@@ -9,7 +9,7 @@
     <ul class="sidebar-items">
         @foreach (allRooms() as $room)
             <li class="sidebar-item">
-                <a href="#">
+                <a href="{{ route('room.show', $room) }}">
                     <span class="sidebar-item-title">{{ $room->name }}</span><span class="sidebar-item-status">{{ $room->presenter()->usersOnlineNumber() }}</span>
                 </a>
             </li>
