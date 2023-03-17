@@ -54983,6 +54983,7 @@ module.exports = yeast;
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 __webpack_require__(/*! ./core */ "./resources/js/core.js");
 __webpack_require__(/*! ./chat */ "./resources/js/chat.js");
+__webpack_require__(/*! ./home */ "./resources/js/home.js");
 
 /***/ }),
 
@@ -55419,6 +55420,38 @@ $(function () {
   initializeEventConfirmDeleteRecord();
   initializeEventLoadMoreRooms();
   initializeEventSaveProfileChanges();
+});
+
+/***/ }),
+
+/***/ "./resources/js/home.js":
+/*!******************************!*\
+  !*** ./resources/js/home.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(function () {
+  var initializeSocketHome = function initializeSocketHome() {
+    var pathname = location.pathname;
+
+    // Verify that the user is not in the login view
+    if (pathname === '/') return;
+    Echo["private"]("home").listen('UserJoinedARoom', function (e) {
+      // Update the number of connected users text in the sidebar
+      $(".sidebar-item[data-sidebaritem=".concat(e.room.id, "] .sidebar-item-status")).html(e.room.users.length);
+
+      // Update the number of connected users text on the room card
+      $(".card-room[data-cardroom=".concat(e.room.id, "]")).find('.card-user-number small > span').first().html(e.room.users.length);
+    }).listen('UserLeftARoom', function (e) {
+      // Update the number of connected users text in the sidebar
+      $(".sidebar-item[data-sidebaritem=".concat(e.room.id, "] .sidebar-item-status")).html(e.room.users.length);
+
+      // Update the number of connected users text on the room card
+      $(".card-room[data-cardroom=".concat(e.room.id, "]")).find('.card-user-number small > span').first().html(e.room.users.length);
+    });
+  };
+  initializeSocketHome();
 });
 
 /***/ }),

@@ -18,3 +18,7 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 Broadcast::channel('room.{id}', function ($user, $id) {
     return $user->rooms->contains('id', $id);
 });
+
+Broadcast::channel('home', function ($user) {
+    return true;
+});
