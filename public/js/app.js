@@ -55080,6 +55080,10 @@ $(function () {
         Echo["private"]("room.".concat(settings.room.id)).listen('MessageWasSent', function (e) {
           $('.messages-container').prepend(e.component);
         }).listen('UserJoinedARoom', function (e) {
+          // Update the number of connected users text
+          $('.text-users-connected span').html(e.room.users.length);
+
+          // Add the card of the connected user
           $(e.component).hide().appendTo('.users-container').fadeIn();
         }).listen('UserLeftARoom', function (e) {
           // Update the number of connected users text

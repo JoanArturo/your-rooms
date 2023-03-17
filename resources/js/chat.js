@@ -62,6 +62,10 @@ $(() => {
                         $('.messages-container').prepend(e.component);
                     })
                     .listen('UserJoinedARoom', (e) => {
+                        // Update the number of connected users text
+                        $('.text-users-connected span').html(e.room.users.length);
+
+                        // Add the card of the connected user
                         $(e.component).hide().appendTo('.users-container').fadeIn();
                     })
                     .listen('UserLeftARoom', (e) => {
