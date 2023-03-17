@@ -8,7 +8,7 @@
     </div>
     <ul class="sidebar-items">
         @foreach (openRoomsOfTheCurrentUser() as $room)
-            <li class="sidebar-item">
+            <li class="sidebar-item" data-sidebaritem="{{ $room->id }}">
                 <a href="#">
                     <span class="sidebar-item-title">{{ $room->name }}</span>
                     <div class="sidebar-item-options">

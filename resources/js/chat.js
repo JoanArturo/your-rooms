@@ -64,6 +64,9 @@ $(() => {
                     .listen('UserJoinedARoom', (e) => {
                         // Update the number of connected users text
                         $('.text-users-connected span').html(e.room.users.length);
+                        
+                        // Update the number of connected users text in the sidebar
+                        $(`.sidebar-item[data-sidebaritem=${e.room.id}] .sidebar-item-status`).html(e.room.users.length);
 
                         // Add the card of the connected user
                         $(e.component).hide().appendTo('.users-container').fadeIn();
@@ -71,6 +74,9 @@ $(() => {
                     .listen('UserLeftARoom', (e) => {
                         // Update the number of connected users text
                         $('.text-users-connected span').html(e.room.users.length);
+
+                        // Update the number of connected users text in the sidebar
+                        $(`.sidebar-item[data-sidebaritem=${e.room.id}] .sidebar-item-status`).html(e.room.users.length);
 
                         // Remove the card of the disconnected user
                         $(`div[data-userid=${e.user.id}]`).remove();
