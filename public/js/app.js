@@ -55075,17 +55075,19 @@ $(function () {
     return "\n        <div class=\"message\">\n            <div class=\"avatar-group\">\n                <div class=\"avatar-image\">\n                    ".concat(profilePicture, "\n                </div>\n            </div>\n            <div>\n                <p class=\"message-user\"><strong>").concat(username, "</strong></p>\n                <div class=\"d-flex flex-wrap\">\n                    <p class=\"message-body mr-2\" style=\"background-color: ").concat(color, "\">").concat(messageText, "</p>\n                    <small class=\"message-time\">").concat(time, "</small>\n                </div>\n            </div>\n        </div>\n        ");
   };
   var initializeSocket = function initializeSocket() {
-    if (settings) {
-      Echo["private"]("room.".concat(settings.room.id)).listen('MessageWasSent', function (e) {
-        $('.messages-container').prepend(e.component);
-      }).listen('UserJoinedARoom', function (e) {
-        $(e.component).hide().appendTo('.users-container').fadeIn();
-      }).listenForWhisper('typing', function (e) {
-        if (e.typing) $('.typing-text').css('display', 'flex');
-        $('.typing-text .typing-text-user').html(e.user);
-        hideTypingText();
-      });
-    }
+    try {
+      if (settings) {
+        Echo["private"]("room.".concat(settings.room.id)).listen('MessageWasSent', function (e) {
+          $('.messages-container').prepend(e.component);
+        }).listen('UserJoinedARoom', function (e) {
+          $(e.component).hide().appendTo('.users-container').fadeIn();
+        }).listenForWhisper('typing', function (e) {
+          if (e.typing) $('.typing-text').css('display', 'flex');
+          $('.typing-text .typing-text-user').html(e.user);
+          hideTypingText();
+        });
+      }
+    } catch (error) {}
   };
   var hideTypingText = function hideTypingText() {
     clearTimeout(typingTimer);
@@ -55094,17 +55096,19 @@ $(function () {
     }, 1000);
   };
   var detectTypingEvent = function detectTypingEvent() {
-    if (settings) {
-      $('#message-input').on('keydown', function () {
-        var channel = Echo["private"]("room.".concat(settings.room.id));
-        setTimeout(function () {
-          channel.whisper('typing', {
-            user: settings.user.name,
-            typing: true
-          });
-        }, 300);
-      });
-    }
+    try {
+      if (settings) {
+        $('#message-input').on('keydown', function () {
+          var channel = Echo["private"]("room.".concat(settings.room.id));
+          setTimeout(function () {
+            channel.whisper('typing', {
+              user: settings.user.name,
+              typing: true
+            });
+          }, 300);
+        });
+      }
+    } catch (error) {}
   };
   initializeEventSendMessage();
   initializeSocket();

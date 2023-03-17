@@ -54,24 +54,26 @@ $(() => {
         `;
     }
 
-    const initializeSocket = () => {      
-        if (settings) {
-            Echo.private(`room.${settings.room.id}`)
-                .listen('MessageWasSent', (e) => {
-                    $('.messages-container').prepend(e.component);
-                })
-                .listen('UserJoinedARoom', (e) => {
-                    $(e.component).hide().appendTo('.users-container').fadeIn();
-                })
-                .listenForWhisper('typing', (e) => {
-                    if (e.typing)
-                        $('.typing-text').css('display', 'flex');
-
-                    $('.typing-text .typing-text-user').html(e.user);
-                    
-                    hideTypingText();
-                });
-        }
+    const initializeSocket = () => {
+        try {
+            if (settings) {
+                Echo.private(`room.${settings.room.id}`)
+                    .listen('MessageWasSent', (e) => {
+                        $('.messages-container').prepend(e.component);
+                    })
+                    .listen('UserJoinedARoom', (e) => {
+                        $(e.component).hide().appendTo('.users-container').fadeIn();
+                    })
+                    .listenForWhisper('typing', (e) => {
+                        if (e.typing)
+                            $('.typing-text').css('display', 'flex');
+    
+                        $('.typing-text .typing-text-user').html(e.user);
+                        
+                        hideTypingText();
+                    });
+            }
+        } catch (error) {}
     }
 
     const hideTypingText = () => {
@@ -83,18 +85,20 @@ $(() => {
     }
 
     const detectTypingEvent = () => {
-        if (settings) {
-            $('#message-input').on('keydown', () => {
-                let channel = Echo.private(`room.${settings.room.id}`);
-    
-                setTimeout(() => {
-                    channel.whisper('typing', {
-                        user: settings.user.name,
-                        typing: true
-                    });
-                }, 300);
-            });
-        }
+        try {
+            if (settings) {
+                $('#message-input').on('keydown', () => {
+                    let channel = Echo.private(`room.${settings.room.id}`);
+        
+                    setTimeout(() => {
+                        channel.whisper('typing', {
+                            user: settings.user.name,
+                            typing: true
+                        });
+                    }, 300);
+                });
+            }
+        } catch (error) {}
     }
     
     initializeEventSendMessage();
