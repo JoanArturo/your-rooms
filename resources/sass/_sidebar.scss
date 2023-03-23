@@ -54,27 +54,34 @@
         }
 
         .sidebar-item {
-            margin-bottom: 6px;
-        }
-        
-        .sidebar-item a {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            position: relative;
+            display: block;
             padding: 8px 10px;
+            margin-bottom: 6px;
             border-radius: $border-radius;
-            color: $semi-dark-color;
             @media screen and (max-width: $view-xs) {
                 padding: 12px;
             }
-            
+
             &:hover {
-                text-decoration: none;
                 background-color: $gray-light;
+            }
+
+            a {
+                display: block;
+                color: $semi-dark-color;
+            }
+
+            a:hover {
+                text-decoration: none;
             }
         }
 
         .sidebar-item-options {
+            position: absolute;
+            top: 50%;;
+            right: 10px;
+            transform: translateY(-50%);
             display: flex;
             align-items: center;
             gap: 8px;

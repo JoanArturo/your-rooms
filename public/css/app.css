@@ -15008,30 +15008,37 @@ input[type=color]::-moz-color-swatch {
 }
 
 .sidebar .sidebar-items .sidebar-item {
-  margin-bottom: 6px;
-}
-
-.sidebar .sidebar-items .sidebar-item a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: relative;
+  display: block;
   padding: 8px 10px;
+  margin-bottom: 6px;
   border-radius: 8px;
-  color: #595959;
 }
 
 @media screen and (max-width: 575px) {
-  .sidebar .sidebar-items .sidebar-item a {
+  .sidebar .sidebar-items .sidebar-item {
     padding: 12px;
   }
 }
 
-.sidebar .sidebar-items .sidebar-item a:hover {
-  text-decoration: none;
+.sidebar .sidebar-items .sidebar-item:hover {
   background-color: #ECECEC;
 }
 
+.sidebar .sidebar-items .sidebar-item a {
+  display: block;
+  color: #595959;
+}
+
+.sidebar .sidebar-items .sidebar-item a:hover {
+  text-decoration: none;
+}
+
 .sidebar .sidebar-items .sidebar-item-options {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   gap: 8px;
