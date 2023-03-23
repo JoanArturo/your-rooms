@@ -6,6 +6,7 @@ use App\Events\MessageWasSent;
 use App\Events\UserJoinedARoom;
 use App\Events\UserLeftARoom;
 use App\Interfaces\RoomRepositoryInterface;
+use App\Room;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -61,12 +62,12 @@ class RoomController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Room $room)
     {
-        $room = $this->roomRepository->findById($id, true);
+        $room = $this->roomRepository->findById($room->id, true);
         $user = auth()->user();
         
         $isJoined = $room->users->contains('id', $user->id);
@@ -84,11 +85,17 @@ class RoomController extends Controller
         return view('room.show', compact('room', 'users'));
     }
     
-    public function sendMessage(Request $request, $id)
+    /**
+     * Send message in a room.
+     *
+     * @param  \App\Room  $room
+     * @return \Illuminate\Http\Response
+     */
+    public function sendMessage(Request $request, Room $room)
     {
         $user = auth()->user();
 
-        $message = $this->roomRepository->createMessage($id, $user->id, $request->message);
+        $message = $this->roomRepository->createMessage($room->id, $user->id, $request->message);
 
         broadcast(new MessageWasSent($message))->toOthers();
 
@@ -105,16 +112,16 @@ class RoomController extends Controller
     /**
      * Leave a room.
      *
-     * @param  int  $id
+     * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function leave($id)
+    public function leave(Room $room)
     {
         $user = auth()->user();
         
-        $this->roomRepository->removeUserFromARoom($user->id, $id);
+        $this->roomRepository->removeUserFromARoom($user->id, $room->id);
 
-        $room = $this->roomRepository->findById($id)->load('users');
+        $room = $room->load('users');
 
         broadcast(new UserLeftARoom($user, $room))->toOthers();
 

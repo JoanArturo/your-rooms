@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\RoomRepositoryInterface;
+use App\Room;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -60,26 +61,22 @@ class RoomController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Room $room)
     {
-        $room = $this->roomRepository->findById($id);
-
         return view('admin.room.show', compact('room'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Room $room)
     {
-        $room = $this->roomRepository->findById($id);
-
         return view('admin.room.edit', compact('room'));
     }
 
@@ -87,10 +84,10 @@ class RoomController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Room $room)
     {
         $fields = $request->validate([
             'name'        => 'required',
@@ -99,7 +96,7 @@ class RoomController extends Controller
             'active'      => 'nullable'
         ]);
 
-        $this->roomRepository->update($id , $fields);
+        $this->roomRepository->update($room->id , $fields);
 
         return redirect()->route('admin.room.index')->with('success', __('The room data has been successfully updated.'));
     }
@@ -107,15 +104,13 @@ class RoomController extends Controller
     /**
      * Show delete modal.
      *
-     * @param  int  $id
+     * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function delete(Room $room)
     {
         if (! request()->ajax())
             abort(404);
-
-        $room = $this->roomRepository->findById($id);
 
         return view('admin.room.partials._delete', compact('room'));
     }
@@ -123,12 +118,12 @@ class RoomController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Room $room)
     {
-        $this->roomRepository->delete($id);
+        $this->roomRepository->delete($room->id);
 
         return response()->json(null, 204);
     }

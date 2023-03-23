@@ -11,6 +11,11 @@ class Room extends Model
         'name', 'description', 'limit', 'active'
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function messages()
     {
         return $this->hasMany(Message::class);

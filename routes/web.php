@@ -11,8 +11,8 @@ Route::get('/', function() {
 // User routes
 Route::middleware(['auth', 'verified', 'ban'])->group(function () {
     Route::get('room/show-more', 'RoomController@showMoreRooms')->name('room.showMoreRooms');
-    Route::post('room/{id}/send-message', 'RoomController@sendMessage')->name('room.sendMessage');
-    Route::post('room/{id}/leave', 'RoomController@leave')->name('room.leave');
+    Route::post('room/{room}/send-message', 'RoomController@sendMessage')->name('room.sendMessage');
+    Route::post('room/{room}/leave', 'RoomController@leave')->name('room.leave');
     Route::resource('room', 'RoomController')->only(['index', 'show']);
 
     Route::resource('suggestion', 'SuggestionController')->only(['create', 'store']);
@@ -29,7 +29,7 @@ Route::middleware(['auth', 'verified', 'ban'])->group(function () {
 // Admin routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('room', 'Admin\RoomController');
-    Route::get('room/{id}/delete', 'Admin\RoomController@delete')->name('room.delete');
+    Route::get('room/{room}/delete', 'Admin\RoomController@delete')->name('room.delete');
     
     Route::resource('user', 'Admin\UserController');
     Route::get('user/{id}/delete', 'Admin\UserController@delete')->name('user.delete');
