@@ -29,7 +29,7 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = $this->roomRepository->getAllSort('created_at', 'desc', true);
+        $rooms = $this->roomRepository->getAllActiveRooms(true);
 
         return view('room.index', compact('rooms'));
     }
@@ -44,7 +44,7 @@ class RoomController extends Controller
         if (! request()->ajax())
             abort(404);
 
-        $rooms = $this->roomRepository->getAllSort('created_at', 'desc', true);
+        $rooms = $this->roomRepository->getAllActiveRooms(true);
         $elementsHtml = "";
 
         foreach($rooms as $room) {
@@ -66,7 +66,7 @@ class RoomController extends Controller
      */
     public function show($id)
     {
-        $room = $this->roomRepository->findById($id);
+        $room = $this->roomRepository->findById($id, true);
         $user = auth()->user();
         
         $isJoined = $room->users->contains('id', $user->id);

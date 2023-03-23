@@ -13,7 +13,7 @@
                     <li class="nav-item">
                         <a class="nav-link" id="nav-link-chats" href="javascript:void(0)">
                             <img src="{{ asset('icons/chats.svg') }}" alt="Chats icon"> <span class="nav-link-text">Chats</span>
-                            <span class="badge badge-gray badge-number">{{ Auth::user()->presenter()->openRoomsNumber() }}</span>
+                            <span class="badge badge-gray badge-number">{{ numberOfOpenRoomsOfTheCurrentUser() }}</span>
                         </a>
                     </li>
                 </ul>

@@ -12,7 +12,7 @@ function activeRoomsNumber()
 
 function openRoomsOfTheCurrentUser()
 {
-    return \Auth::user()->rooms;
+    return \Auth::user()->rooms->where('active', 1);
 }
 
 function numberOfOpenRoomsOfTheCurrentUser()

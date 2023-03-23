@@ -30,11 +30,6 @@ class UserPresenter extends Presenter
         return new HtmlString("<span class='badge badge-{$badgeColor}'>{$status}</span>");
     }
 
-    public function openRoomsNumber()
-    {
-        return $this->entity->rooms->count();
-    }
-
     public function messageColor()
     {
         if (empty($this->entity->settings))

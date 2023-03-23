@@ -44,10 +44,15 @@ class RoomRepository implements RoomRepositoryInterface
 
         return $paginate ? Entity::orderBy($sortColumn, $sortType)->paginate() : Entity::orderBy($sortColumn, $sortType)->all();
     }
-
-    public function findById($id)
+    
+    public function getAllActiveRooms($paginate = false)
     {
-        return Entity::findOrFail($id);
+        return $paginate ? Entity::latest()->whereActive(1)->paginate() : Entity::latest()->whereActive(1)->all();
+    }
+
+    public function findById($id, $onlyActivated = false)
+    {
+        return $onlyActivated ? Entity::whereId($id)->whereActive(1)->firstOrFail() : Entity::findOrFail($id);
     }
 
     public function delete($id)
@@ -76,7 +81,7 @@ class RoomRepository implements RoomRepositoryInterface
 
     public function createMessage($id, $userId, $message)
     {
-        $room = $this->findById($id);
+        $room = $this->findById($id, true);
 
         $message = $room->messages()->create([
             'body'    => $message,
