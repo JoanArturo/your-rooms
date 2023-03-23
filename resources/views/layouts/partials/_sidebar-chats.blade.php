@@ -9,7 +9,7 @@
     <ul class="sidebar-items">
         @foreach (openRoomsOfTheCurrentUser() as $room)
             <li class="sidebar-item" data-sidebaritem="{{ $room->id }}">
-                <a href="#">
+                <a href="{{ route('room.show', $room) }}">
                     <span class="sidebar-item-title">{{ $room->name }}</span>
                 </a>
                 <div class="sidebar-item-options">
