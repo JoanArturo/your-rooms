@@ -58,9 +58,11 @@ class RoomRepository implements RoomRepositoryInterface
     public function delete($id)
     {
         $room = $this->findById($id);
+        
+        $room->messages()->delete();
 
-        $room->users()->delete();
-
+        $room->users()->detach();
+        
         return $room->delete();
     }
 
