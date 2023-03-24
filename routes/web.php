@@ -1,7 +1,5 @@
 <?php
 
-use App\Room;
-
 Auth::routes(['verify' => true]);
 
 Route::get('/', function() {
