@@ -9,7 +9,7 @@ class RoomRepository implements RoomRepositoryInterface
     {
         if (request()->has('search')) {
             $search = request()->get('search');
-            $entity= Entity::where(function($query) use ($search) {
+            $entity= Entity::with('users')->where(function($query) use ($search) {
                 $query->where('id', 'like', "%{$search}%")
                     ->orWhere('name', 'like', "%{$search}%")
                     ->orWhere('description', 'like', "%{$search}%");
@@ -19,14 +19,16 @@ class RoomRepository implements RoomRepositoryInterface
             return $paginate ? $entity->paginate() : $entity->get();
         }
 
-        return $paginate ? Entity::paginate() : Entity::all();
+        return $paginate ?
+            Entity::with('users')->paginate() :
+            Entity::with('users')->all();
     }
 
     public function getAllSort($sortColumn = 'created_at', $sortType = 'asc', $paginate = false)
     {
         if (request()->has('search')) {
             $search = request()->get('search');
-            $entity= Entity::where(function($query) use ($search) {
+            $entity= Entity::with('users')->where(function($query) use ($search) {
                 $query->where('id', 'like', "%{$search}%")
                     ->orWhere('name', 'like', "%{$search}%")
                     ->orWhere('description', 'like', "%{$search}%");
@@ -42,17 +44,23 @@ class RoomRepository implements RoomRepositoryInterface
                     ->get();
         }
 
-        return $paginate ? Entity::orderBy($sortColumn, $sortType)->paginate() : Entity::orderBy($sortColumn, $sortType)->all();
+        return $paginate ?
+            Entity::with('users')->orderBy($sortColumn, $sortType)->paginate() :
+            Entity::with('users')->orderBy($sortColumn, $sortType)->all();
     }
     
     public function getAllActiveRooms($paginate = false)
     {
-        return $paginate ? Entity::latest()->whereActive(1)->paginate() : Entity::latest()->whereActive(1)->all();
+        return $paginate ?
+            Entity::with('users')->latest()->whereActive(1)->paginate() :
+            Entity::with('users')->latest()->whereActive(1)->all();
     }
 
     public function findById($id, $onlyActivated = false)
     {
-        return $onlyActivated ? Entity::whereId($id)->whereActive(1)->firstOrFail() : Entity::findOrFail($id);
+        return $onlyActivated ?
+            Entity::with(['users', 'messages', 'messages.user'])->whereId($id)->whereActive(1)->firstOrFail() :
+            Entity::with(['users', 'messages', 'messages.user'])->findOrFail($id);
     }
 
     public function delete($id)
