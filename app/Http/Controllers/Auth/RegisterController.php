@@ -64,10 +64,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $faker = \Faker\Factory::create();
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'settings' => [
+                'message_color' => $faker->hexColor()
+            ]
         ]);
     }
 
