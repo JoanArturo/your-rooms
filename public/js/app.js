@@ -55285,7 +55285,7 @@ $(function () {
     axios.post('/register', formData).then(function (response) {
       if (response.status == 200) {
         $('.errors-container').html(getLoadingMessageHtml('Cuenta creada exitosamente!, redirigiendo...'));
-        location.href = '/home';
+        location.href = '/email/verify';
       }
     })["catch"](function (error) {
       $('.errors-container').html(getErrorsMessageHtml(error));

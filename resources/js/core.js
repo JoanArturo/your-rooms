@@ -204,7 +204,7 @@ $(() => {
                         getLoadingMessageHtml('Cuenta creada exitosamente!, redirigiendo...')
                     );
 
-                    location.href = '/home';
+                    location.href = '/email/verify';
                 }
             })
             .catch( (error) => {
