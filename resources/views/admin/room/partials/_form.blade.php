@@ -1,6 +1,16 @@
-<div class="form-group float-input">
-    {!! Form::text('name', null, ['id' => 'name-input', 'class' => 'form-control', 'required' => true, 'autofocus' => true]) !!}
-    {!! Form::label('name-input', __('validation.attributes.name')) !!}
+<div class="form-row">
+    <div class="col-12 col-md-6">
+        <div class="form-group float-input">
+            {!! Form::text('name', null, ['id' => 'name-input', 'class' => 'form-control', 'required' => true, 'autofocus' => true]) !!}
+            {!! Form::label('name-input', __('validation.attributes.name')) !!}
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="form-group float-input">
+            {!! Form::text('slug', null, ['id' => 'slug-input', 'class' => 'form-control', 'required' => true]) !!}
+            {!! Form::label('slug-input', __('Slug')) !!}
+        </div>
+    </div>
 </div>
 
 <div class="form-group float-input">

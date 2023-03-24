@@ -55407,6 +55407,12 @@ $(function () {
       });
     });
   };
+  var detectChangesInTheRoomFormNameInput = function detectChangesInTheRoomFormNameInput() {
+    $('#name-input').stringToSlug({
+      setEvents: 'keyup',
+      getPut: '#slug-input'
+    });
+  };
   initializeLibraries();
   initializeEventGoLogin();
   initializeEventGoRegister();
@@ -55420,6 +55426,7 @@ $(function () {
   initializeEventConfirmDeleteRecord();
   initializeEventLoadMoreRooms();
   initializeEventSaveProfileChanges();
+  detectChangesInTheRoomFormNameInput();
 });
 
 /***/ }),

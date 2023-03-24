@@ -48,6 +48,7 @@ class RoomController extends Controller
     {
         $fields = $request->validate([
             'name'        => 'required',
+            'slug'        => 'required|unique:rooms',
             'description' => 'required',
             'limit'       => 'required|numeric|min:2',
             'active'      => 'nullable'
@@ -91,6 +92,7 @@ class RoomController extends Controller
     {
         $fields = $request->validate([
             'name'        => 'required',
+            'slug'        => 'required|unique:rooms,slug,' . $room->id,
             'description' => 'required',
             'limit'       => 'required|numeric|min:2',
             'active'      => 'nullable'

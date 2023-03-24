@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     protected $fillable = [
-        'name', 'description', 'limit', 'active'
+        'name', 'slug', 'description', 'limit', 'active',
     ];
 
     public function getRouteKeyName()

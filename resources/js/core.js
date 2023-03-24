@@ -398,6 +398,13 @@ $(() => {
         });
     }
 
+    const detectChangesInTheRoomFormNameInput = () => {
+        $('#name-input').stringToSlug({
+            setEvents: 'keyup',
+            getPut: '#slug-input',
+        });
+    }
+
     initializeLibraries();
     initializeEventGoLogin();
     initializeEventGoRegister();
@@ -411,4 +418,5 @@ $(() => {
     initializeEventConfirmDeleteRecord();
     initializeEventLoadMoreRooms();
     initializeEventSaveProfileChanges();
+    detectChangesInTheRoomFormNameInput();
 });
