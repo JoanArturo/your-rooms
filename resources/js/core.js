@@ -399,10 +399,13 @@ $(() => {
     }
 
     const detectChangesInTheRoomFormNameInput = () => {
-        $('#name-input').stringToSlug({
-            setEvents: 'keyup',
-            getPut: '#slug-input',
-        });
+        const inputExists = $('#name-input').length > 0;
+        
+        if (inputExists)
+            $('#name-input').stringToSlug({
+                setEvents: 'keyup',
+                getPut: '#slug-input',
+            });
     }
 
     initializeLibraries();

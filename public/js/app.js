@@ -55408,7 +55408,8 @@ $(function () {
     });
   };
   var detectChangesInTheRoomFormNameInput = function detectChangesInTheRoomFormNameInput() {
-    $('#name-input').stringToSlug({
+    var inputExists = $('#name-input').length > 0;
+    if (inputExists) $('#name-input').stringToSlug({
       setEvents: 'keyup',
       getPut: '#slug-input'
     });
