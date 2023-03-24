@@ -24,6 +24,7 @@
                 <th scope="col" width="30%">{{ __('validation.attributes.description') }}</th>
                 <th scope="col">{{ __('validation.attributes.limit') }}</th>
                 <th scope="col">{{ __('Users online') }}</th>
+                <th scope="col">{{ __('Room status') }}</th>
                 <th scope="col">{{ __('Registration date') }}</th>
                 <th scope="col"></th>
             </tr>
@@ -36,6 +37,7 @@
                     <td>{{ $room->description }}</td>
                     <td>{{ $room->limit }}</td>
                     <td>{{ $room->presenter()->usersOnlineNumberWithIndicator() }}</td>
+                    <td>{{ $room->presenter()->status() }}</td>
                     <td>{{ $room->presenter()->createdAt() }}</td>
                     <td>
                         <a href="{{ route('admin.room.edit', $room) }}" class="btn btn-info table-btn"><i class="ri-pencil-line"></i>{{ __('Edit') }}</a>
