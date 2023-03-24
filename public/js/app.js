@@ -55397,7 +55397,7 @@ $(function () {
     $('#btn-save-profile-changes').click(function (e) {
       var url = $('#user-profile-form').attr('action');
       var formData = $('#user-profile-form').serialize();
-      $('.messages-status').html(getLoadingMessageHtml('Gurdando cambios...'));
+      $('.messages-status').html(getLoadingMessageHtml('Guardando cambios...'));
       axios.put(url, formData).then(function (response) {
         if (response.status == 200) {
           $('.messages-status').html(getSuccessMessage(response.data.status_message));

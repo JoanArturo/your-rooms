@@ -379,7 +379,7 @@ $(() => {
             let formData = $('#user-profile-form').serialize();
 
             $('.messages-status').html(
-                getLoadingMessageHtml('Gurdando cambios...')
+                getLoadingMessageHtml('Guardando cambios...')
             );
 
             axios.put(url, formData)
