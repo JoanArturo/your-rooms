@@ -68,6 +68,7 @@ class RoomController extends Controller
     public function show(Room $room)
     {
         $room = $this->roomRepository->findById($room->id, true);
+        $messages = $room->messages()->orderBy('created_at', 'desc')->paginate();
         $user = auth()->user();
         
         $isJoined = $room->users->contains('id', $user->id);
@@ -82,7 +83,7 @@ class RoomController extends Controller
             }
         }
 
-        return view('room.show', compact('room', 'users'));
+        return view('room.show', compact('room', 'users', 'messages'));
     }
     
     /**

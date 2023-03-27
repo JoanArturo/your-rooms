@@ -9,7 +9,7 @@
     <div class="col-12 col-md-9">   
         <p class="text-container-title">{{ __('Connected to the room') }} <strong>{{ $room->name }}</strong></p>
         <div class="messages-container">
-            @foreach ($room->messages->reverse() as $message)
+            @foreach ($messages as $message)
                 @message(['message' => $message])
                 @endmessage
             @endforeach
