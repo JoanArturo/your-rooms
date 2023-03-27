@@ -29,6 +29,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::resource('room', 'Admin\RoomController');
     Route::get('room/{room}/delete', 'Admin\RoomController@delete')->name('room.delete');
     
+    Route::resource('suggestion', 'Admin\SuggestionController')->only('index');
+
     Route::resource('user', 'Admin\UserController');
     Route::get('user/{id}/delete', 'Admin\UserController@delete')->name('user.delete');
     Route::post('user/{id}/update-ban-status/{status}', 'Admin\UserController@updateBanStatus')->name('user.updateBanStatus');

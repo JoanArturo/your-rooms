@@ -29,6 +29,7 @@
                     @if (Auth::user()->is_admin)
                         <a class="dropdown-item" href="{{ route('admin.user.index') }}">{{ __('Users list') }}</a>
                         <a class="dropdown-item" href="{{ route('admin.room.index') }}">{{ __('Rooms list') }}</a>
+                        <a class="dropdown-item" href="{{ route('admin.suggestion.index') }}">{{ __('Suggestions received') }}</a>
                         <hr class="m-0">
                     @endif
                     <a class="dropdown-item" href="{{ route('suggestion.create') }}">{{ __('Suggestions') }}</a>
