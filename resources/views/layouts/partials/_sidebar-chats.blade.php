@@ -7,7 +7,7 @@
         </svg>
     </div>
     <ul class="sidebar-items">
-        @foreach (openRoomsOfTheCurrentUser() as $room)
+        @forelse (openRoomsOfTheCurrentUser() as $room)
             <li class="sidebar-item" data-sidebaritem="{{ $room->id }}">
                 <a href="{{ route('room.show', $room) }}">
                     <span class="sidebar-item-title">{{ $room->name }}</span>
@@ -23,6 +23,8 @@
                     {!! Form::close() !!}
                 </div>
             </li>
-        @endforeach
+        @empty
+            <li class="p-2">{{ __('You have not joined any rooms.') }}</li>
+        @endforelse
     </ul>
 </aside>

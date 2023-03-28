@@ -114,5 +114,6 @@
     "Updated password.": "Contraseña actualizada.",
     "By deactivating the account you will lose your profile information and all the messages you have sent in each of the rooms.": "Al desactivar la cuenta perderás tu información de perfil y  todos los mensajes que has enviado en cada una de las salas.",
     "Ok, deactivate it": "Ok, desactivalo",
-    "Message": "Mensaje"
+    "Message": "Mensaje",
+    "You have not joined any rooms.": "No te has unido a ninguna sala."
 }
