@@ -25,6 +25,7 @@
                     <div class="avatar-image">
                         {{ Auth::user()->presenter()->profilePicture() }}
                     </div>
+                    <span>{{ Auth::user()->name }}</span>
                     <img src="{{ asset('icons/arrow-down.svg') }}" alt="Arrow down icon">
                 </div>
                 <div class="dropdown-menu dropdown-menu-right">
