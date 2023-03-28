@@ -35,6 +35,12 @@ $(() => {
         });
     }
 
+    const initializeEventClickSendMessageButton = () => {
+        $('#btn-send-message').on('click', () => {
+            $('#message-form').submit();
+        });
+    }
+
     const getMessageComponentInHtml = (profilePicture, username, color, messageText, time) => {
         return `
         <div class="message">
@@ -119,6 +125,7 @@ $(() => {
     }
     
     initializeEventSendMessage();
+    initializeEventClickSendMessageButton();
     initializeSocket();
     detectTypingEvent();
 });

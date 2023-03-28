@@ -55072,6 +55072,11 @@ $(function () {
       }
     });
   };
+  var initializeEventClickSendMessageButton = function initializeEventClickSendMessageButton() {
+    $('#btn-send-message').on('click', function () {
+      $('#message-form').submit();
+    });
+  };
   var getMessageComponentInHtml = function getMessageComponentInHtml(profilePicture, username, color, messageText, time) {
     return "\n        <div class=\"message\">\n            <div class=\"avatar-group\">\n                <div class=\"avatar-image\">\n                    ".concat(profilePicture, "\n                </div>\n            </div>\n            <div>\n                <p class=\"message-user\"><strong>").concat(username, "</strong></p>\n                <div class=\"d-flex flex-wrap\">\n                    <p class=\"message-body mr-2\" style=\"background-color: ").concat(color, "\">").concat(messageText, "</p>\n                    <small class=\"message-time\">").concat(time, "</small>\n                </div>\n            </div>\n        </div>\n        ");
   };
@@ -55128,6 +55133,7 @@ $(function () {
     } catch (error) {}
   };
   initializeEventSendMessage();
+  initializeEventClickSendMessageButton();
   initializeSocket();
   detectTypingEvent();
 });
