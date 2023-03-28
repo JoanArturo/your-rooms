@@ -154,6 +154,7 @@ return [
         'role'            => 'Rol',
         'account_status'  => 'Estado de la cuenta',
         'gender'          => 'Género',
+        'password'        => 'Contraseña',
         'new_password'    => 'Nueva contraseña',
         'repeat_password' => 'Repetir contraseña'
     ],
