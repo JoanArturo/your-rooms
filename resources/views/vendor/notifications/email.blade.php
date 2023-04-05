@@ -6,7 +6,7 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('Hello!')
+# @lang('Hello, thank you for registering to :appname!', [ 'appname' => config('app.name') ])
 @endif
 @endif
 
