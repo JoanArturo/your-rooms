@@ -30,6 +30,9 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\UserIsLoggedIn::class => [
             \App\Listeners\ChangeUserStatusIndicatorToOnline::class
         ],
+        \App\Events\UserLoggedOut::class => [
+            \App\Listeners\ChangeUserStatusIndicatorToOffline::class
+        ],
     ];
 
     /**

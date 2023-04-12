@@ -55104,7 +55104,9 @@ $(function () {
           // Remove the card of the disconnected user
           $("div[data-userid=".concat(e.user.id, "]")).remove();
         }).listen('UserIsLoggedIn', function (e) {
-          $(".user[data-userid=\"".concat(e.user.id, "\"] .badge-user-status")).removeClass('bg-success bg-gray').addClass('bg-success').attr('title', e.activeText);
+          changeUserActiveStatus(e.user, e.activeText, true);
+        }).listen('UserLoggedOut', function (e) {
+          changeUserActiveStatus(e.user, e.activeText, false);
         }).listenForWhisper('typing', function (e) {
           if (e.typing) $('.typing-text').css('display', 'flex');
           $('.typing-text .typing-text-user').html(e.user);
@@ -55133,6 +55135,11 @@ $(function () {
         });
       }
     } catch (error) {}
+  };
+  var changeUserActiveStatus = function changeUserActiveStatus(user, text) {
+    var isOnline = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var color = isOnline ? 'bg-success' : 'bg-gray';
+    $(".user[data-userid=\"".concat(user.id, "\"] .badge-user-status")).removeClass('bg-success bg-gray').addClass(color).attr('title', text);
   };
   initializeEventSendMessage();
   initializeEventClickSendMessageButton();

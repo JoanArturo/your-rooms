@@ -88,10 +88,10 @@ $(() => {
                         $(`div[data-userid=${e.user.id}]`).remove();
                     })
                     .listen('UserIsLoggedIn', (e) => {
-                        $(`.user[data-userid="${e.user.id}"] .badge-user-status`)
-                            .removeClass('bg-success bg-gray')
-                            .addClass('bg-success')
-                            .attr('title', e.activeText);
+                        changeUserActiveStatus(e.user, e.activeText, true);
+                    })
+                    .listen('UserLoggedOut', (e) => {
+                        changeUserActiveStatus(e.user, e.activeText, false);
                     })
                     .listenForWhisper('typing', (e) => {
                         if (e.typing)
@@ -128,6 +128,15 @@ $(() => {
                 });
             }
         } catch (error) {}
+    }
+
+    const changeUserActiveStatus = (user, text, isOnline = false) => {
+        let color = isOnline ? 'bg-success' : 'bg-gray';
+        
+        $(`.user[data-userid="${user.id}"] .badge-user-status`)
+            .removeClass('bg-success bg-gray')
+            .addClass(color)
+            .attr('title', text);
     }
     
     initializeEventSendMessage();
