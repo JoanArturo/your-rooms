@@ -30,7 +30,7 @@
             </div>
             
             <div class="form-group float-input">
-                {!! Form::text('email', null, ['id' => 'email-input', 'class' => 'form-control', 'required' => true]) !!}
+                {!! Form::text('email', null, ['id' => 'email-input', 'class' => 'form-control', 'required' => true, 'disabled' => true]) !!}
                 {!! Form::label('email-input', __('validation.attributes.email')) !!}
             </div>
 

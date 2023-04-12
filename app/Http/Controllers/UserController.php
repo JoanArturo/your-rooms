@@ -42,10 +42,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $fields = $request->validate([
-            'name'           => 'required|string|max:255',
-            'email'          => 'required|string|email|max:255|unique:users,email,' . $id,
-            'gender'         => 'nullable',
-            'message_color'  => 'nullable'
+            'name'          => 'required|string|max:255',
+            'gender'        => 'nullable',
+            'message_color' => 'nullable'
         ]);
 
         $this->userRepository->update($id, $fields);

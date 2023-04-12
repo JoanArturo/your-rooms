@@ -28,7 +28,7 @@ strong {
 }
 
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 32px;
 
     label {
         color: $semi-dark-color;
@@ -93,8 +93,8 @@ strong {
                 box-shadow: none;
                 border-bottom: 1px solid $primary;
             }
-            &:focus + label, &:valid + label {
-                top: -5px;
+            &:focus + label, &:valid + label, &:disabled + label {
+                top: -8px;
                 font-size: $font-size;
             }
         }
