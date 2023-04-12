@@ -27,6 +27,9 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\UserLeftARoom::class => [
             \App\Listeners\InformUsers::class
         ],
+        \App\Events\UserIsLoggedIn::class => [
+            \App\Listeners\ChangeUserStatusIndicatorToOnline::class
+        ],
     ];
 
     /**

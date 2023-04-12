@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserIsLoggedIn;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -47,6 +48,8 @@ class LoginController extends Controller
      */
     protected function authenticated(\Illuminate\Http\Request $request, $user)
     {
+        broadcast(new UserIsLoggedIn($user))->toOthers();
+
         return $user->is_admin ? 
             redirect()->route('admin.user.index') : 
             redirect()->intended($this->redirectPath());

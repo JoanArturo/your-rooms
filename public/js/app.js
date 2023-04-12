@@ -55103,6 +55103,8 @@ $(function () {
 
           // Remove the card of the disconnected user
           $("div[data-userid=".concat(e.user.id, "]")).remove();
+        }).listen('UserIsLoggedIn', function (e) {
+          $(".user[data-userid=\"".concat(e.user.id, "\"] .badge-user-status")).removeClass('bg-success bg-gray').addClass('bg-success').attr('title', e.activeText);
         }).listenForWhisper('typing', function (e) {
           if (e.typing) $('.typing-text').css('display', 'flex');
           $('.typing-text .typing-text-user').html(e.user);

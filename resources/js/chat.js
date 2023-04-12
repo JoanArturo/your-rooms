@@ -87,6 +87,12 @@ $(() => {
                         // Remove the card of the disconnected user
                         $(`div[data-userid=${e.user.id}]`).remove();
                     })
+                    .listen('UserIsLoggedIn', (e) => {
+                        $(`.user[data-userid="${e.user.id}"] .badge-user-status`)
+                            .removeClass('bg-success bg-gray')
+                            .addClass('bg-success')
+                            .attr('title', e.activeText);
+                    })
                     .listenForWhisper('typing', (e) => {
                         if (e.typing)
                             $('.typing-text').css('display', 'flex');
