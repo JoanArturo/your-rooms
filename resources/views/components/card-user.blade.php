@@ -5,5 +5,5 @@
         </div>
         <p class="m-0">{{ $user->name }}</p>
     </div>
-    <div class="badge-user-status" style="background-color: {{ $user->presenter()->messageColor() }}"></div>
+    <div class="badge-user-status bg-{{ $user->presenter()->activeColor() }}" title="{{ $user->presenter()->activeText() }}"></div>
 </div>

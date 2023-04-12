@@ -40,6 +40,16 @@ class UserPresenter extends Presenter
         return $settings['message_color'];
     }
 
+    public function activeColor()
+    {
+        return $this->entity->is_active ? 'success' : 'gray';
+    }
+
+    public function activeText()
+    {
+        return $this->entity->is_active ? __('Online') : __('Offline');
+    }
+
     public function createdAt()
     {
         return $this->entity->created_at->diffForHumans();

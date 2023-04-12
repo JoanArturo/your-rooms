@@ -123,5 +123,7 @@
     "Create now!": "Crear ahora!",
     "Do you already have an account?": "Ya tienes una cuenta?",
     "Click the button below to verify your email address.": "Haga clic en el botón de abajo para verificar su dirección de correo electrónico.",
-    "Hello, thank you for registering to :appname!": "¡Hola, gracias por registrarte a :appname!"
+    "Hello, thank you for registering to :appname!": "¡Hola, gracias por registrarte a :appname!",
+    "Online": "En línea",
+    "Offline": "Desconectado"
 }
