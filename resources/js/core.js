@@ -408,6 +408,39 @@ $(() => {
             });
     }
 
+    const initializeEventReportMessage = () => {
+        $('.messages-container').click( (e) => {
+            let isButtonReportMessage = $(e.target).hasClass('btn-report-message');
+
+            if (isButtonReportMessage) {
+                let buttonReportMessage = $(e.target);
+                let url = $(buttonReportMessage).data('url');
+
+                $(buttonReportMessage).closest('.btn-group')
+                    .find('.dropdown-toggle')
+                    .attr('disabled', true);
+    
+                axios.post(url, [])
+                    .then( ({ status, data }) => {
+                        if (status == 200) {
+                            $(buttonReportMessage).closest('.message')
+                                .find('.message-body')
+                                .hide()
+                                .html(data.message)
+                                .fadeIn();
+                            
+                            $(buttonReportMessage).closest('.btn-group').remove();
+                        }
+                    })
+                    .catch( (error) => {
+                        $(buttonReportMessage).closest('.btn-group')
+                            .find('.dropdown-toggle')
+                            .removeAttr('disabled');
+                    });
+            }
+        });
+    }
+
     initializeLibraries();
     initializeEventGoLogin();
     initializeEventGoRegister();
@@ -422,4 +455,5 @@ $(() => {
     initializeEventLoadMoreRooms();
     initializeEventSaveProfileChanges();
     detectChangesInTheRoomFormNameInput();
+    initializeEventReportMessage();
 });

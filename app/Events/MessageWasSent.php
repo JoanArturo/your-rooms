@@ -25,7 +25,10 @@ class MessageWasSent implements ShouldBroadcast
     public function __construct($message)
     {
         $this->message = $message;
-        $this->component = view('components.message', compact('message'))->render();
+        $this->component = view('components.message', [
+            'message' => $message,
+            'showOptions' => true
+        ])->render();
     }
 
     /**

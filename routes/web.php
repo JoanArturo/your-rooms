@@ -15,6 +15,8 @@ Route::middleware(['auth', 'verified', 'ban'])->group(function () {
 
     Route::resource('suggestion', 'SuggestionController')->only(['create', 'store']);
     
+    Route::post('report/{id}/report-message', 'ReportController@reportMessage')->name('report.reportMessage');
+    
     Route::get('user/profile', 'UserController@profile')->name('user.profile');
     Route::get('user/change-password', 'UserController@changePassword')->name('user.changePassword');
     Route::get('user/deactivate-account', 'UserController@deactivateAccount')->name('user.deactivateAccount');

@@ -10,7 +10,10 @@
         <p class="text-container-title">{{ __('Connected to the room') }} <strong>{{ $room->name }}</strong></p>
         <div class="messages-container">
             @foreach ($messages as $message)
-                @message(['message' => $message])
+                @message([
+                    'message' => $message,
+                    'showOptions' => $message->user_id != Auth::user()->id && $message->reports->where('user_id', Auth::user()->id)->count() == 0
+                ])
                 @endmessage
             @endforeach
             <div class="typing-text">
