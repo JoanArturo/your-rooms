@@ -33,6 +33,7 @@
                         <a class="dropdown-item" href="{{ route('admin.user.index') }}">{{ __('Users list') }}</a>
                         <a class="dropdown-item" href="{{ route('admin.room.index') }}">{{ __('Rooms list') }}</a>
                         <a class="dropdown-item" href="{{ route('admin.suggestion.index') }}">{{ __('Suggestions received') }}</a>
+                        <a class="dropdown-item" href="{{ route('admin.report.index') }}">{{ __('Reports received') }}</a>
                         <hr class="m-0">
                     @endif
 

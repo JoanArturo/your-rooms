@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Interfaces\ReportRepositoryInterface;
 use App\Interfaces\RoomRepositoryInterface;
 use App\Interfaces\SuggestionRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
+use App\Repositories\ReportRepository;
 use App\Repositories\RoomRepository;
 use App\Repositories\SuggestionRepository;
 use App\Repositories\UserRepository;
@@ -22,6 +24,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(RoomRepositoryInterface::class, RoomRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(SuggestionRepositoryInterface::class, SuggestionRepository::class);
+        $this->app->bind(ReportRepositoryInterface::class, ReportRepository::class);
     }
 
     /**

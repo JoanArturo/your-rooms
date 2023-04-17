@@ -128,5 +128,14 @@
     "Offline": "Desconectado",
     "- MESSAGE BLOCKED -": "- MENSAJE BLOQUEADO -",
     "Report": "Reportar",
-    "Report as inappropriate message/content": "Reportar como mensaje/contenido inapropiado"
+    "Report as inappropriate message/content": "Reportar como mensaje/contenido inapropiado",
+    "Report inappropriate message/content": "Reporte de mensaje/contenido inapropiado",
+    "Reporting user": "Usuario que reporta",
+    "Reported message": "Mensaje reportado",
+    "Subject": "Asunto",
+    "Message from": "Mensaje de",
+    "Reports received": "Reportes recibidos",
+    "Num. reports": "Num. de reportes",
+    "Reported messages": "Mensajes reportados",
+    "View reported messages": "Ver mensajes reportados"
 }

@@ -71,7 +71,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = $this->userRepository->findById($id);
+        $user = $this->userRepository->findById($id)
+            ->load(['messages', 'messages.reports']);
 
         return view('admin.user.show', compact('user'));
     }

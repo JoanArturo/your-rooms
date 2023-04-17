@@ -39,6 +39,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'settings'          => 'array'
     ];
 
+    protected $appends = [
+        'messages_reported_against',
+        'number_of_reports_against'
+    ];
+
     public function messages()
     {
         return $this->hasMany(Message::class);
@@ -67,5 +72,19 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isVerified()
     {
         return ! empty($this->email_verified_at);
+    }
+
+    public function getMessagesReportedAgainstAttribute()
+    {
+        return $this->messages->filter(
+            function($message, $key) { 
+                return $message->reports->isNotEmpty();
+            }
+        );
+    }
+
+    public function getNumberOfReportsAgainstAttribute()
+    {
+        return $this->messages_reported_against->count();
     }
 }
