@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\UserRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -72,6 +73,30 @@ class UserController extends Controller
         $this->userRepository->updateProfilePictureFromUser($user->id, $file);
 
         return response()->json(['status_message' => __('You changed your profile picture.')], 200);
+    }
+    
+    /**
+     * Change user's profile picture.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function changeProfilePicture(Request $request, \App\User $user)
+    {
+        if (empty($request->image_path))
+            return back();
+
+        $filename = explode('/', $request->image_path)[2];
+        $userGalleryPath = "gallery/{$user->id}/";
+        
+        if (! Storage::exists($userGalleryPath . $filename))
+            return back()->withErrors(__('This photo does not exist in your gallery.'));
+        
+        $user->profile_picture = $request->image_path;
+        $user->save();
+        
+        return back()->with(['success' => __('You changed your profile picture.')]);
     }
 
     /**

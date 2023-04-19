@@ -149,5 +149,6 @@
     "Image preview": "Previsualización de la imagen",
     "Use as profile photo": "Usar como foto de perfil",
     "Close": "Cerrar",
-    "Remove from gallery": "Eliminar de la galería"
+    "Remove from gallery": "Eliminar de la galería",
+    "This photo does not exist in your gallery.": "Esta foto no existe en tu galería."
 }
