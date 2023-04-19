@@ -11,11 +11,17 @@
             {!! Form::open(['url' => route('user.changeProfilePicture', ['user' => Auth::user()]), 'method' => 'put', 'class' => 'display: none', 'id' => 'profilePhotoChangeForm']) !!}
                 {!! Form::hidden('image_path', $image->path) !!}
             {!! Form::close() !!}    
+            
+            {!! Form::open(['url' => route('user.deletePhoto', ['id' => $image]), 'method' => 'delete', 'class' => 'display: none', 'id' => 'deletePhotoForm']) !!}
+            {!! Form::close() !!}    
         @endif
     @endslot
 
     @slot('actionButtons')
-        <button type="button" class="btn btn-outline-danger mr-auto"><i class="ri-delete-bin-5-fill mr-1"></i> {{ __('Remove from gallery') }}</button>
+        @if ($image->user == Auth::user())
+            <button type="submit" class="btn btn-outline-danger mr-auto" form="deletePhotoForm"><i class="ri-delete-bin-5-fill mr-1"></i> {{ __('Remove from gallery') }}</button>
+        @endif
+
         <button type="button" class="btn btn-gray" data-dismiss="modal">{{ __('Close') }}</button>
 
         @if ($image->user == Auth::user())

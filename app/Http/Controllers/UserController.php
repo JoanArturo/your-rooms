@@ -133,6 +133,25 @@ class UserController extends Controller
 
         return response()->json(['status_message' => __('You deleted your profile picture.')], 200);
     }
+    
+    /**
+     * Delete a photo from a user's gallery.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deletePhoto($id)
+    {
+        $user = auth()->user();
+
+        $image = $user->images()->findOrFail($id);
+
+        if (Storage::exists($image->path))
+            Storage::delete($image->path);
+
+        $image->delete();
+
+        return back()->with(['success' => __('You deleted a photo from your gallery.')]);
+    }
 
     /**
      * Shows the change password view.
