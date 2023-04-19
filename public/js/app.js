@@ -55449,6 +55449,29 @@ $(function () {
       }
     });
   };
+  var initializeEventShowImage = function initializeEventShowImage() {
+    $('.gallery-image').click(function (e) {
+      var url = $(e.delegateTarget).data('url');
+      var imageParent = e.delegateTarget.parentElement;
+
+      // Add spinner load if it doesn't exist
+      if ($(imageParent).find('.spinner-load-image').length <= 0) {
+        $(imageParent).append("\n                    <div class=\"spinner-load-image\">\n                        <div class=\"spinner-border\" role=\"status\" aria-hidden=\"true\"></div>\n                        <span>Cargando...</span>\n                    </div>\n                ");
+      }
+      axios.get(url).then(function (response) {
+        $('#modal-container').html(response.data);
+        $('#modal-container .modal').modal('show');
+
+        // Remove spinner load
+        $(imageParent).find('.spinner-load-image').remove();
+      })["catch"](function (error) {
+        $('.errors-container').html(getErrorsMessageHtml(error));
+
+        // Remove spinner load
+        $(imageParent).find('.spinner-load-image').remove();
+      });
+    });
+  };
   initializeLibraries();
   initializeEventGoLogin();
   initializeEventGoRegister();
@@ -55464,6 +55487,7 @@ $(function () {
   initializeEventSaveProfileChanges();
   detectChangesInTheRoomFormNameInput();
   initializeEventReportMessage();
+  initializeEventShowImage();
 });
 
 /***/ }),

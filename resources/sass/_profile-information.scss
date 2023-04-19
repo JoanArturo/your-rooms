@@ -108,6 +108,29 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+                transition: $transition;
+                cursor: pointer;
+                &:hover {
+                    filter: brightness(0.65);
+                }
+            }
+
+            img + .spinner-load-image {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 2px;
+                width: 100%;
+                height: 100%;
+                background-color: rgba($semi-dark-color, 0.65);
+
+                span, .spinner-border {
+                    color: $gray-light;
+                }
             }
         }
     }

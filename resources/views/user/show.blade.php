@@ -3,7 +3,7 @@
 @section('page', __('Profile information'))
 
 @section('content')
-<div class="top-separate container user-profile mb-5">
+<div class="top-separate user-profile mb-5">
     <div class="user-profile-header">
         {{-- Avatar --}}
         {!! Form::open(['url' => route('user.uploadProfilePicture'), 'id' => 'profile-image-form', 'enctype' => 'multipart/form-data']) !!}
@@ -59,10 +59,12 @@
                 @endif
                 @forelse ($images as $image)
                     <div class="col-6 col-md-2">
-                        <img src="{{ asset('storage/' . $image->path) }}" alt="Photo {{ $image->id }}">
+                        <img src="{{ asset('storage/' . $image->path) }}" alt="Photo {{ $image->id }}" class="gallery-image" data-url="{{ route('image.show', $image) }}">
                     </div>
                 @empty
-                    <p class="lead">{{ __('No images') }}</p>
+                    <div class="col-6 col-md-2 d-flex align-items-center justify-content-center">
+                        <p class="m-0">{{ __('No images') }}</p>
+                    </div>
                 @endforelse
             </div>
             {!! $images->links() !!}

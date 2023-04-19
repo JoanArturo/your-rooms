@@ -441,6 +441,40 @@ $(() => {
         });
     }
 
+    const initializeEventShowImage = () => {
+        $('.gallery-image').click( (e) => {
+            let url = $(e.delegateTarget).data('url');
+            let imageParent = e.delegateTarget.parentElement;
+
+            // Add spinner load if it doesn't exist
+            if ($(imageParent).find('.spinner-load-image').length <= 0) {
+                $(imageParent).append(`
+                    <div class="spinner-load-image">
+                        <div class="spinner-border" role="status" aria-hidden="true"></div>
+                        <span>Cargando...</span>
+                    </div>
+                `);
+            }
+
+            axios.get(url)
+                .then( (response) => {
+                    $('#modal-container').html(response.data);
+                    $('#modal-container .modal').modal('show');
+                    
+                    // Remove spinner load
+                    $(imageParent).find('.spinner-load-image').remove();
+                })
+                .catch( (error) => {
+                    $('.errors-container').html(
+                        getErrorsMessageHtml(error)
+                    );
+
+                    // Remove spinner load
+                    $(imageParent).find('.spinner-load-image').remove();
+                });
+        });
+    }
+
     initializeLibraries();
     initializeEventGoLogin();
     initializeEventGoRegister();
@@ -456,4 +490,5 @@ $(() => {
     initializeEventSaveProfileChanges();
     detectChangesInTheRoomFormNameInput();
     initializeEventReportMessage();
+    initializeEventShowImage();
 });
