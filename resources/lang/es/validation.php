@@ -156,7 +156,8 @@ return [
         'gender'          => 'Género',
         'password'        => 'Contraseña',
         'new_password'    => 'Nueva contraseña',
-        'repeat_password' => 'Repetir contraseña'
+        'repeat_password' => 'Repetir contraseña',
+        'photo'           => 'Foto',
     ],
 
 ];

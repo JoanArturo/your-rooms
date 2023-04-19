@@ -15080,7 +15080,19 @@ input[type=color]::-moz-color-swatch {
   background-color: #aa3448;
 }
 
-.image-label {
+.user-profile .user-profile-header {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 38px;
+}
+
+@media screen and (max-width: 575px) {
+  .user-profile .user-profile-header h5 {
+    font-size: 1.2rem;
+  }
+}
+
+.user-profile .image-label {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -15095,38 +15107,39 @@ input[type=color]::-moz-color-swatch {
 }
 
 @media screen and (max-width: 575px) {
-  .image-label {
+  .user-profile .image-label {
     width: 120px;
     height: 120px;
   }
 }
 
-.image-label:hover {
+.user-profile .image-label:hover {
   background-color: #dfdfdf;
 }
 
-.image-label img.has-profile-image {
+.user-profile .image-label img.has-profile-image {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.image-input {
+.user-profile .image-input {
   position: absolute;
   top: -200%;
   left: -200%;
   opacity: 0;
 }
 
-.image-input:focus ~ .image-label {
+.user-profile .image-input:focus ~ .image-label {
   background-color: #dfdfdf;
 }
 
-#btn-delete-profile-image {
+.user-profile #btn-delete-profile-image {
   position: absolute;
-  top: 0;
-  right: -72px;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15143,31 +15156,71 @@ input[type=color]::-moz-color-swatch {
 }
 
 @media screen and (max-width: 575px) {
-  #btn-delete-profile-image {
+  .user-profile #btn-delete-profile-image {
+    min-width: 90px;
     padding: 6px 8px;
   }
 }
 
-#btn-delete-profile-image:hover {
+.user-profile #btn-delete-profile-image:hover {
   background-color: #404040;
 }
 
-#btn-delete-profile-image:focus {
+.user-profile #btn-delete-profile-image:focus {
   background-color: #404040;
 }
 
-#btn-delete-profile-image:active {
+.user-profile #btn-delete-profile-image:active {
   background-color: #666666;
 }
 
-#btn-delete-profile-image svg path {
+.user-profile #btn-delete-profile-image svg path {
   fill: white;
 }
 
-.options-group {
+.user-profile .options-group {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
+}
+
+.user-profile #gallery .row > div {
+  min-height: 168px;
+  max-height: 168px;
+  overflow: hidden;
+}
+
+.user-profile #gallery .row > div img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.user-profile #btn-show-modal-to-upload-photo {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #DCDCDC;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 100ms;
+}
+
+.user-profile #btn-show-modal-to-upload-photo:hover {
+  border-color: #595959;
+}
+
+.user-profile #btn-show-modal-to-upload-photo i {
+  color: #595959;
+  font-size: 2.188rem;
+  line-height: 2rem;
+}
+
+.user-profile #btn-show-modal-to-upload-photo span {
+  color: #595959;
 }
 
 .table-header-options {

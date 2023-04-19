@@ -8,6 +8,7 @@ interface UserRepositoryInterface extends RepositoryInterface
     public function getAllAccountStatus(): Collection;
     public function updateIsBannedStatusFromUser($id, bool $status);
     public function updateProfilePictureFromUser($id, $file);
+    public function uploadPhotoToUserGallery($id, $file);
     public function deleteProfilePictureFromUser($id);
     public function updatePasswordFromUser($id, $newPassword);
 }

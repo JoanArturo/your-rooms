@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function profile()
     {
-        $user = auth()->user();
+        $user = auth()->user()->load('images');
 
         $genders = [
             'Undefined' => __('Undefined'),
@@ -29,7 +29,9 @@ class UserController extends Controller
             'Female'    => __('Female'),
         ];
 
-        return view('user.show', compact('user', 'genders'));
+        $images = $user->images()->paginate();
+
+        return view('user.show', compact('user', 'genders', 'images'));
     }
 
     /**
@@ -70,6 +72,27 @@ class UserController extends Controller
         $this->userRepository->updateProfilePictureFromUser($user->id, $file);
 
         return response()->json(['status_message' => __('You changed your profile picture.')], 200);
+    }
+
+    /**
+     * Upload a user's photo.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadPhoto(Request $request)
+    {
+        $request->validate([
+            'photo' => 'required|image'
+        ]);
+
+        $user = auth()->user();
+
+        $file = $request->file('photo');
+
+        $this->userRepository->uploadPhotoToUserGallery($user->id, $file);
+
+        return back()->with(['success' => __('You have uploaded a photo to your gallery.')]);
     }
     
     /**

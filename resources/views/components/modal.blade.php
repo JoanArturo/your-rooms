@@ -2,10 +2,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-secondary">
-                <h5 class="modal-title" id="customModalLabel">{{ $title }}</h5>
+                <h5 class="modal-title d-flex" id="customModalLabel">{{ $title }}</h5>
             </div>
             <div class="modal-body py-4">
                 <p class="m-0">{{ $descriptionText }}</p>
+
+                @isset ($body)
+                    {!! $body !!}
+                @endisset
             </div>
             <div class="modal-footer p-2">
                 {{ $actionButtons }}

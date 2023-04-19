@@ -143,6 +143,18 @@ class UserRepository implements UserRepositoryInterface
 
         return $user->save();
     }
+    
+    public function uploadPhotoToUserGallery($id, $file)
+    {
+        $user = $this->findById($id);
+        $path = "/gallery/{$id}";
+
+        $filename = $file->store($path);
+
+        $photo = $user->images()->create([ 'path' => $filename ]);
+
+        return $photo;
+    }
 
     public function deleteProfilePictureFromUser($id)
     {

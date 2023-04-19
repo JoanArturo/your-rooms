@@ -50,6 +50,11 @@ class UserPresenter extends Presenter
         return $this->entity->is_active ? __('Online') : __('Offline');
     }
 
+    public function gender()
+    {
+        return empty($this->entity->gender) ? __('Undefined') : __($this->entity->gender);
+    }
+
     public function createdAt()
     {
         return $this->entity->created_at->diffForHumans();

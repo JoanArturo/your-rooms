@@ -64,6 +64,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Report::class);
     }
 
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
     public function presenter()
     {
         return new UserPresenter($this);

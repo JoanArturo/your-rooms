@@ -137,5 +137,13 @@
     "Reports received": "Reportes recibidos",
     "Num. reports": "Num. de reportes",
     "Reported messages": "Mensajes reportados",
-    "View reported messages": "Ver mensajes reportados"
+    "View reported messages": "Ver mensajes reportados",
+    "Gallery": "Galería",
+    "Profile data": "Datos de perfil",
+    ":number photos in total": ":number fotos en total",
+    "Upload photo": "Subir foto",
+    "You have uploaded a photo to your gallery.": "Has subido una foto a tu galería.",
+    "No images": "Sin imágenes",
+    "Upload": "Subir",
+    "He/She joined": "Se unió"
 }
