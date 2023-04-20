@@ -57,6 +57,10 @@ class UserRepository implements UserRepositoryInterface
         $entity = $this->findById($id);
 
         $entity->messages()->delete();
+        
+        Storage::deleteDirectory("gallery/{$entity->id}");
+
+        $entity->images()->delete();
 
         $entity->rooms()->detach();
         
