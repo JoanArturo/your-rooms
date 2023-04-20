@@ -4,6 +4,7 @@ use App\User as Entity;
 use App\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -82,6 +83,8 @@ class UserRepository implements UserRepositoryInterface
 
         $data['password'] = Hash::make($data['password']);
 
+        $data['slug'] = Str::slug($data['name']);
+
         return Entity::create($data);
     }
 
@@ -104,6 +107,8 @@ class UserRepository implements UserRepositoryInterface
             $data['settings'] = ['message_color' => $data['message_color']] + $currentSettings;
             unset($data['message_color']);
         }
+
+        $data['slug'] = Str::slug($data['name']);
         
         return $entity->update($data);
     }

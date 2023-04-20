@@ -151,5 +151,6 @@
     "Close": "Cerrar",
     "Remove from gallery": "Eliminar de la galería",
     "This photo does not exist in your gallery.": "Esta foto no existe en tu galería.",
-    "You deleted a photo from your gallery.": "Borraste una foto de tu galería."
+    "You deleted a photo from your gallery.": "Borraste una foto de tu galería.",
+    "The :attribute entered is already in use.": "El :attribute ingresado ya está en uso."
 }

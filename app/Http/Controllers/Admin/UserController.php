@@ -51,11 +51,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $fields = $request->validate([
-            'name'           => 'required|string|max:255',
+            'name'           => 'required|string|max:255|unique:users',
             'email'          => 'required|string|email|max:255|unique:users',
             'password'       => 'required|string|min:8|confirmed',
             'role'           => ['required', Rule::in($this->userRepository->getAllRoles()->keys())],
             'account_status' => ['required', Rule::in($this->userRepository->getAllAccountStatus()->keys())]
+        ], [
+            'name.unique' => __('The :attribute entered is already in use.')
         ]);
 
         $this->userRepository->create($fields);
@@ -106,10 +108,12 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $fields = $request->validate([
-            'name'           => 'required|string|max:255',
+            'name'           => 'required|string|max:255|unique:users,name,' .  $id,
             'email'          => 'required|string|email|max:255|unique:users,email,' . $id,
             'role'           => ['required', Rule::in($this->userRepository->getAllRoles()->keys())],
             'account_status' => ['required', Rule::in($this->userRepository->getAllAccountStatus()->keys())]
+        ], [
+            'name.unique' => __('The :attribute entered is already in use.')
         ]);
 
         $this->userRepository->update($id, $fields);

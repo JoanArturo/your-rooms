@@ -7,10 +7,15 @@
     </div>
     <div class="col-12 col-md-6">
         <div class="form-group float-input">
-            {!! Form::text('email', null, ['id' => 'email-input', 'class' => 'form-control', 'required' => true]) !!}
-            {!! Form::label('email-input', __('validation.attributes.email')) !!}
+            {!! Form::text('slug', null, ['id' => 'slug-input', 'class' => 'form-control', 'required' => true, 'disabled' => true]) !!}
+            {!! Form::label('slug-input', __('Slug')) !!}
         </div>
     </div>
+</div>
+
+<div class="form-group float-input">
+    {!! Form::text('email', null, ['id' => 'email-input', 'class' => 'form-control', 'required' => true]) !!}
+    {!! Form::label('email-input', __('validation.attributes.email')) !!}
 </div>
 
 @empty($user)
