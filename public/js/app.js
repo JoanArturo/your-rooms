@@ -55257,7 +55257,10 @@ $(function () {
         if ($('#col-no-images').length > 0) $('#col-no-images').remove();
 
         // Add image to gallery
-        $("\n                        <div class=\"col-6 col-md-2\">\n                            <img src=\"/storage/".concat(response.data.image.path, "\" alt=\"Photo ").concat(response.data.image.id, "\" class=\"gallery-image\" data-url=\"/image/").concat(response.data.image.id, "\">\n                        </div>\n                    ")).insertAfter('#col-upload-photo');
+        $("\n                        <div class=\"col-6 col-md-2\">\n                            <img src=\"".concat(location.origin, "/storage/").concat(response.data.image.path, "\" alt=\"Photo ").concat(response.data.image.id, "\" class=\"gallery-image\" data-url=\"/image/").concat(response.data.image.id, "\">\n                        </div>\n                    ")).insertAfter('#col-upload-photo');
+
+        // Update user profile avatar image
+        $('.image-label img').attr('src', "".concat(location.origin, "/storage/").concat(response.data.image.path));
 
         // Update number of photos
         var photoNumberText = $('#photo-number-text').find('span');
@@ -55268,7 +55271,7 @@ $(function () {
     });
   };
   var createButtonDeleteProfileImage = function createButtonDeleteProfileImage() {
-    $('#profile-image-form #profile-image-container').append("\n            <button id=\"btn-delete-profile-image\">\n                <svg width=\"8\" height=\"8\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <path d=\"M1 10L0 9L4 5L0 1L1 0L5 4L9 0L10 1L6 5L10 9L9 10L5 6L1 10Z\" fill=\"#330136\"/>\n                </svg>\n                Eliminar foto\n            </button>\n        ");
+    $('#profile-image-form #profile-image-container').append("\n            <button type=\"button\" id=\"btn-delete-profile-image\">\n                <svg width=\"8\" height=\"8\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <path d=\"M1 10L0 9L4 5L0 1L1 0L5 4L9 0L10 1L6 5L10 9L9 10L5 6L1 10Z\" fill=\"#330136\"/>\n                </svg>\n                Eliminar foto\n            </button>\n        ");
   };
   var initializeEventDeleteProfileImage = function initializeEventDeleteProfileImage() {
     $('#profile-image-container').click(function (e) {
