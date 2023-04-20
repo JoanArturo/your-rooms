@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use App\Http\Controllers\Controller;
 use App\Interfaces\UserRepositoryInterface;
 use Illuminate\Http\Request;
@@ -68,12 +69,12 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = $this->userRepository->findById($id)
+        $user = $this->userRepository->findById($user->id)
             ->load(['messages', 'messages.reports']);
 
         return view('admin.user.show', compact('user'));
@@ -82,12 +83,12 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = $this->userRepository->findById($id);
+        $user = $this->userRepository->findById($user->id);
         $user->role = $user->is_admin ? 1 : 2;
         $user->account_status = $user->is_banned ? 2 : 1;
 
@@ -102,21 +103,21 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         $fields = $request->validate([
-            'name'           => 'required|string|max:255|unique:users,name,' .  $id,
-            'email'          => 'required|string|email|max:255|unique:users,email,' . $id,
+            'name'           => 'required|string|max:255|unique:users,name,' .  $user->id,
+            'email'          => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'role'           => ['required', Rule::in($this->userRepository->getAllRoles()->keys())],
             'account_status' => ['required', Rule::in($this->userRepository->getAllAccountStatus()->keys())]
         ], [
             'name.unique' => __('The :attribute entered is already in use.')
         ]);
 
-        $this->userRepository->update($id, $fields);
+        $this->userRepository->update($user->id, $fields);
 
         return redirect()->route('admin.user.index')->with('success', __('The user data has been successfully updated.'));
     }
@@ -124,15 +125,15 @@ class UserController extends Controller
     /**
      * Show delete modal.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function delete(User $user)
     {
         if (! request()->ajax())
             abort(404);
 
-        $user = $this->userRepository->findById($id);
+        $user = $this->userRepository->findById($user->id);
 
         return view('admin.user.partials._delete', compact('user'));
     }
@@ -140,12 +141,12 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $this->userRepository->delete($id);
+        $this->userRepository->delete($user->id);
 
         return response()->json(null, 204);
     }
@@ -153,16 +154,16 @@ class UserController extends Controller
     /**
      * Updates a user's account status (Banned, Unbanned).
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @param  bool  $status
      * @return \Illuminate\Http\Response
      */
-    public function updateBanStatus($id, $status)
+    public function updateBanStatus(User $user, $status)
     {
-        $this->userRepository->updateIsBannedStatusFromUser($id, $status);
+        $this->userRepository->updateIsBannedStatusFromUser($user->id, $status);
 
         $message = $status ? __('The user has been banned.') : __('The user has been unbanned.');
 
-        return redirect()->route('admin.user.show', $id)->with('success', $message);
+        return redirect()->route('admin.user.show', $user)->with('success', $message);
     }
 }

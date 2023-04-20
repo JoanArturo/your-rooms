@@ -41,6 +41,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::resource('report', 'Admin\ReportController')->only('index');
 
     Route::resource('user', 'Admin\UserController');
-    Route::get('user/{id}/delete', 'Admin\UserController@delete')->name('user.delete');
-    Route::post('user/{id}/update-ban-status/{status}', 'Admin\UserController@updateBanStatus')->name('user.updateBanStatus');
+    Route::get('user/{user}/delete', 'Admin\UserController@delete')->name('user.delete');
+    Route::post('user/{user}/update-ban-status/{status}', 'Admin\UserController@updateBanStatus')->name('user.updateBanStatus');
 });

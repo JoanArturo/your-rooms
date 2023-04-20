@@ -44,6 +44,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'number_of_reports_against'
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function messages()
     {
         return $this->hasMany(Message::class);
