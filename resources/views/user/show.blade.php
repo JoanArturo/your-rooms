@@ -35,7 +35,7 @@
         <li class="nav-item">
             <a class="nav-link active" id="gallery-tab" data-toggle="tab" href="#gallery" role="tab" aria-controls="gallery" aria-selected="true">{{ __('Gallery') }}</a>
         </li>
-        @if ($user == Auth::user())
+        @if ($user->id == Auth::user()->id)
             <li class="nav-item">
                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">{{ __('Profile data') }}</a>
             </li>
@@ -49,7 +49,7 @@
         <div class="tab-pane fade show active" id="gallery" role="tabpanel" aria-labelledby="gallery-tab">
             <p id="photo-number-text">{!! __('<span>:number</span> photos in total', ['number' => $user->images->count()]) !!}</p>
             <div class="row no-gutters mb-3">
-                @if ($user == Auth::user())
+                @if ($user->id == Auth::user()->id)
                     <div class="col-6 col-md-2" id="col-upload-photo">
                         <button id="btn-show-modal-to-upload-photo" data-toggle="modal" data-target="#customModal">
                             <i class="ri-add-line"></i>

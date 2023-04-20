@@ -19,9 +19,9 @@ Route::middleware(['auth', 'verified', 'ban'])->group(function () {
     
     Route::post('report/{id}/report-message', 'ReportController@reportMessage')->name('report.reportMessage');
     
-    Route::get('user/profile', 'UserController@profile')->name('user.profile');
     Route::get('user/change-password', 'UserController@changePassword')->name('user.changePassword');
     Route::get('user/deactivate-account', 'UserController@deactivateAccount')->name('user.deactivateAccount');
+    Route::get('user/{user}', 'UserController@profile')->name('user.profile');
     Route::put('user/update-password', 'UserController@updatePassword')->name('user.updatePassword');
     Route::post('user/upload-profile-picture', 'UserController@uploadProfilePicture')->name('user.uploadProfilePicture');
     Route::post('user/upload-photo', 'UserController@uploadPhoto')->name('user.uploadPhoto');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Interfaces\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,11 +19,12 @@ class UserController extends Controller
     /**
      * Shows the profile data.
      *
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function profile()
+    public function profile(User $user)
     {
-        $user = auth()->user()->load('images');
+        $user = $user->load('images');
 
         $genders = [
             'Undefined' => __('Undefined'),
@@ -39,18 +41,18 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         $fields = $request->validate([
-            'name'          => 'required|string|max:255',
+            'name'          => 'required|string|max:255|unique:users,name,' .  $user->id,
             'gender'        => 'nullable',
             'message_color' => 'nullable'
         ]);
 
-        $this->userRepository->update($id, $fields);
+        $this->userRepository->update($user->id, $fields);
 
         return response()->json(['status_message' => __('You updated your data correctly.')], 200);
     }
@@ -82,7 +84,7 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function changeProfilePicture(Request $request, \App\User $user)
+    public function changeProfilePicture(Request $request, User $user)
     {
         if (empty($request->image_path))
             return back();
@@ -184,7 +186,7 @@ class UserController extends Controller
 
         $this->userRepository->updatePasswordFromUser($user->id, $fields['new_password']);
 
-        return redirect()->route('user.profile')->with('success', __('Updated password.'));
+        return redirect()->route('user.profile', $user)->with('success', __('Updated password.'));
     }
 
     /**
@@ -200,12 +202,12 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $this->userRepository->delete($id);
+        $this->userRepository->delete($user->id);
 
         return redirect()->route('guest');
     }

@@ -39,7 +39,7 @@
 
                     @if (Auth::user()->isVerified())
                         <a class="dropdown-item" href="{{ route('suggestion.create') }}">{{ __('Suggestions') }}</a>
-                        <a class="dropdown-item" href="{{ route('user.profile') }}">{{ __('Profile information') }}</a>
+                        <a class="dropdown-item" href="{{ route('user.profile', Auth::user()) }}">{{ __('Profile information') }}</a>
                     @endif
 
                     <button class="dropdown-item text-danger" type="button" 

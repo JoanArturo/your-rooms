@@ -17,7 +17,7 @@
             </div>
             <div class="d-flex align-items-center justify-content-between">
                 <button class="btn btn-block btn-primary" type="submit">{{ __('Save') }}</button>
-                <a class="btn btn-block btn-gray m-0 ml-2" href="{{ route('user.profile') }}">{{ __('Cancel') }}</a>
+                <a class="btn btn-block btn-gray m-0 ml-2" href="{{ route('user.profile', Auth::user()) }}">{{ __('Cancel') }}</a>
             </div>
         {!! Form::close() !!}
     </div>
