@@ -123,6 +123,21 @@ $(() => {
                     $('.messages-status').html(
                         getSuccessMessage(response.data.status_message)
                     );
+                    
+                    // Remove the No Images column from the photo gallery
+                    if ($('#col-no-images').length > 0)
+                        $('#col-no-images').remove();
+
+                    // Add image to gallery
+                    $(`
+                        <div class="col-6 col-md-2">
+                            <img src="/storage/${response.data.image.path}" alt="Photo ${response.data.image.id}" class="gallery-image" data-url="/image/${response.data.image.id}">
+                        </div>
+                    `).insertAfter('#col-upload-photo');
+
+                    // Update number of photos
+                    let photoNumberText = $('#photo-number-text').find('span');
+                    $(photoNumberText).html(parseInt(photoNumberText.text()) + 1);
                 }
             })
             .catch( (error) => {
@@ -148,13 +163,7 @@ $(() => {
             const isButton = $(e.target).attr('id') == 'btn-delete-profile-image';
 
             if (isButton) {
-                $('#profile-image-form').trigger('reset');
-                $('.image-label img').attr('src', '/icons/camera.svg').removeClass('has-profile-image');
-                $(e.target).remove();
-                
-                // Change navbar icon
-                $('.avatar-image img').attr('src', '/icons/camera.svg').removeClass('has-profile-image');
-
+                $(e.target).hide();
                 deleteProfilePicture();
             }
         });
@@ -171,12 +180,43 @@ $(() => {
                     $('.messages-status').html(
                         getSuccessMessage(response.data.status_message)
                     );
+
+                    let imagePath = $('.image-label img').attr('src');
+                    
+                    // Remove main avatar image
+                    $('#profile-image-form').trigger('reset');
+                    $('.image-label img').attr('src', '/icons/camera.svg').removeClass('has-profile-image');
+                    
+                    // Change navbar icon
+                    $('.avatar-image img').attr('src', '/icons/camera.svg').removeClass('has-profile-image');
+                    
+                    // Remove image from gallery
+                    $(`img[src="${imagePath}"]`).parent().remove();
+
+                    // Add the column No Images of the photo gallery
+                    if ($('#gallery .row').children().length <= 1) {
+                        $('#gallery .row').append(`
+                            <div class="col-6 col-md-2 d-flex align-items-center justify-content-center" id="col-no-images">
+                                <p class="m-0">Sin imágenes</p>
+                            </div>
+                        `);
+                    }
+
+                    // Remove delete image button
+                    $('#btn-delete-profile-image').remove();
+
+                    // Update number of photos
+                    let photoNumberText = $('#photo-number-text').find('span');
+                    $(photoNumberText).html(parseInt(photoNumberText.text()) - 1);
                 }
             })
             .catch( (error) => {
                 $('.messages-status').html(
                     getErrorsMessageHtml(error)
                 );
+                
+                // Show delete image button
+                $('#btn-delete-profile-image').show();
             });
     }
 
@@ -442,36 +482,40 @@ $(() => {
     }
 
     const initializeEventShowImage = () => {
-        $('.gallery-image').click( (e) => {
-            let url = $(e.delegateTarget).data('url');
-            let imageParent = e.delegateTarget.parentElement;
+        $('#gallery').click( (e) => {
+            const isImage = $(e.target).hasClass('gallery-image');
 
-            // Add spinner load if it doesn't exist
-            if ($(imageParent).find('.spinner-load-image').length <= 0) {
-                $(imageParent).append(`
-                    <div class="spinner-load-image">
-                        <div class="spinner-border" role="status" aria-hidden="true"></div>
-                        <span>Cargando...</span>
-                    </div>
-                `);
+            if (isImage) {
+                let url = $(e.target).data('url');
+                let imageParent = e.target.parentElement;
+
+                // Add spinner load if it doesn't exist
+                if ($(imageParent).find('.spinner-load-image').length <= 0) {
+                    $(imageParent).append(`
+                        <div class="spinner-load-image">
+                            <div class="spinner-border" role="status" aria-hidden="true"></div>
+                            <span>Cargando...</span>
+                        </div>
+                    `);
+                }
+
+                axios.get(url)
+                    .then( (response) => {
+                        $('#modal-container').html(response.data);
+                        $('#modal-container .modal').modal('show');
+                        
+                        // Remove spinner load
+                        $(imageParent).find('.spinner-load-image').remove();
+                    })
+                    .catch( (error) => {
+                        $('.errors-container').html(
+                            getErrorsMessageHtml(error)
+                        );
+
+                        // Remove spinner load
+                        $(imageParent).find('.spinner-load-image').remove();
+                    });
             }
-
-            axios.get(url)
-                .then( (response) => {
-                    $('#modal-container').html(response.data);
-                    $('#modal-container .modal').modal('show');
-                    
-                    // Remove spinner load
-                    $(imageParent).find('.spinner-load-image').remove();
-                })
-                .catch( (error) => {
-                    $('.errors-container').html(
-                        getErrorsMessageHtml(error)
-                    );
-
-                    // Remove spinner load
-                    $(imageParent).find('.spinner-load-image').remove();
-                });
         });
     }
 

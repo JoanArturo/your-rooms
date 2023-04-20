@@ -55252,6 +55252,16 @@ $(function () {
     axios.post(url, formData).then(function (response) {
       if (response.status == 200) {
         $('.messages-status').html(getSuccessMessage(response.data.status_message));
+
+        // Remove the No Images column from the photo gallery
+        if ($('#col-no-images').length > 0) $('#col-no-images').remove();
+
+        // Add image to gallery
+        $("\n                        <div class=\"col-6 col-md-2\">\n                            <img src=\"/storage/".concat(response.data.image.path, "\" alt=\"Photo ").concat(response.data.image.id, "\" class=\"gallery-image\" data-url=\"/image/").concat(response.data.image.id, "\">\n                        </div>\n                    ")).insertAfter('#col-upload-photo');
+
+        // Update number of photos
+        var photoNumberText = $('#photo-number-text').find('span');
+        $(photoNumberText).html(parseInt(photoNumberText.text()) + 1);
       }
     })["catch"](function (error) {
       $('.messages-status').html(getErrorsMessageHtml(error));
@@ -55264,12 +55274,7 @@ $(function () {
     $('#profile-image-container').click(function (e) {
       var isButton = $(e.target).attr('id') == 'btn-delete-profile-image';
       if (isButton) {
-        $('#profile-image-form').trigger('reset');
-        $('.image-label img').attr('src', '/icons/camera.svg').removeClass('has-profile-image');
-        $(e.target).remove();
-
-        // Change navbar icon
-        $('.avatar-image img').attr('src', '/icons/camera.svg').removeClass('has-profile-image');
+        $(e.target).hide();
         deleteProfilePicture();
       }
     });
@@ -55279,9 +55284,35 @@ $(function () {
     axios["delete"]('/user/delete-profile-picture').then(function (response) {
       if (response.status == 200) {
         $('.messages-status').html(getSuccessMessage(response.data.status_message));
+        var imagePath = $('.image-label img').attr('src');
+
+        // Remove main avatar image
+        $('#profile-image-form').trigger('reset');
+        $('.image-label img').attr('src', '/icons/camera.svg').removeClass('has-profile-image');
+
+        // Change navbar icon
+        $('.avatar-image img').attr('src', '/icons/camera.svg').removeClass('has-profile-image');
+
+        // Remove image from gallery
+        $("img[src=\"".concat(imagePath, "\"]")).parent().remove();
+
+        // Add the column No Images of the photo gallery
+        if ($('#gallery .row').children().length <= 1) {
+          $('#gallery .row').append("\n                            <div class=\"col-6 col-md-2 d-flex align-items-center justify-content-center\" id=\"col-no-images\">\n                                <p class=\"m-0\">Sin im\xE1genes</p>\n                            </div>\n                        ");
+        }
+
+        // Remove delete image button
+        $('#btn-delete-profile-image').remove();
+
+        // Update number of photos
+        var photoNumberText = $('#photo-number-text').find('span');
+        $(photoNumberText).html(parseInt(photoNumberText.text()) - 1);
       }
     })["catch"](function (error) {
       $('.messages-status').html(getErrorsMessageHtml(error));
+
+      // Show delete image button
+      $('#btn-delete-profile-image').show();
     });
   };
   var initializeEventCreateAccount = function initializeEventCreateAccount() {
@@ -55450,26 +55481,29 @@ $(function () {
     });
   };
   var initializeEventShowImage = function initializeEventShowImage() {
-    $('.gallery-image').click(function (e) {
-      var url = $(e.delegateTarget).data('url');
-      var imageParent = e.delegateTarget.parentElement;
+    $('#gallery').click(function (e) {
+      var isImage = $(e.target).hasClass('gallery-image');
+      if (isImage) {
+        var url = $(e.target).data('url');
+        var imageParent = e.target.parentElement;
 
-      // Add spinner load if it doesn't exist
-      if ($(imageParent).find('.spinner-load-image').length <= 0) {
-        $(imageParent).append("\n                    <div class=\"spinner-load-image\">\n                        <div class=\"spinner-border\" role=\"status\" aria-hidden=\"true\"></div>\n                        <span>Cargando...</span>\n                    </div>\n                ");
+        // Add spinner load if it doesn't exist
+        if ($(imageParent).find('.spinner-load-image').length <= 0) {
+          $(imageParent).append("\n                        <div class=\"spinner-load-image\">\n                            <div class=\"spinner-border\" role=\"status\" aria-hidden=\"true\"></div>\n                            <span>Cargando...</span>\n                        </div>\n                    ");
+        }
+        axios.get(url).then(function (response) {
+          $('#modal-container').html(response.data);
+          $('#modal-container .modal').modal('show');
+
+          // Remove spinner load
+          $(imageParent).find('.spinner-load-image').remove();
+        })["catch"](function (error) {
+          $('.errors-container').html(getErrorsMessageHtml(error));
+
+          // Remove spinner load
+          $(imageParent).find('.spinner-load-image').remove();
+        });
       }
-      axios.get(url).then(function (response) {
-        $('#modal-container').html(response.data);
-        $('#modal-container .modal').modal('show');
-
-        // Remove spinner load
-        $(imageParent).find('.spinner-load-image').remove();
-      })["catch"](function (error) {
-        $('.errors-container').html(getErrorsMessageHtml(error));
-
-        // Remove spinner load
-        $(imageParent).find('.spinner-load-image').remove();
-      });
     });
   };
   initializeLibraries();

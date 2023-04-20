@@ -132,16 +132,17 @@ class UserRepository implements UserRepositoryInterface
     public function updateProfilePictureFromUser($id, $file)
     {
         $user = $this->findById($id);
-        $path = '/profile-picture/';
-
-        if (isset($user->profile_picture) && Storage::exists($user->profile_picture))
-            Storage::delete($user->profile_picture);
+        $path = "/gallery/{$id}";
 
         $filename = $file->store($path);
 
         $user->profile_picture = $filename;
+        
+        $user->save();
 
-        return $user->save();
+        $image = $user->images()->create([ 'path' => $filename ]);
+
+        return $image;
     }
     
     public function uploadPhotoToUserGallery($id, $file)
@@ -159,6 +160,12 @@ class UserRepository implements UserRepositoryInterface
     public function deleteProfilePictureFromUser($id)
     {
         $user = $this->findById($id);
+
+        $user
+            ->images()
+            ->where('path', $user->profile_picture)
+            ->firstOrFail()
+            ->delete();
 
         if (isset($user->profile_picture) && Storage::exists($user->profile_picture))
             Storage::delete($user->profile_picture);

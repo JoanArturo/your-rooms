@@ -30,7 +30,7 @@ class UserController extends Controller
             'Female'    => __('Female'),
         ];
 
-        $images = $user->images()->paginate();
+        $images = $user->images()->orderBy('id', 'desc')->paginate();
 
         return view('user.show', compact('user', 'genders', 'images'));
     }
@@ -70,9 +70,9 @@ class UserController extends Controller
 
         $file = $request->file('profile_picture');
 
-        $this->userRepository->updateProfilePictureFromUser($user->id, $file);
+        $image = $this->userRepository->updateProfilePictureFromUser($user->id, $file);
 
-        return response()->json(['status_message' => __('You changed your profile picture.')], 200);
+        return response()->json(['status_message' => __('You changed your profile picture.'), 'image' => $image], 200);
     }
     
     /**
@@ -144,6 +144,11 @@ class UserController extends Controller
         $user = auth()->user();
 
         $image = $user->images()->findOrFail($id);
+
+        if ($user->profile_picture == $image->path) {
+            $user->profile_picture = null;
+            $user->save();
+        }
 
         if (Storage::exists($image->path))
             Storage::delete($image->path);

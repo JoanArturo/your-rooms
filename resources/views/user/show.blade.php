@@ -13,7 +13,7 @@
                     {{ $user->presenter()->profilePicture() }}
                 </label>
                 @isset ($user->profile_picture)
-                    <button id="btn-delete-profile-image">
+                    <button type="button" id="btn-delete-profile-image">
                         <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 10L0 9L4 5L0 1L1 0L5 4L9 0L10 1L6 5L10 9L9 10L5 6L1 10Z" fill="#330136"/>
                         </svg>
@@ -47,10 +47,10 @@
     
     <div class="tab-content pt-5" id="userProfileTabContent">
         <div class="tab-pane fade show active" id="gallery" role="tabpanel" aria-labelledby="gallery-tab">
-            <p>{{ __(':number photos in total', ['number' => $user->images->count()]) }}</p>
+            <p id="photo-number-text">{!! __('<span>:number</span> photos in total', ['number' => $user->images->count()]) !!}</p>
             <div class="row no-gutters mb-3">
                 @if ($user == Auth::user())
-                    <div class="col-6 col-md-2">
+                    <div class="col-6 col-md-2" id="col-upload-photo">
                         <button id="btn-show-modal-to-upload-photo" data-toggle="modal" data-target="#customModal">
                             <i class="ri-add-line"></i>
                             <span>{{ __('Upload photo') }}</span>
@@ -62,7 +62,7 @@
                         <img src="{{ asset('storage/' . $image->path) }}" alt="Photo {{ $image->id }}" class="gallery-image" data-url="{{ route('image.show', $image) }}">
                     </div>
                 @empty
-                    <div class="col-6 col-md-2 d-flex align-items-center justify-content-center">
+                    <div class="col-6 col-md-2 d-flex align-items-center justify-content-center" id="col-no-images">
                         <p class="m-0">{{ __('No images') }}</p>
                     </div>
                 @endforelse
