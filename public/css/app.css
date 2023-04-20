@@ -14154,6 +14154,10 @@ strong {
   color: #595959;
 }
 
+.text-dark {
+  color: #595959 !important;
+}
+
 .form-group {
   margin-bottom: 32px;
 }
@@ -14472,6 +14476,11 @@ main.container {
 
 .text-tertiary {
   color: #330136;
+}
+
+a.text-tertiary:focus,
+a.text-tertiary:hover {
+  color: #330136 !important;
 }
 
 .text-secondary {

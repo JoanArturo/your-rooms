@@ -5,7 +5,11 @@
         </div>
     </div>
     <div>
-        <p class="message-user"><strong>{{ $message->user->name }}</strong></p>
+        <p class="message-user">
+            <a class="text-tertiary" href="{{ route('user.profile', $message->user) }}">
+                <strong>{{ $message->user->name }}</strong>
+            </a>
+        </p>
         <div class="d-flex align-items-center flex-wrap">
             <p class="message-body mr-2" style="background-color: {{ $message->user->presenter()->messageColor() }}">{{ $message->presenter()->body() }}</p>
             <div>

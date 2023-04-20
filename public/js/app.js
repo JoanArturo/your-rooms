@@ -55059,7 +55059,7 @@ $(function () {
       if (message) {
         var formData = $(form).serialize();
         var url = $(form).attr('action');
-        var messageDOM = $(getMessageComponentInHtml(settings.user.profilePicture, settings.user.name, settings.user.settings.message_color + '85',
+        var messageDOM = $(getMessageComponentInHtml(settings.user.profilePicture, settings.user.name, settings.user.slug, settings.user.settings.message_color + '85',
         // Alpha color
         message, 'Enviando...')).prependTo('.messages-container');
         $(form).trigger('reset');
@@ -55077,8 +55077,8 @@ $(function () {
       $('#message-form').submit();
     });
   };
-  var getMessageComponentInHtml = function getMessageComponentInHtml(profilePicture, username, color, messageText, time) {
-    return "\n        <div class=\"message\">\n            <div class=\"avatar-group\">\n                <div class=\"avatar-image\">\n                    ".concat(profilePicture, "\n                </div>\n            </div>\n            <div>\n                <p class=\"message-user\"><strong>").concat(username, "</strong></p>\n                <div class=\"d-flex flex-wrap\">\n                    <p class=\"message-body mr-2\" style=\"background-color: ").concat(color, "\">").concat(messageText, "</p>\n                    <small class=\"message-time\">").concat(time, "</small>\n                </div>\n            </div>\n        </div>\n        ");
+  var getMessageComponentInHtml = function getMessageComponentInHtml(profilePicture, username, slug, color, messageText, time) {
+    return "\n        <div class=\"message\">\n            <div class=\"avatar-group\">\n                <div class=\"avatar-image\">\n                    ".concat(profilePicture, "\n                </div>\n            </div>\n            <div>\n                <p class=\"message-user\">\n                    <a class=\"text-tertiary\" href=\"/user/").concat(slug, "\">\n                        <strong>").concat(username, "</strong>\n                    </a>\n                </p>\n                <div class=\"d-flex flex-wrap\">\n                    <p class=\"message-body mr-2\" style=\"background-color: ").concat(color, "\">").concat(messageText, "</p>\n                    <small class=\"message-time\">").concat(time, "</small>\n                </div>\n            </div>\n        </div>\n        ");
   };
   var initializeSocket = function initializeSocket() {
     try {

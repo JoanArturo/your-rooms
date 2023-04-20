@@ -3,7 +3,7 @@
         <div class="avatar-image">
             {{ $user->presenter()->profilePicture() }}
         </div>
-        <p class="m-0">{{ $user->name }}</p>
+        <a class="text-dark" href="{{ route('user.profile', $user) }}">{{ $user->name }}</a>
     </div>
     <div class="badge-user-status bg-{{ $user->presenter()->activeColor() }}" title="{{ $user->presenter()->activeText() }}"></div>
 </div>

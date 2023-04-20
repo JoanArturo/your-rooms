@@ -16,6 +16,7 @@ $(() => {
                     getMessageComponentInHtml(
                         settings.user.profilePicture,
                         settings.user.name,
+                        settings.user.slug,
                         settings.user.settings.message_color + '85', // Alpha color
                         message,
                         'Enviando...'
@@ -41,7 +42,7 @@ $(() => {
         });
     }
 
-    const getMessageComponentInHtml = (profilePicture, username, color, messageText, time) => {
+    const getMessageComponentInHtml = (profilePicture, username, slug, color, messageText, time) => {
         return `
         <div class="message">
             <div class="avatar-group">
@@ -50,7 +51,11 @@ $(() => {
                 </div>
             </div>
             <div>
-                <p class="message-user"><strong>${username}</strong></p>
+                <p class="message-user">
+                    <a class="text-tertiary" href="/user/${slug}">
+                        <strong>${username}</strong>
+                    </a>
+                </p>
                 <div class="d-flex flex-wrap">
                     <p class="message-body mr-2" style="background-color: ${color}">${messageText}</p>
                     <small class="message-time">${time}</small>

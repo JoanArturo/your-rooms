@@ -55,6 +55,7 @@
             user: {
                 id: {!! Auth::user()->id !!},
                 name: "{!! Auth::user()->name !!}",
+                slug: "{!! Auth::user()->slug !!}",
                 settings: {!! json_encode(Auth::user()->settings) !!},
                 profilePicture: "{!! Auth::user()->presenter()->profilePicture() !!}"
             },
