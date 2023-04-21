@@ -15,7 +15,7 @@ class AddSlugInUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('name')->unique()->change();
-            $table->text('slug')->after('name')->unique();
+            $table->text('slug')->after('name');
         });
     }
 
