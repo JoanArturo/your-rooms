@@ -7,19 +7,23 @@
     <div class="user-profile-header">
         {{-- Avatar --}}
         {!! Form::open(['url' => route('user.uploadProfilePicture'), 'id' => 'profile-image-form', 'enctype' => 'multipart/form-data']) !!}
-            <input type="file" name="profile_picture" id="image-input" class="image-input">
+            @if ($user->id == Auth::user()->id)
+                <input type="file" name="profile_picture" id="image-input" class="image-input">
+            @endif
+
             <div class="d-inline-flex position-relative" id="profile-image-container">
-                <label for="image-input" class="image-label mb-0" data-toggle="tooltip" title="{{ __('Profile picture') }}">
+                <label for="image-input" class="image-label mb-0" data-toggle="tooltip" title="{{ __('Profile picture') }}" @if ($user->id != Auth::user()->id) style="cursor: auto;" @endif>
                     {{ $user->presenter()->profilePicture() }}
                 </label>
-                @isset ($user->profile_picture)
+                
+                @if (isset($user->profile_picture) && $user->id == Auth::user()->id)
                     <button type="button" id="btn-delete-profile-image">
                         <svg width="8" height="8" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 10L0 9L4 5L0 1L1 0L5 4L9 0L10 1L6 5L10 9L9 10L5 6L1 10Z" fill="#330136"/>
                         </svg>
                         {{ __('Delete picture') }}
                     </button>
-                @endisset
+                @endif
             </div>
         {!! Form::close() !!}
         
