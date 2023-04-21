@@ -11,9 +11,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            RoomsTableSeeder::class,
-            UsersTableSeeder::class,
-        ]);
+        if (config('app.env') == 'local') {
+
+            $this->call([
+                RoomsTableSeeder::class,
+                UsersTableSeeder::class,
+            ]);
+
+        } else {
+
+            $this->call([
+                AdministratorSeeder::class,
+            ]);
+
+        }
     }
 }
