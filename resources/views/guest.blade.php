@@ -20,6 +20,12 @@
         {{-- Login Form --}}
         <div class="form-container" id="login-form">
             <h1 class="text-title text-center m-0 pt-3 pb-5">{{ config('app.name', 'Laravel') }}</h1>
+
+            <a href="{{ url('auth/google') }}" class="btn d-flex btn-light align-items-center border text-dark font-weight-bold mb-4">
+                <i class="ri-google-line mr-2"></i> {{ __('Login With Google') }}
+            </a>
+
+            <span class="separator-or">{{ __('Or') }}</span>
             
             @if ($errors->any())
                 <div class="alert alert-danger mb-4">
@@ -45,9 +51,13 @@
                     <input type="checkbox" name="remember" id="input-remember" {{ old('remember') ? 'checked' : '' }}>
                     <label for="input-remember" class="m-0 mr-2">{{ __('Remember this account?') }}</label>
                 </div>
-                <button class="btn btn-block btn-primary text-uppercase" type="submit">{{ __('Login') }}</button>
+                <button class="btn btn-block btn-primary font-weight-bold" type="submit">{{ __('Login') }}</button>
             </form>
-            <p class="m-0 pt-5 pb-3 text-center">{{ __("Don't you have an account?") }} <a href="#register" id="btn-go-register"><strong class="text-primary">{{ __('Sign up here') }}</strong></a></p>
+            <p class="m-0 pt-5 mb-3 text-center">{{ __("Don't you have an account?") }} <a href="#register" id="btn-go-register"><strong class="text-primary">{{ __('Sign up here') }}</strong></a></p>
+
+            {{-- <a href="{{ url('auth/google') }}" class="btn d-flex align-items-center btn-light border text-dark font-weight-bold mt-5 mb-3">
+                <i class="ri-google-line mr-2"></i> {{ __('Login With Google') }}
+            </a> --}}
         </div>
         
         {{-- Register Form --}}
@@ -74,7 +84,7 @@
                     <input type="password" id="password-confirmation-input" class="form-control" name="password_confirmation" required autocomplete="new-password">
                     <label for="password-confirmation-input">{{ __('validation.attributes.repeat_password') }}</label>
                 </div>
-                <button class="btn btn-block btn-primary text-uppercase" id="btn-create-account" type="submit">{{ __('Create now!') }}</button>
+                <button class="btn btn-block btn-primary font-weight-bold" id="btn-create-account" type="submit">{{ __('Create now!') }}</button>
             </form>
             <p class="m-0 pt-5 pb-3 text-center">{{ __('Do you already have an account?') }} <a href="#login" id="btn-go-login"><strong class="text-primary">{{ __('Login') }}</strong></a></p>
         </div>

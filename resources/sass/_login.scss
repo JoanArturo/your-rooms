@@ -31,4 +31,36 @@
             padding: 30px;
         }
     }
+
+    .separator-or {
+        position: relative;
+        margin: 40px 0;
+        display: block;
+        text-align: center;
+        // color: $gray;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: block;
+            width: 40%;
+            height: 1px;
+            background-color: $gray-light
+        }
+        
+        &::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: block;
+            width: 40%;
+            height: 1px;
+            background-color: $gray-light
+        }
+    }
 }

@@ -6,6 +6,9 @@ Route::get('/', function() {
     return view('guest');
 })->name('guest')->middleware('guest');
 
+Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle')->name('auth.google');
+Route::get('auth/google/callback', 'Auth\GoogleController@handleGoogleCallback')->name('auth.googleCallback');
+
 // User routes
 Route::middleware(['auth', 'verified', 'ban'])->group(function () {
     Route::get('room/show-more', 'RoomController@showMoreRooms')->name('room.showMoreRooms');
