@@ -21,12 +21,16 @@
         @include('layouts.partials._navbar')       
     </header>
 
-    <main class="container px-3 px-lg-0">
+    <main>
         @section('alerts')
             @include('layouts.partials._messages-status')
         @show
 
-        @yield('content')
+        @yield('content-fluid')
+
+        <div class="container px-3 px-lg-0">
+            @yield('content')
+        </div>
 
         @include('layouts.partials._sidebar-rooms')
         @include('layouts.partials._sidebar-chats')

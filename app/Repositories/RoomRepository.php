@@ -51,9 +51,20 @@ class RoomRepository implements RoomRepositoryInterface
     
     public function getAllActiveRooms($paginate = false)
     {
+        $entity = Entity::with('users');
+
+        if (request()->has('search')) {
+            $search = request()->get('search');
+            $entity->where(function($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+                }
+            );
+        }
+
         return $paginate ?
-            Entity::with('users')->latest()->whereActive(1)->paginate() :
-            Entity::with('users')->latest()->whereActive(1)->all();
+            $entity->latest()->whereActive(1)->paginate() :
+            $entity->latest()->whereActive(1)->get();
     }
 
     public function findById($id, $onlyActivated = false)
@@ -106,5 +117,24 @@ class RoomRepository implements RoomRepositoryInterface
         $room = $this->findById($roomId);
 
         $room->users()->detach($userId);
+    }
+
+    public function joinUserARandomRoom($userId)
+    {
+        $rooms = Entity::whereDoesntHave('users', function ($query) use ($userId) {
+            $query->whereUserId($userId);
+        })->get();
+
+        if ($rooms->count() <= 0)
+            return null;
+
+        $room = $rooms->random();
+
+        if ($room->users->count() >= $room->limit)
+            return null;
+        
+        $room->users()->attach($userId);
+
+        return $room;
     }
 }

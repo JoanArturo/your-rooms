@@ -128,4 +128,23 @@ class RoomController extends Controller
 
         return redirect()->route('room.index');
     }
+
+    /**
+     * Join user a random room.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function joinUserARandomRoom()
+    {
+        $user = auth()->user();
+
+        $room = $this->roomRepository->joinUserARandomRoom($user->id);
+
+        if (! $room)
+            return back()->withErrors(__('No rooms available.'));
+        
+        broadcast(new UserJoinedARoom($room, $user))->toOthers();
+
+        return redirect()->route('room.show', $room);
+    }
 }

@@ -199,6 +199,46 @@ button.btn.text-uppercase {
         color: $semi-dark-color;
     }
 
+    .search-input-group {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        i {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: $gray;
+
+            &::before {
+                vertical-align: middle;
+            }
+        }
+
+        #search-input {
+            position: relative;
+            padding-left: 1.125rem;
+            font-size: $font-size-md;
+            color: $semi-dark-color;
+            border: none;
+            border-radius: 0;
+
+            &::placeholder {
+                color: $gray;
+            }
+
+            &:focus {
+                border: none;
+                box-shadow: none !important;
+            }
+
+            &:focus ~ i {
+                color: $semi-dark-color;
+            }
+        }
+    }
+
     #navbar-nav-container {
         @media screen and (max-width: $view-xs) {
             position: fixed;
@@ -322,8 +362,10 @@ main {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 30px;
-        height: 30px;
+        min-width: 30px;
+        min-height: 30px;
+        max-width: 30px;
+        max-height: 30px;
         border: 1px solid $gray-light;
         border-radius: 50%;
         background-color: $gray-light;

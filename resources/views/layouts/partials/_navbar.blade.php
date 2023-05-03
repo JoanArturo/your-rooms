@@ -1,6 +1,14 @@
 <nav class="navbar navbar-expand navbar-light bg-light">
     <div class="container d-flex align-items-center justify-content-between">
-        <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+        <div class="d-flex align-items-center">
+            <a class="navbar-brand mr-4" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+            {!! Form::open(['url' => route('room.index'), 'method' => 'get']) !!}
+                <div class="search-input-group">
+                    {!! Form::text('search', request('search') ?? '', ['class' => 'form-control', 'id' => 'search-input', 'placeholder' => __('Search a room')]) !!}
+                    <i class="ri-search-2-line"></i>
+                </div>
+            {!! Form::close() !!}
+        </div>
         @if (Auth::check())
             @if (Auth::user()->isVerified())
                 <div class="collapse navbar-collapse flex-grow-0" id="navbar-nav-container">

@@ -6,4 +6,5 @@ interface RoomRepositoryInterface extends RepositoryInterface
     public function createMessage($id, $userId, $message);
     public function removeUserFromARoom($userId, $roomId);
     public function getAllActiveRooms($paginate = false);
+    public function joinUserARandomRoom($userId);
 }

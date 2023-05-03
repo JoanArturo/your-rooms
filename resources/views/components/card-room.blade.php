@@ -1,7 +1,7 @@
 <div class="col-12 col-md-4 col-room">
     <div class="card card-room" data-cardroom="{{ $room->id }}">
         <div class="card-body">
-            <p class="card-title text-uppercase text-tertiary"><strong>{{ $room->name }}</strong></p>
+            <p class="card-title text-tertiary"><strong>{{ $room->name }}</strong></p>
             <p>{{ $room->presenter()->description(120) }}</p>
             <div class="d-flex align-items-center">
                 <div class="card-user-number mr-4">

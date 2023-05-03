@@ -12,6 +12,7 @@ Route::get('auth/google/callback', 'Auth\GoogleController@handleGoogleCallback')
 // User routes
 Route::middleware(['auth', 'verified', 'ban'])->group(function () {
     Route::get('room/show-more', 'RoomController@showMoreRooms')->name('room.showMoreRooms');
+    Route::get('room/join-user-a-random-room', 'RoomController@joinUserARandomRoom')->name('room.joinUserARandomRoom');
     Route::post('room/{room}/send-message', 'RoomController@sendMessage')->name('room.sendMessage');
     Route::post('room/{room}/leave', 'RoomController@leave')->name('room.leave');
     Route::resource('room', 'RoomController')->only(['index', 'show']);

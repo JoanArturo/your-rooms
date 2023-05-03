@@ -91,6 +91,7 @@
     "Suggestions received": "Sugerencias recibidas",
     "Profile information": "Información de perfil",
     "Rooms available": "Salas disponibles",
+    "No rooms available.": "No hay salas disponibles.",
     "Connected to the room": "Conectado a la sala",
     "Sent": "Enviado",
     "The room :name is full.": "La sala :name está llena.",
@@ -154,5 +155,9 @@
     "You deleted a photo from your gallery.": "Borraste una foto de tu galería.",
     "The :attribute entered is already in use.": "El :attribute ingresado ya está en uso.",
     "Login With Google": "Iniciar Sesión con Google",
-    "Or": "O"
+    "Or": "O",
+    "There are no rooms that match the search \":text\"": "No hay salas que coincidan con la búsqueda \":text\"",
+    "Join a random chat room and start chatting right now!": "¡Únete a una sala de chat al azar y comienza a chatear ahora mismo!",
+    "Join Now": "Unirse Ahora",
+    "Search a room": "Buscar una sala"
 }
