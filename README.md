@@ -1,78 +1,212 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+# Your Rooms
 
-## About Laravel
+Este proyecto consiste en un sistema de salas de chat en línea que permite a los usuarios conectarse y comunicarse en tiempo real. Está dirigido a cualquier persona interesada en conocer y socializar con otros usuarios a través de una plataforma virtual.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Pre-requisitos 📋
+Para la correcta ejecución de este proyecto, necesitas tener las siguientes tecnologías instaladas en tu ordenador.
+* Php ^7.2.5|^8.0
+* Composer 1.8.0
+* Laravel ^6.20.26
+* Laravel Echo Server 1.6.3
+* Redis ^4.0.14
+* Npm 8.19.3
+* MySQL ^5.5
+## Instalación 🔧
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. Clona este proyecto.
+```bash
+git clone https://github.com/JoanArturo/your-rooms.git
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2. Instala las dependencias de php con composer.
+```bash
+composer install
+```
 
-## Learning Laravel
+3. Instala las dependencias de javascript con npm.
+```bash
+npm install
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+4. Crea una nueva base de datos con tu gestor de base de datos preferido.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+5. Crea el archivo .env y configura las variables de entorno correspondientes.
+```json
+APP_NAME="Your Rooms"
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://you-rooms.com
 
-## Laravel Sponsors
+LOG_CHANNEL=stack
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3308
+DB_DATABASE=your_new_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+BROADCAST_DRIVER=redis
+CACHE_DRIVER=file
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
 
-## Contributing
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+MAIL_DRIVER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=
+MAIL_FROM_NAME="${APP_NAME}"
 
-## Code of Conduct
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_APP_CLUSTER=mt1
 
-## Security Vulnerabilities
+MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+FILESYSTEM_DRIVER=public
+REDIS_CLIENT=predis
 
-## License
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+CALLBACK_URL_GOOGLE="http://you-rooms.com/auth/google/callback"
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+6. Configura una cuenta Gmail para obtener el GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET y CALLBACK_URL_GOOGLE para que el módulo de inicio de sesión por correo funcione correctamente.
+
+7. Genera una APP_KEY.
+```bash
+php artisan key:generate
+```
+
+8. Ejecuta las migraciones con los seeders.
+```bash
+php artisan migrate:fresh --seed
+```
+
+9. Crea el enlace de la carpeta storage/app/public.
+```bash
+php artisan storage:link
+```
+
+10. Genera el archivo de configuración laravel-echo-server.json.
+```bash
+laravel-echo-server init
+```
+
+11. Configura el archivo laravel-echo-server.json.
+```json
+{
+	"authHost": "http://you-rooms.com",
+	"authEndpoint": "/broadcasting/auth",
+	"clients": [],
+	"database": "redis",
+	"databaseConfig": {
+		"redis": {},
+		"sqlite": {
+			"databasePath": "/database/laravel-echo-server.sqlite"
+		}
+	},
+	"devMode": true,
+	"host": "127.0.0.1",
+	"port": "6001",
+	"protocol": "http",
+	"socketio": {},
+	"secureOptions": 67108864,
+	"sslCertPath": "",
+	"sslKeyPath": "",
+	"sslCertChainPath": "",
+	"sslPassphrase": "",
+	"subscribers": {
+		"http": true,
+		"redis": true
+	},
+	"apiOriginAllow": {
+		"allowCors": false,
+		"allowOrigin": "",
+		"allowMethods": "",
+		"allowHeaders": ""
+	}
+}
+```
+
+12. Ejecuta el demonio de Laravel Echo Server.
+```bash
+laravel-echo-server start
+```
+
+13. Ejecuta el proyecto laravel.
+```bash
+php artisan serve
+```
+## Construido con 🛠️
+- [Laravel 6.20.26](https://laravel.com/docs/6.x)
+- [Composer 1.8.0](https://getcomposer.org/)
+- [Bootstrap 4.0.0](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
+- [Laravel Echo Server 1.6.3](https://github.com/tlaverdure/laravel-echo-server)
+- [Laravel Echo 1.15.0](https://github.com/laravel/echo/tree/v1.15.0)
+- [Socket IO Client 2.3.0](https://socket.io/docs/v2/client-installation/)
+- [Axios 0.19](https://github.com/axios/axios/tree/v0.19.0)
+- [Remix Icon 2.5.0](https://remixicon.com/releases)
+- [Select2 4.1.0](https://select2.org/getting-started/installation)
+- [MySQL 5.5](https://downloads.mysql.com/archives/community/)
+- [Redis 4.0.14](https://redis.io/download/)
+- [Npm 8.19.3](https://www.npmjs.com/package/npm/v/8.19.3)
+
+
+## Preview 📸
+
+- Inicio de sesión
+![App Screenshot](https://i.imgur.com/LdwiPKd.png)
+
+- Registro
+![App Screenshot](https://i.imgur.com/iuVC8rz.png)
+
+- Pagina principal
+![App Screenshot](https://i.imgur.com/KkQFfkG.png)
+
+- Sala de chat
+![App Screenshot](https://i.imgur.com/A0OaKe2.png)
+
+- Galería de fotos del usuario
+![App Screenshot](https://i.imgur.com/eUlMeRJ.png)
+
+- Datos de perfil del usuario
+![App Screenshot](https://i.imgur.com/RaW8IKt.png)
+
+- Otros ajustes
+![App Screenshot](https://i.imgur.com/xrprZlC.png)
+
+- Sidebar de salas disponibles
+![App Screenshot](https://i.imgur.com/B9ChRX3.png)
+
+- Sidebar de salas abiertas por el usuario
+![App Screenshot](https://i.imgur.com/hCJ1Nu9.png)
+
+- Listado de usuarios (Administrador)
+![App Screenshot](https://i.imgur.com/pkBUosV.png)
+
+- Listado de salas (Administrador)
+![App Screenshot](https://i.imgur.com/RtY7mtf.png)
+
+- Listado de reportes recibidos (Administrador)
+![App Screenshot](https://i.imgur.com/7Y0krxJ.png)
+## Autor 🖋️
+
+- [@JoanArturo](https://github.com/JoanArturo)
